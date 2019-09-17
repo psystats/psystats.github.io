@@ -234,7 +234,7 @@ hr {
     font-family: "Times";
     font-weight: bolder;
     font-size: 5em;
-    color: rgb(var(--theme-col));
+    color: rgb(var(--warn-col));
     margin-top: -37px;
     margin-left: -40px;
     float: left;
