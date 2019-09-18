@@ -242,7 +242,7 @@ warn {
     margin-bottom: 3em;
 }
 
-.warn > h4, .warn > h3 {
+.warn > h3, .warn > h4, .warn > h5 {
     font-size: 20px;
     color: rgb(var(--warn-col));
 	margin-top: 10px;
