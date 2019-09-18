@@ -225,7 +225,10 @@ hr {
 .solText > title {
     font-size: 20px;
     color: rgb(var(--theme-col));
-  }
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
 
 warn {
     font-weight: bold;
@@ -242,6 +245,7 @@ warn {
 .warn > h4, .warn > h3 {
     font-size: 20px;
     color: rgb(var(--warn-col));
+	margin-top: 10px;
 }
 
 .warn > strong {
