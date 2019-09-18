@@ -356,7 +356,7 @@ warn {
     margin: 0;
   }
   
-  .warn > h4, .warn > h3, .solText > title {
+  .warn > h3, .warn > h4, .warn > h5, .solText > title {
     font-size: 13pt;
   }
 }
