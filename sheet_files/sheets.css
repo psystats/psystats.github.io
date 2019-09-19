@@ -292,7 +292,8 @@ warn {
     border: none;
     resize: none;
     font-size: 15pt;
-    margin-top: 0.5em;
+    margin-top: 10px;
+	width: 100%;
 }
 
 @media print {	
