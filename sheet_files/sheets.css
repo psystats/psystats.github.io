@@ -366,8 +366,12 @@ warn {
     margin: 0;
   }
   
-  .warn > h3, .warn > h4, .warn > h5, .solText > title, .writeUp.empty textarea {
+  .warn > h3, .warn > h4, .warn > h5, .solText > title {
     font-size: 13pt;
+  }
+  
+  .writeUp.empty textarea {
+    font-size: 11pt;
   }
   
   .writeUp.empty {
