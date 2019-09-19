@@ -369,6 +369,10 @@ warn {
   .warn > h3, .warn > h4, .warn > h5, .solText > title, .writeUp.empty textarea {
     font-size: 13pt;
   }
+  
+  .writeUp.empty {
+	padding-top:10px
+  }
 }
 
 </style>
