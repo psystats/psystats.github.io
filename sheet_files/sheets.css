@@ -284,6 +284,15 @@ warn {
 .writeUp.empty {
 	background-color: white;
     margin-top: 4em;
+	padding-bottom:1em
+}
+
+.writeUp.empty textarea {
+    overflow: auto;
+    border: none;
+    resize: none;
+    font-size: 15pt;
+    margin-top: 0.5em;
 }
 
 @media print {	
@@ -356,7 +365,7 @@ warn {
     margin: 0;
   }
   
-  .warn > h3, .warn > h4, .warn > h5, .solText > title {
+  .warn > h3, .warn > h4, .warn > h5, .solText > title, .writeUp.empty textarea {
     font-size: 13pt;
   }
 }
