@@ -307,7 +307,6 @@ textarea.notes {
 
 .math.inline {
     font-size: 0.9em !important;
-	font-family: "Helvetica Neue" !important;
 }
 
 @media print {	
