@@ -305,6 +305,11 @@ textarea.notes {
     font-size: 11pt;
 }
 
+.math.inline {
+    font-size: 0.9em !important;
+	font-family: "Helvetica Neue" !important;
+}
+
 @media print {	
   .col-md-9 {
     width: 100%;
