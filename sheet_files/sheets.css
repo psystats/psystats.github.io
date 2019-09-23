@@ -305,10 +305,6 @@ textarea.notes {
     font-size: 11pt;
 }
 
-.math.inline {
-    font-size: 0.9em !important;
-}
-
 @media print {	
   .col-md-9 {
     width: 100%;
@@ -390,6 +386,14 @@ textarea.notes {
   .writeUp.empty, textarea.notes {
 	padding-top:25px
   }
+  
+  .math.inline {
+    font-size: 8pt !important;
+  }
 }
 
+
+.math.inline {
+    font-size: 10pt !important;
+}
 </style>
