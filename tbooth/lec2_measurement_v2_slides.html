@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -60,7 +60,7 @@
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="https:\\mivalek.github.io\slides_files\css\slides.css"/>
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -444,9 +444,9 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
-    <link href="lec2_measurement_v2_slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-    <link href="lec2_measurement_v2_slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-    <script src="lec2_measurement_v2_slides_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <script src="https://psystats.github.io/slides_files/kePrint-0.0.1/kePrint.js"></script>
 </head>
 <body>
 <div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
@@ -457,6 +457,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">Measurement</h1>
   <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
     <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec2_measurement_v2.html">Click for handout</a></h3>
 </section>
 
 <section id="today" class="slide level2">
@@ -518,10 +519,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li><strong>Categorical:</strong> Variables with a <em>discrete</em> number of response options.
 <ul>
 <li>These are usually coded as integers.</li>
-<li><strong>Binary</strong> variables are a special case with only 2 categories</li>
+<li>Binary data is a special case with only 2 possible values.</li>
 </ul></li>
-<li>Example: Hair colour, Likert Scale items, Degree or Not?</li>
 </ul>
+</section>
+<section id="types-of-data-1" class="slide level2">
+<h2>Types of data</h2>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -542,7 +545,7 @@ Degree
 <tbody>
 <tr>
 <td style="text-align:left;">
-ID1
+ID101
 </td>
 <td style="text-align:left;">
 Brown
@@ -556,7 +559,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-ID2
+ID102
 </td>
 <td style="text-align:left;">
 Brown
@@ -570,7 +573,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-ID3
+ID103
 </td>
 <td style="text-align:left;">
 Blonde
@@ -584,7 +587,7 @@ Yes
 </tr>
 <tr>
 <td style="text-align:left;">
-ID4
+ID104
 </td>
 <td style="text-align:left;">
 Blonde
@@ -598,7 +601,7 @@ Yes
 </tr>
 <tr>
 <td style="text-align:left;">
-ID5
+ID105
 </td>
 <td style="text-align:left;">
 Black
@@ -612,10 +615,22 @@ Yes
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Example: Hair colour, Likert Scale items, Degree or Not?</li>
+</ul>
 </section>
-<section id="types-of-data-1" class="slide level2">
+<section id="types-of-data-2" class="slide level2">
 <h2>Types of data</h2>
-<p><strong>Continuous:</strong> Variables which can take any real number value within the specified range of measurement. - Examples: Height in cm; Weight in kg; Reaction time</p>
+<ul>
+<li><strong>Categorical:</strong> Variables with a <em>discrete</em> number of response options.
+<ul>
+<li>Binary data is a special case with only 2 possible values.</li>
+</ul></li>
+<li><strong>Continuous:</strong> Variables which can take any real number value within the specified range of measurement.</li>
+</ul>
+</section>
+<section id="types-of-data-3" class="slide level2">
+<h2>Types of data</h2>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -636,7 +651,7 @@ Weight_kg
 <tbody>
 <tr>
 <td style="text-align:left;">
-ID1
+ID101
 </td>
 <td style="text-align:right;">
 1.2
@@ -650,7 +665,7 @@ ID1
 </tr>
 <tr>
 <td style="text-align:left;">
-ID2
+ID102
 </td>
 <td style="text-align:right;">
 0.9
@@ -664,7 +679,7 @@ ID2
 </tr>
 <tr>
 <td style="text-align:left;">
-ID3
+ID103
 </td>
 <td style="text-align:right;">
 3.2
@@ -678,7 +693,7 @@ ID3
 </tr>
 <tr>
 <td style="text-align:left;">
-ID4
+ID104
 </td>
 <td style="text-align:right;">
 55.5
@@ -692,7 +707,7 @@ ID4
 </tr>
 <tr>
 <td style="text-align:left;">
-ID5
+ID105
 </td>
 <td style="text-align:right;">
 2.1
@@ -706,8 +721,11 @@ ID5
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Examples: Height in cm; Weight in kg; Reaction time</li>
+</ul>
 </section>
-<section id="types-of-data-2" class="slide level2">
+<section id="types-of-data-4" class="slide level2">
 <h2>Types of data</h2>
 <ul>
 <li><strong>Categorical</strong>: Variables with a discrete number of response options.
@@ -737,11 +755,10 @@ ID5
 <ul>
 <li>Binary or categorical variable where numerical markers share no relationship.</li>
 <li>Here is no meaningful ordering.</li>
-<li>Example: Hair colour
-<ul>
-<li>1 = Brown, 2 = Blonde, 3 = Black</li>
-</ul></li>
 </ul>
+</section>
+<section id="nominal-data-1" class="slide level2">
+<h2>Nominal data</h2>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -759,7 +776,7 @@ Hair_values
 <tbody>
 <tr>
 <td style="text-align:left;">
-ID1
+ID101
 </td>
 <td style="text-align:left;">
 Brown
@@ -770,7 +787,7 @@ Brown
 </tr>
 <tr>
 <td style="text-align:left;">
-ID2
+ID102
 </td>
 <td style="text-align:left;">
 Brown
@@ -781,7 +798,7 @@ Brown
 </tr>
 <tr>
 <td style="text-align:left;">
-ID3
+ID103
 </td>
 <td style="text-align:left;">
 Blonde
@@ -792,7 +809,7 @@ Blonde
 </tr>
 <tr>
 <td style="text-align:left;">
-ID4
+ID104
 </td>
 <td style="text-align:left;">
 Blonde
@@ -803,7 +820,7 @@ Blonde
 </tr>
 <tr>
 <td style="text-align:left;">
-ID5
+ID105
 </td>
 <td style="text-align:left;">
 Black
@@ -814,17 +831,22 @@ Black
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Example: Hair colour
+<ul>
+<li>1 = Brown, 2 = Blonde, 3 = Black</li>
+</ul></li>
+</ul>
 </section>
 <section id="ordinal-data" class="slide level2">
 <h2>Ordinal data</h2>
 <ul>
 <li>Binary or categorical variable where there exists a meaningful way to <strong>rank-order</strong> responses.</li>
 <li>Here X &lt; Y or Y &gt; X statements can be made, but we can not meaningfully quantify the differences.</li>
-<li>Example: Likert scale items
-<ul>
-<li>1 = Strongly Disagree, 2 = Disagree, 3 = Neither A/D, 4 = Agree, 5 = Strongly Agree</li>
-</ul></li>
 </ul>
+</section>
+<section id="ordinal-data-1" class="slide level2">
+<h2>Ordinal data</h2>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -842,7 +864,7 @@ Likert_values
 <tbody>
 <tr>
 <td style="text-align:left;">
-ID1
+ID101
 </td>
 <td style="text-align:left;">
 Strongly Agree
@@ -853,7 +875,7 @@ Strongly Agree
 </tr>
 <tr>
 <td style="text-align:left;">
-ID2
+ID102
 </td>
 <td style="text-align:left;">
 Agree
@@ -864,7 +886,7 @@ Agree
 </tr>
 <tr>
 <td style="text-align:left;">
-ID3
+ID103
 </td>
 <td style="text-align:left;">
 Agree
@@ -875,7 +897,7 @@ Agree
 </tr>
 <tr>
 <td style="text-align:left;">
-ID4
+ID104
 </td>
 <td style="text-align:left;">
 Disagree
@@ -886,7 +908,7 @@ Disagree
 </tr>
 <tr>
 <td style="text-align:left;">
-ID5
+ID105
 </td>
 <td style="text-align:left;">
 Strongly Disagree
@@ -897,12 +919,22 @@ Strongly Disagree
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Example: Likert scale items
+<ul>
+<li>1 = Strongly Disagree, 2 = Disagree, 3 = Neither A/D, 4 = Agree, 5 = Strongly Agree</li>
+</ul></li>
+</ul>
 </section>
 <section id="interval-data" class="slide level2">
 <h2>Interval data</h2>
 <ul>
 <li>Variables for which numerical values have meaning.</li>
-<li>There is no true 0 point on an interval scale. - But we can consider differences. - And the differences have a true 0 point.</li>
+<li>There is no true 0 point on an interval scale.
+<ul>
+<li>But we can consider differences.</li>
+<li>And the differences have a true 0 point.</li>
+</ul></li>
 <li>Now it gets harder to talk about psychological examples.
 <ul>
 <li>Some would consider IQ and other test scores as interval.</li>
@@ -938,16 +970,16 @@ Strongly Disagree
 </thead>
 <tbody>
 <tr class="odd">
+<td>Character</td>
+<td>ID</td>
+<td>Nominal</td>
+<td>(Categorical)</td>
+</tr>
+<tr class="even">
 <td>Numeric</td>
 <td>Reaction Time</td>
 <td>Interval or ratio</td>
 <td>Continuous</td>
-</tr>
-<tr class="even">
-<td>Character</td>
-<td>ID</td>
-<td>Nominal</td>
-<td>Categorical</td>
 </tr>
 <tr class="odd">
 <td>Factor</td>
@@ -966,14 +998,17 @@ Strongly Disagree
 </section>
 <section id="data-types-and-r-1" class="slide level2">
 <h2>Data types and R</h2>
+<ul>
+<li>And a sneak look ahead to how this might look in R.</li>
+</ul>
 <pre><code># A tibble: 5 x 4
   ID    Hair_colour Likert_item       ReactionTime
   &lt;chr&gt; &lt;fct&gt;       &lt;fct&gt;                    &lt;dbl&gt;
-1 ID1   Brown       Strongly Agree             1.2
-2 ID2   Brown       Agree                      0.9
-3 ID3   Blonde      Agree                      3.2
-4 ID4   Blonde      Disagree                  55.5
-5 ID5   Black       Strongly Disagree          2.1</code></pre>
+1 ID101 Brown       Strongly Agree             1.2
+2 ID102 Brown       Agree                      0.9
+3 ID103 Blonde      Agree                      3.2
+4 ID104 Blonde      Disagree                  55.5
+5 ID105 Black       Strongly Disagree          2.1</code></pre>
 </section>
 <section id="measurement-matters" class="slide level2">
 <h2>Measurement matters</h2>
@@ -999,13 +1034,13 @@ Strongly Disagree
 <h2>Tasks for this week…</h2>
 <ol type="1">
 <li>Finish any existing tasks from lab 1.</li>
-<li>Reading: Linked at the top of lab 2.
+<li>Reading: No compulsory reading for this week.
 <ul>
 <li>Additional reading on final slide.</li>
 </ul></li>
-<li>Quiz 2A (On course guide) and 2B (to show you question types)
+<li>Quiz 2 (On course guide)
 <ul>
-<li>Both live now.</li>
+<li>Live now.</li>
 <li>Close Sunday at 17:00</li>
 </ul></li>
 </ol>
@@ -1019,7 +1054,7 @@ Strongly Disagree
 </li>
 <li>Book: <a href="https://www-cambridge-org.ezproxy.is.ed.ac.uk/core/books/flatland/71E876947B2318B1B023975C7EAA5E69">Flatland: A Romance of Many Dimensions, Edwin Abbott</a><br />
 </li>
-<li>Thing to do: Arthurs Seat<br />
+<li>Thing to do: Arthur’s Seat<br />
 </li>
 <li>Coffee/food Place: <a href="http://gaiadeliedinburgh.co.uk/">Gaia, Leith Walk</a>
 <ul>
@@ -1037,8 +1072,8 @@ Strongly Disagree
     </div>
   </div>
 
-  <script src="lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
-  <script src="lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1080,9 +1115,9 @@ Strongly Disagree
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
-          { src: 'lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
-          { src: 'lec2_measurement_v2_slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
