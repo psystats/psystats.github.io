@@ -310,6 +310,8 @@ textarea.notes {
     background-color: #fff;
     padding: 0.5em 1em;
     overflow: auto;
+	min-height: 35px;
+	margin-bottom: 40px;
 }
 
 @media print {	
