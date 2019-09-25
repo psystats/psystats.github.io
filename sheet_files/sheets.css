@@ -263,7 +263,7 @@ warn {
     float: left;
 }
 
-.writeUp:not(.empty)::before {
+.writeUp:not(.noteBox)::before {
     content: "Write-up";
     font-size: 25px;
     color: rgb(var(--theme-col));
@@ -272,37 +272,13 @@ warn {
     display: block;
 }
 
-.empty::before {
+.noteBox.writeUp::before {
     content: 'Write-up';
     font-size: 25px;
     color: rgb(var(--theme-col));
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin: -55px 0 10px -15px;
 	display: block;
-}
-
-.writeUp.empty {
-	background-color: white;
-    margin-top: 4em;
-	padding-bottom:1em
-}
-
-.writeUp.empty textarea, textarea.notes {
-    overflow: auto;
-    resize: none;
-	width: 100%;
-}
-
-.writeUp.empty textarea {
-    margin-top: 10px;
-    border: none;
-    font-size: 15pt;
-}
-
-textarea.notes {
-	border: solid 1px rgb(var(--theme-col));
-	padding: 10px;
-    font-size: 11pt;
 }
 
 .noteBox {
@@ -331,7 +307,7 @@ textarea.notes {
     border: none;
   }
   
-  .writeUp, .solText, .empty, .solution, .why, .warn {
+  .writeUp, .solText, .noteBox, .solution, .why, .warn {
     page-break-inside:avoid
   }
   
@@ -372,7 +348,7 @@ textarea.notes {
     font-size: 10pt;
   }
   
-  .empty::before, .solution pre.sourceCode::before, .writeUp:not(.empty)::before, why::before {
+  .noteBox.writeUp::before, .solution pre.sourceCode::before, .writeUp:not(.noteBox)::before, why::before {
     font-size: 11pt;      
   }
   
@@ -387,15 +363,7 @@ textarea.notes {
   .warn > h3, .warn > h4, .warn > h5, .solText > title {
     font-size: 13pt;
   }
-  
-  .writeUp.empty textarea {
-    font-size: 11pt;
-  }
-  
-  .writeUp.empty, textarea.notes {
-	padding-top:25px
-  }
-  
+    
   .math.inline {
     font-size: 8pt !important;
   }
