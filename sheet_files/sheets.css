@@ -283,13 +283,14 @@ warn {
     border: solid 1px rgb(var(--theme-col));
     background-color: #fff;
     padding: 6px 12px;
-    overflow: auto;
+    overflow-y: auto;
 	min-height: 35px;
 	margin-bottom: 40px;
+	overflow-wrap: break-word;
 }
 
 .noteBox.writeUp {
-	padding: 65px 12px;
+	padding: 65px 12px 12px 12px;
 }
 
 @media print {	
