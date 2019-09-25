@@ -263,31 +263,33 @@ warn {
     float: left;
 }
 
-.writeUp:not(.noteBox)::before {
+.writeUp::before {
     content: "Write-up";
     font-size: 25px;
     color: rgb(var(--theme-col));
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin-bottom: 10px;
     display: block;
 }
 
+.writeUp:not(.noteBox)::before {
+    margin-bottom: 10px;
+}
+
 .noteBox.writeUp::before {
-    content: 'Write-up';
-    font-size: 25px;
-    color: rgb(var(--theme-col));
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin: -55px 0 10px -15px;
-	display: block;
+    margin: -50px 0 10px 0;
 }
 
 .noteBox {
     border: solid 1px rgb(var(--theme-col));
     background-color: #fff;
-    padding: 0.5em 1em;
+    padding: 6px 12px;
     overflow: auto;
 	min-height: 35px;
 	margin-bottom: 40px;
+}
+
+.noteBox.writeUp {
+	padding: 65px 12px;
 }
 
 @media print {	
@@ -356,6 +358,7 @@ warn {
     border: 1pt solid rgb(var(--theme-col)) !important;
     background-color: rgba(var(--theme-col), .2) !important;
   }
+  
   body {
     margin: 0;
   }
@@ -373,4 +376,5 @@ warn {
 .math.inline {
     font-size: 10pt !important;
 }
+
 </style>
