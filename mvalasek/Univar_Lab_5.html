@@ -1791,8 +1791,8 @@ The unbearable weight of analytical decision, episode 2
 </div>
 <p> </p>
 <p><strong>Task 23: </strong>Perform a goodness-of-fit test on the distribution of <code>programme</code> separately for the Thursday and Friday labs. The null hypothesis assumes that both are uniform. Write up the results.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 A Pearson's goodness-of-fit test showed that the distribution of lab group attendance was significantly different from uniform in the Thursday group ($\chi^2(2) = 9.03,\ p=.011$) but not the Friday group ($\chi^2(2) = 2.87,\ p=.239$).
@@ -1800,7 +1800,7 @@ A Pearson's goodness-of-fit test showed that the distribution of lab group atten
 <div class="warn">
 <h4 id="writeable-text-boxes">Writeable text boxes</h4>
 <p>Boxes such as the one above are there for you to type in the answer. If you want to keep what you’ve written, you <strong>must save the page</strong> to your computer. These sheets are online so if you just close the tab/window without saving the page, all your answers will be lost.</p>
-<p>Try to keep your answers concise. There is enough room in the boxes for a complete answer so, even if you can type in more than can be shown within the limits of the box, try not to do that. That way, you can print out the sheet if you so wish and have all the text nicely visible.</p>
+<p>The boxes expand as you type but try to keep your answers concise. It’s good practice!</p>
 </div>
 <p><strong>This is the kind of multiple testing that inflates Type I error, so don’t do it in practice! :)</strong></p>
 <p>Instead, let’s see if there is a relationship between the day on which the lab takes place and who attends it.</p>
@@ -1824,8 +1824,8 @@ lab        Psychology Linguistics CogScience
 <p>Great! Now, that you understand why the formula for <em>df</em> is what it is, let’s run the test itself! There are, yet again, several ways of telling the <code>chisq.test()</code> function that you want to perform the test of independence. You can give it a contingency table (without marginal counts!) or two variables. Consult the function documentations (<code>?chisq.test</code>) for examples and details.</p>
 <p> </p>
 <p><strong>Task 27: </strong>Run the <span class="math inline">\(\chi^2\)</span> test of independence to see if the day of the lab is related to the distribution of programme. Write up the results.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 According to the $\chi^2$ test of independence, there was a relationship between the day of the lab and the distribution of attending students with respect to study programme, $\chi^2(2) = 11.04,\ p=.004$. -->
@@ -1852,8 +1852,8 @@ Yes, the variables are both categorical, with expected cell counts of $> 5$, and
 </div>
 <p> </p>
 <p><strong>Task 29: </strong>Write up the results of the <em>z</em>-test.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 The mean time spent on lab sheets in the sample of USMR students was significantly less than in the population of Psychology undergraduates, $z=-4.43,\ p=9.4\times 10^{-6}$. -->
@@ -1863,8 +1863,8 @@ The mean time spent on lab sheets in the sample of USMR students was significant
 <p>As you know, the <em>z</em>-test required the population variance to be known and so I told you what it is so that you could run the test. Let’s try a more realistic scenario, where we don’t know <span class="math inline">\(\sigma^2\)</span>. Let’s keep the hull hypothesis the same tough, <span class="math inline">\(H_0: \mu = 103.7\)</span>.</p>
 <p> </p>
 <p><strong>Task 30: </strong>Run the one-sample <em>t</em>-test on the same variable and write up the results. Take note of the similarities and differences between the results of the <em>z</em>- and the <em>t</em>-test. <strong>Hint. </strong>By default, the test assumes that <span class="math inline">\(\mu = 0\)</span>. The documentation to the <code>t.test()</code> function will help you find out how to change this value.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 A one-sample *t*-test revealed a significant difference in time spent on lab sheets between USMR students (*Mean* = 98.45, 95% CI [96.46, 100.45]) and the population of Psychology undergraduates, $t(151)=-5.2,\ p<10^{-6}$. -->
@@ -1970,23 +1970,23 @@ Levels: Psychology Linguistics CogScience
 <p>We can assume, that people attend either one or the other group.</p>
 <p> </p>
 <p><strong>Task 36: </strong>Write down the formulation of the null hypothesis. <strong>Hint. </strong>We are looking at differences in means of average time spent on lab sheets in the two groups.</p>
-<div class="writeUp empty">
-<textarea rows="2"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 $H_0: \mu_{Thursday} = \mu_{Frisday}$ -->
 <p> </p>
 <p><strong>Task 37: </strong>OK, let’s test the null with a Welch’s <em>t</em>-test. That’s the one <code>R</code> does by default when you ask it to perform a <em>t</em>-test on independent data (recall lecture 5). Write up the results. <strong>Hint. </strong>The function documentation should help you find out how to specify the test formula. If it doesn’t, ask the Internet.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 A Welch's *t*-test showed that the time spent on lab sheets in the Thursday group was significantly longer than that in the Friday group, *Mean diff* = $-8.51$, 95% CI [$-12.25,\ -4.78$], $t(143.12)=-4.51,\ p<10^{-4}$. -->
 <p>Great! Finally, let’s see if there’s been a change in the number of tasks students are able to complete in the labs between week 3 and 4.</p>
 <p> </p>
 <p><strong>Task 38: </strong>What is the null hypothesis and which test is appropriate to test it?</p>
-<div class="writeUp empty">
-<textarea rows="2"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 $H_0: \mu_{wk3} = \mu_{wk4}$ -->
@@ -1994,8 +1994,8 @@ $H_0: \mu_{wk3} = \mu_{wk4}$ -->
 The paired sample *t*-test is the one to pick as the observations are paired (and therefore not independent) -- one observation per week from each student. -->
 <p> </p>
 <p><strong>Task 39: </strong>Run the test and write up the results.</p>
-<div class="writeUp empty">
-<textarea rows="4"></textarea>
+<div class="noteBox writeUp" contenteditable="true">
+
 </div>
 <!--
 The students spent on average less time on the lab sheet in week 4 compared to week 3, *Mean diff* = $-2.05$, 95% CI [$-2.58,\ -1.51$], $t(152)=-7.53,\ p=4.1\times 10^{-12}$. -->
@@ -2292,46 +2292,34 @@ warn {
     float: left;
 }
 
-.writeUp:not(.empty)::before {
+.writeUp::before {
     content: "Write-up";
     font-size: 25px;
     color: rgb(var(--theme-col));
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin-bottom: 10px;
     display: block;
 }
 
-.empty::before {
-    content: 'Write-up';
-    font-size: 25px;
-    color: rgb(var(--theme-col));
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin: -55px 0 10px -15px;
-	display: block;
+.writeUp:not(.noteBox)::before {
+    margin-bottom: 10px;
 }
 
-.writeUp.empty {
-	background-color: white;
-    margin-top: 4em;
-	padding-bottom:1em
+.noteBox.writeUp::before {
+    margin: -50px 0 10px 0;
 }
 
-.writeUp.empty textarea, textarea.notes {
-    overflow: auto;
-    resize: none;
-	width: 100%;
+.noteBox {
+    border: solid 1px rgb(var(--theme-col));
+    background-color: #fff;
+    padding: 6px 12px;
+    overflow-y: auto;
+	min-height: 35px;
+	margin-bottom: 40px;
+	overflow-wrap: break-word;
 }
 
-.writeUp.empty textarea {
-    margin-top: 10px;
-    border: none;
-    font-size: 15pt;
-}
-
-textarea.notes {
-	border: solid 1px rgb(var(--theme-col));
-	padding: 10px;
-    font-size: 11pt;
+.noteBox.writeUp {
+	padding: 65px 12px 12px 12px;
 }
 
 @media print {	
@@ -2351,7 +2339,7 @@ textarea.notes {
     border: none;
   }
   
-  .writeUp, .solText, .empty, .solution, .why, .warn {
+  .writeUp, .solText, .noteBox, .solution, .why, .warn {
     page-break-inside:avoid
   }
   
@@ -2392,7 +2380,7 @@ textarea.notes {
     font-size: 10pt;
   }
   
-  .empty::before, .solution pre.sourceCode::before, .writeUp:not(.empty)::before, why::before {
+  .noteBox.writeUp::before, .solution pre.sourceCode::before, .writeUp:not(.noteBox)::before, why::before {
     font-size: 11pt;      
   }
   
@@ -2400,6 +2388,7 @@ textarea.notes {
     border: 1pt solid rgb(var(--theme-col)) !important;
     background-color: rgba(var(--theme-col), .2) !important;
   }
+  
   body {
     margin: 0;
   }
@@ -2407,15 +2396,7 @@ textarea.notes {
   .warn > h3, .warn > h4, .warn > h5, .solText > title {
     font-size: 13pt;
   }
-  
-  .writeUp.empty textarea {
-    font-size: 11pt;
-  }
-  
-  .writeUp.empty, textarea.notes {
-	padding-top:25px
-  }
-  
+    
   .math.inline {
     font-size: 8pt !important;
   }
@@ -2425,6 +2406,7 @@ textarea.notes {
 .math.inline {
     font-size: 10pt !important;
 }
+
 </style>
 
 <script>
