@@ -305,6 +305,13 @@ textarea.notes {
     font-size: 11pt;
 }
 
+.noteBox {
+    border: solid 1px rgb(var(--theme-col));
+    background-color: #fff;
+    padding: 0.5em 1em;
+    overflow: auto;
+}
+
 @media print {	
   .col-md-9 {
     width: 100%;
