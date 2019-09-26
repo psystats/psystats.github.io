@@ -13,7 +13,7 @@
 <meta name="author" content="Univariate Statistics with R" />
 
 
-<title>Lab 5</title>
+<title>Lab 7</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -1559,7 +1559,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab 5</h1>
+<h1 class="title toc-ignore">Lab 7</h1>
 <h4 class="author">Univariate Statistics with R</h4>
 
 </div>
@@ -1570,460 +1570,163 @@ div.tocify {
 --theme-col: var(--usmr-col);
 }
 </style>
-<div id="finally-stats" class="section level1">
-<h1>Finally stats</h1>
-<p>Welcome to lab 5! Today, we will dip our toes in the wonderful world of statistical analysis. We’ll use <code>R</code> to gain some experience analysing data as well as to solidify your understanding of the concepts covered in past few lectures.</p>
-<p>So exciting!</p>
+<p>This week we’ll be merging data collected from a number of sources before running a simple correlation and a linear model. You should end up knowing a bit more about data manipulation, as well as about running statistical tests. As always, create a new project in RStudio.</p>
+<div id="aperitif-merge-and-missing-values" class="section level2">
+<h2>Aperitif: <code>merge()</code> and missing values</h2>
 <p> </p>
-<p><strong>Task 1: </strong>You know what’s coming don’t you? That’s right, create a new <code>R</code> project.</p>
-<p><strong>TIP: </strong>You <em>really</em> want to work from both the script and the console here. Any commands that <em>modify the data</em> or create plots and output analysis <em>that you want to have access to</em> belong in the script. Any other commands (one-off stuff) should be left for the console.</p>
-<div id="data-set" class="section level2">
-<h2>Data set</h2>
-<p>Big brother has been collecting some data on you<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Go on LEARN, fetch the ‘Lab5_data.csv’ file in the Week 5 folder and save it into your project directory.</p>
-<p>Here is the code book for the data set</p>
-<ul>
-<li><code>id</code>: categorical; student ID number</li>
-<li><code>lab</code>: categorical with 2 levels (<code>&quot;Thursday&quot;</code>, <code>&quot;Friday&quot;</code>); student’s lab group</li>
-<li><code>programme</code>: categorical with 3 levels (<code>1</code> = <code>&quot;Psychology&quot;</code>, <code>2</code> = <code>&quot;Linguistics&quot;</code>, <code>3</code> = <code>&quot;CogScience&quot;</code>); programme of study</li>
-<li><code>lab_time</code>: numeric, integer; average time in minutes spent on the lab sheets across last 4 labs</li>
-<li><code>tasks3</code>: numeric, integer; number of tasks completed in lab 3, maximum 18</li>
-<li><code>tasks4</code>: numeric, integer; number of tasks completed in lab 4, maximum 18</li>
-</ul>
-</div>
-</div>
-<div id="read-in-and-clean-data" class="section level1">
-<h1>Read in and clean data</h1>
+<p><strong>Task 1: </strong>First of all, generate a data frame with IQ measurements for 5 people (Amos, Bill, Chas, Dave, and Earl). (<strong>Hint: </strong>Remember that IQ is a normally distributed variable with <span class="math inline">\(Mean = 100\)</span> and <span class="math inline">\(SD = 15\)</span>.)</p>
+<pre><code>  name        iq
+1 Amos  80.00194
+2 Bill 120.17541
+3 Chas 103.97025
+4 Dave 124.94289
+5 Earl 103.71343</code></pre>
 <p> </p>
-<p><strong>Task 2: </strong>Read the data into <code>R</code>. Use the <code>read.csv()</code> function to save the data set into an object called <code>data</code>. <strong>Hint. </strong>If you save the file somewhere else than your project directory, you will have to specify the path to it so that <code>R</code> knows where to find it.</p>
+<p><strong>Task 2: </strong>Next, create another data frame with height measurements for 5 people (Bill, Dave, Earl, Fred, and Greg).</p>
+<pre><code>  name   height
+1 Bill 182.1303
+2 Dave 211.3598
+3 Earl 180.1156
+4 Fred 155.3442
+5 Greg 175.3764</code></pre>
 <p> </p>
-<p>As a first step in analysis, you need to familiarise yourself with the data. looking at the first few rows is a good way of doing this.</p>
+<p>You’ll notice that the data frames you’ve created contain partially overlapping information (some of the names). If you wanted to test for a relationship between IQ and height<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> it would be useful to create one merged data frame. Perhaps predictably, the <code>R</code> function for this is <code>merge()</code>:</p>
 <p> </p>
-<p><strong>Task 3: </strong>Use the <code>head()</code> function to see the first few rows of <code>data</code>.</p>
+<p><strong>Task 3: </strong>Try the following commands:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">merge</span>(iq.f, ht.f)</a>
+<a class="sourceLine" id="cb3-2" title="2">  name       iq   height</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="dv">1</span> Bill <span class="fl">120.1754</span> <span class="fl">182.1303</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="dv">2</span> Dave <span class="fl">124.9429</span> <span class="fl">211.3598</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="dv">3</span> Earl <span class="fl">103.7134</span> <span class="fl">180.1156</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">merge</span>(iq.f, ht.f, <span class="dt">all =</span> T)</a>
+<a class="sourceLine" id="cb3-7" title="7">  name        iq   height</a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="dv">1</span> Amos  <span class="fl">80.00194</span>       <span class="ot">NA</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="dv">2</span> Bill <span class="fl">120.17541</span> <span class="fl">182.1303</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="dv">3</span> Chas <span class="fl">103.97025</span>       <span class="ot">NA</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="dv">4</span> Dave <span class="fl">124.94289</span> <span class="fl">211.3598</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="dv">5</span> Earl <span class="fl">103.71343</span> <span class="fl">180.1156</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="dv">6</span> Fred        <span class="ot">NA</span> <span class="fl">155.3442</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="dv">7</span> Greg        <span class="ot">NA</span> <span class="fl">175.3764</span></a></code></pre></div>
+<p>What do the different versions do? What would you do if the columns in each data frame had different names? (Try <code>?merge</code>).</p>
 <p> </p>
-<p>OK, you can probably see that the data set isn’t quite ready for analysis. This is often that case with real data. You might get your hands on all sorts of data sets collected by people with varying degrees of methodological prowess. Getting data into shape for analysis can be a time-consuming and frustrating process and the ability to do it is a crucial skill.</p>
+<p><strong>Task 4: </strong>Now create a new merged data frame (note, this command is slightly different again):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">new.f &lt;-<span class="st"> </span><span class="kw">merge</span>(iq.f, ht.f, <span class="dt">all.x =</span> T)</a>
+<a class="sourceLine" id="cb4-2" title="2">new.f</a>
+<a class="sourceLine" id="cb4-3" title="3">  name        iq   height</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="dv">1</span> Amos  <span class="fl">80.00194</span>       <span class="ot">NA</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="dv">2</span> Bill <span class="fl">120.17541</span> <span class="fl">182.1303</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="dv">3</span> Chas <span class="fl">103.97025</span>       <span class="ot">NA</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="dv">4</span> Dave <span class="fl">124.94289</span> <span class="fl">211.3598</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="dv">5</span> Earl <span class="fl">103.71343</span> <span class="fl">180.1156</span></a></code></pre></div>
 <p> </p>
-<p><strong>Task 4: </strong>Look, the data set doesn’t have proper variable names, just some <code>V</code> labels. Let’s remedy this. Name the columns according to the code book. <strong>Hint. </strong>The <code>names()</code> function will be handy here</p>
+<p><strong>Task 5: </strong>Calculate the means of the different relevant columns. <em>Revision: The first two calculations do the same thing (why?)</em></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">mean</span>(new.f<span class="op">$</span>iq)</a>
+<a class="sourceLine" id="cb5-2" title="2">[<span class="dv">1</span>] <span class="fl">106.5608</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">mean</span>(new.f[ ,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb5-4" title="4">[<span class="dv">1</span>] <span class="fl">106.5608</span></a></code></pre></div>
 <p> </p>
-<p>Cool, now that our variables have informative names, let’s look at some descriptive statistics. This is a quick way of spotting obvious errors in the data set.</p>
+<p><strong>Task 6: </strong>Now calculate the mean <code>height</code>:</p>
 <p> </p>
-<p><strong>Task 5: </strong>Use the <code>describe()</code> function from package <code>psych</code> to cast a first glance on your data. <strong>Hint. </strong>Don’t forget that to use functions from packages that are not pre-loaded at the start of the <code>R</code> session, you have to load them using <code>library()</code>.</p>
-<p> </p>
-<p>This should be raising some red flags! Check out the minima and maxima of the variables. Is this what you’d expect based on what the code book says? No, I didn’t think so… :)</p>
-<p> </p>
-<p><strong>Task 6: </strong>What class is <code>id</code>? It’s a categorical variable so let’s tell <code>R</code> to treat is as such. <strong>Hint. </strong>You want to turn it into a <code>factor</code>.</p>
-<p> </p>
-<p><strong>Task 7: </strong>Can you spot what’s wrong with the <code>lab</code> variable? How many levels does it have? How many is it supposed to have? Can you fix it? Read on for a more step-by-step guide if you’re feeling a bit lost.</p>
-<p><strong>Hint. </strong><code>table()</code> is a useful function for categorical variables/factors. It let’s you know what different values there are in the data and what their frequencies are.</p>
-<p> </p>
-<p>You might have noticed that <code>lab</code> is already a <code>factor</code>. That is because the <code>read.csv()</code> function turns variables with character strings. You can easily change factors into character vectors using <code>as.character()</code> but, as a general rule, it might be worth reading data in the rawest possible format.</p>
-<p> </p>
-<p><strong>Task 8: </strong>Can you figure out how to tell <code>read.csv()</code> not to turn strings into factors? <strong>Hint. </strong>Look up the help file for the function and read through the list of arguments it takes.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>The nice things about the script (you have been using the script, haven’t you?) is that if you realise you should have done something slightly different earlier in the process of cleaning and analysing your data, you can just edit and re-run the code.</p>
-<p> </p>
-<p><strong>Task 9: </strong>Edit the script code to read in the data without turning strings into factors and re-run the remainder of the code you’ve written thus far.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>Now that’s done, you can do something about the <code>lab</code> variable.</p>
-<p> </p>
-<p><strong>Task 10: </strong>Change the inappropriate values of <code>lab</code>. <strong>Hint. </strong>This is where logical subsetting comes in handy so good thing you spilled so much sweat over it!</p>
-<div class="solution">
-
-</div>
-<p><em>Want more hints?</em> To refresh your memory, something like <code>data$variable[data$variable == &quot;value&quot;] &lt;- &quot;different value&quot;</code> does the trick.</p>
-<p> </p>
-<div class="solText">
-<title>
-The unbearable weight of analytical decision, episode 1
-</title>
-<p>You will have noticed that one of the weird values in <code>data$lab</code> is not really a typo. What to do about it is sort of your call. You might argue that it <em>is</em> a typo and change it to the value it resembles. However, it is possible that the data is self-reported, in which case you might legitimately ask if including data from some space cadet who doesn’t know what day it is is useful. I would probably exclude this persons entry for the <code>lab</code> variable (by replacing it with <code>NA</code>). <strong>I would not recommend ever deleting entire rows from your data frames.</strong></p>
-</div>
-<p> </p>
-<p><strong>Task 11: </strong>Good, now you can change the variable into a <code>factor</code>.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>So that’s <code>lab</code> sorted. Let’s move on to <code>programme</code>. As you can see, it only has numeric values. It is also not a <code>factor</code>. It would be good to do something about this, don’t you think?</p>
-<p> </p>
-<p><strong>Task 12: </strong>First things first though! Have a closer look at the variable. Does it look fine?</p>
-<p> </p>
-<p><strong>Task 13: </strong>If you’re happy with it, tell <code>R</code> it’s a factor with labels as per the code book. <strong>Hint. </strong>There are several ways to do this. For instance, you can use the <code>factor(..., labels = ...)</code> approach, or opt for the <code>recode()</code> function from package <code>car</code>.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>Grand! Moving on to <code>lab_time</code>. Definitely something fishy going on here. Can you spot what it is?</p>
-<p> </p>
-<p><strong>Task 14: </strong>Fix the <code>lab_time</code> so that it conforms to the criteria in the code book. <strong>Hint. </strong>There are 3 problems with the values: there are impossible ones, improbable ones, and the format of the numbers suggests that there are also non-integer ones. Dealing with the third issue is going to be a bit of a puzzle. If you’re up for a challenge, that’s great! You may skip to next non-decimal task. If not, let’s take you by the hand a little (read on).</p>
-<div id="impossible-values" class="section level3">
-<h3>Impossible values</h3>
-<p>It stands to reason that average time spent on the lab sheets should not be negative (if this is not obvious, you might want to brush up on your special relativity! ;) )</p>
-<p> </p>
-<p><strong>Task 14.1: </strong>Get rid of the negative values by replacing them with <code>NA</code>s. <strong>Hint. </strong>again, logical subsetting is the way to go!</p>
-<div class="solution">
-
-</div>
+<div id="missing-values" class="section level3">
+<h3>Missing Values</h3>
+<p><code>mean(new.f$height)</code> doesn’t give you a mean; instead it returns <code>NA</code>. If you completed last weeks worksheet you will have encountered <code>NA</code> values and perhaps learned to deal with them. The fact that <code>R</code> returns <code>NA</code> rather than ignoring any <code>NA</code>s in the values given may seem dumb at first (why can’t it ignore the missing values?) but in fact it’s based on an important principle: <em>You should know your data and you should know that there are missing values, and tell <code>R</code>.</em> If it ‘silently’ dealt with missing values, you could end up with meaningless results through not checking your data properly.</p>
+<p>For simple functions (like <code>mean()</code>, <code>sd()</code>, etc.) <em>the only way to get <code>R</code> to ignore <code>NA</code>s is as follows</em> (<code>na.rm</code> can be read as “<code>NA</code> remove”):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">mean</span>(new.f<span class="op">$</span>height, <span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb6-2" title="2">[<span class="dv">1</span>] <span class="fl">191.2019</span></a></code></pre></div>
+<p>For more complicated functions (like <code>lm()</code>, which we’ll meet below) there is a general default behaviour called <code>na.omit</code> which deletes missing values prior to calculation.</p>
 <p> </p>
 </div>
-<div id="improbable-values" class="section level3">
-<h3>Improbable values</h3>
-<p> </p>
-<p><strong>Task 14.2: </strong>Have a look at the distribution of <code>lab_time</code>. Use a histogram or a box plot to visualise it.</p>
-<p>You should hopefully see that there’s an improbably large value in the variable.</p>
-<p> </p>
-<p><strong>Task 14.3: </strong>Choose a safe cut-off point and use it to remove the offending data point.</p>
-<div class="solution">
-
 </div>
-<p> </p>
-<div class="solText">
-<title>
-The unbearable weight of analytical decision, episode 2
-</title>
-<p>Should we have really removed the poor chap or chapette who spends on average 20 hours on a lab sheet? Is it a typo? Probably… But what if not? Well, if not then, fist of all, I sincerely apologise to you, brave, tenacious hero! That said, you are probably quite a drastic outlier so not sure your data are worth including… I think it’s safe to remove this value, what do you think?</p>
-</div>
-</div>
-<div id="non-integer-values" class="section level3">
-<h3>Non-integer values</h3>
-<p>Have a look at this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span>(data<span class="op">$</span>lab_time)</a>
-<a class="sourceLine" id="cb1-2" title="2">[<span class="dv">1</span>] <span class="st">&quot;numeric&quot;</span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">class</span>(data<span class="op">$</span>task3)</a>
-<a class="sourceLine" id="cb1-4" title="4">[<span class="dv">1</span>] <span class="st">&quot;integer&quot;</span></a></code></pre></div>
-<p>You see that <code>task3</code> is a vector of integers, just like we’d expect it to be. <code>lab_time</code>, however, is not. The only reason for that is that <em>at least one</em> of the values of <code>lab_time</code> is a decimal number and so the entire vector must be decimal. Since the good book above tells us that <code>lab_time</code> is supposed to be an integer, any decimal values must be typos. To get rid of them, we first need to identify them</p>
-<p> </p>
-<p><strong>Task 14.4: </strong>How can we programmatically spot non-integers?</p>
-<p> </p>
-<p>Well, non-integers will – by definition – not be divisible by 1 without a remainder. That means that if we can somehow ask <code>R</code> to give us the remainder of division by 1, any numbers that are not zero will identify non-integers. If this is not clear, read the preceding two sentences again.</p>
-<p>As luck would have it, the mathematical operation we are looking for is called <em>modulo</em> and is implemented in <code>R</code> as the <code>%%</code> operator:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="fl">32.452</span> <span class="op">%%</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb2-2" title="2">[<span class="dv">1</span>] <span class="fl">0.452</span></a></code></pre></div>
-<p>Putting it all together, <code>lab_time</code> modulo 1 should be 0. If it’s not, we should get rid of the value.</p>
-<p> </p>
-<p><strong>Task 14.5: </strong>Use <code>%% 1</code> and logical subsetting to get rid of non-integer values.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>Cool, whether you managed to do all of this with or without help, well done!</p>
-<p> </p>
-<p><strong>Task 15: </strong>If we want, we can now safely turn <code>lab_time</code> into integer. <strong>Hint. </strong><code>as integer()</code>.</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>Two more variables to go. These are fairly straight-forward so I’ll let you deal with them unaided. Just apply the same reasoning and principles as we did above.</p>
-<p> </p>
-<p><strong>Task 16: </strong>Clean the <code>tasks3</code> and <code>tasks4</code> variables so that they conform to the code book rules (because <em>the code book rulz!</em>).</p>
-<div class="solution">
-
-</div>
-<p> </p>
-<p>I think this is us, we have ourselves some nice and clean data. If you’ve done everything with me, you should see this output if you ask for <code>describe(data)</code> again:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">describe</span>(data)</a>
-<a class="sourceLine" id="cb3-2" title="2">           vars   n  mean    sd median trimmed   mad min max range  skew</a>
-<a class="sourceLine" id="cb3-3" title="3">id<span class="op">*</span><span class="st">           </span><span class="dv">1</span> <span class="dv">167</span> <span class="fl">84.00</span> <span class="fl">48.35</span>     <span class="dv">84</span>   <span class="fl">84.00</span> <span class="fl">62.27</span>   <span class="dv">1</span> <span class="dv">167</span>   <span class="dv">166</span>  <span class="fl">0.00</span></a>
-<a class="sourceLine" id="cb3-4" title="4">lab<span class="op">*</span><span class="st">          </span><span class="dv">2</span> <span class="dv">166</span>  <span class="fl">1.46</span>  <span class="fl">0.50</span>      <span class="dv">1</span>    <span class="fl">1.45</span>  <span class="fl">0.00</span>   <span class="dv">1</span>   <span class="dv">2</span>     <span class="dv">1</span>  <span class="fl">0.17</span></a>
-<a class="sourceLine" id="cb3-5" title="5">programme<span class="op">*</span><span class="st">    </span><span class="dv">3</span> <span class="dv">167</span>  <span class="fl">1.96</span>  <span class="fl">0.82</span>      <span class="dv">2</span>    <span class="fl">1.95</span>  <span class="fl">1.48</span>   <span class="dv">1</span>   <span class="dv">3</span>     <span class="dv">2</span>  <span class="fl">0.08</span></a>
-<a class="sourceLine" id="cb3-6" title="6">lab_time      <span class="dv">4</span> <span class="dv">152</span> <span class="fl">98.45</span> <span class="fl">12.44</span>    <span class="dv">100</span>   <span class="fl">98.91</span> <span class="fl">14.83</span>  <span class="dv">73</span> <span class="dv">119</span>    <span class="dv">46</span> <span class="fl">-0.27</span></a>
-<a class="sourceLine" id="cb3-7" title="7">task3         <span class="dv">5</span> <span class="dv">155</span>  <span class="fl">6.15</span>  <span class="fl">3.59</span>      <span class="dv">6</span>    <span class="fl">5.91</span>  <span class="fl">4.45</span>   <span class="dv">1</span>  <span class="dv">15</span>    <span class="dv">14</span>  <span class="fl">0.50</span></a>
-<a class="sourceLine" id="cb3-8" title="8">task4         <span class="dv">6</span> <span class="dv">163</span>  <span class="fl">7.99</span>  <span class="fl">3.40</span>      <span class="dv">8</span>    <span class="fl">8.04</span>  <span class="fl">2.97</span>   <span class="dv">1</span>  <span class="dv">16</span>    <span class="dv">15</span> <span class="fl">-0.04</span></a>
-<a class="sourceLine" id="cb3-9" title="9">           kurtosis   se</a>
-<a class="sourceLine" id="cb3-10" title="10">id<span class="op">*</span><span class="st">           </span><span class="fl">-1.22</span> <span class="fl">3.74</span></a>
-<a class="sourceLine" id="cb3-11" title="11">lab<span class="op">*</span><span class="st">          </span><span class="fl">-1.98</span> <span class="fl">0.04</span></a>
-<a class="sourceLine" id="cb3-12" title="12">programme<span class="op">*</span><span class="st">    </span><span class="fl">-1.53</span> <span class="fl">0.06</span></a>
-<a class="sourceLine" id="cb3-13" title="13">lab_time      <span class="fl">-0.98</span> <span class="fl">1.01</span></a>
-<a class="sourceLine" id="cb3-14" title="14">task3         <span class="fl">-0.58</span> <span class="fl">0.29</span></a>
-<a class="sourceLine" id="cb3-15" title="15">task4         <span class="fl">-0.56</span> <span class="fl">0.27</span></a></code></pre></div>
-<p>The take-home message is that, in order to produce sensible analyses, you must make sure you work with sensible data. Cleaning data requires a great deal of attention to detail, thinking, and, well, coding. Having done that, we can move on to finding out about the world…</p>
-</div>
-</div>
-<div id="lets-stats" class="section level1">
-<h1>Let’s stats!</h1>
-<p>In this section, we will ask and answer questions about our variables and relationships between them. What I’d like you to do is to run at least one test “by hand”, <em>i.e.,</em> without using a built-in <code>R</code> function. Doing this will help you understand the basic principle common to all statistical tests we will cover on this course.</p>
-<div id="categorical-variables" class="section level2">
-<h2>Categorical variables</h2>
-<p>Let’s have a look at <code>lab</code> again. This time, we want to know if the number of students attending the Thursday lab is the same as the number attending the Friday lab. In other words,</p>
-<p><span class="math display">\[H_0: P(Thursday) = P(Friday)\]</span></p>
-<p>To test this null hypothesis, let’s first simply look at the frequency table.</p>
-<p> </p>
-<p><strong>Task 17: </strong>Ask <code>R</code> to dive you a table of the <code>lab</code> variable. Save this table into an object called <code>lab_table</code> since it will come in handy later. Once that’s done, look at it in the console.</p>
-<p> </p>
-<p>If you want, you can visualise this distribution in a plot, such as this one:</p>
-<div class="solution">
-<img src="data:image/png;base64,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" width="480" />
-</div>
-<p>We can test our hypothesis using Pearson’s goodness-of-fit test. In other words, we want to see if the distribution of <code>lab</code> is significantly different from uniform. To do that, we first need to know what frequencies we expect under uniform distribution.</p>
-<p> </p>
-<p><strong>Task 18: </strong>Create an object <code>exp</code> with the expected frequencies. Try doing this programmatically rather than manually typing in the numbers. <strong>Hint. </strong>The expected frequency of each category is half of all the observations.</p>
-<p> </p>
-<p>Now we want a measure of just how much our observed distribution deviates from the expected one. Squares of differences are a good measure, however, a difference of 1 if the expected value is 100 isn’t the same as a difference of 1 if the expected value is 10. So to get a more proportional measure, let’s scale the squared differences between the observed and expected counts by the expected counts (<span class="math inline">\((obs - exp)^2/exp\)</span>)</p>
-<p> </p>
-<p><strong>Task 19: </strong>Do this in <code>R</code>! Create an object <code>sq_scaled</code> that includes these scaled squared differences</p>
-<p>We still have as many numbers as we have categories. To get a single measure of the departure from expectation, let’s just add the numbers up. Since this is our test statistic, let’s call it <code>chi_sq</code>.</p>
-<p> </p>
-<p><strong>Task 20: </strong>Calculate the <code>chi_sq</code> statistic.</p>
-<p> </p>
-<p>We know that this test statistic follows the <span class="math inline">\(\chi^2\)</span>-distribution. We also know that this distribution changes shape depending on the number of degrees of freedom. So our test statistic will have a different associated <em>p</em>-value under each of these distributions:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">pchisq</span>(chi_sq, <span class="dv">3</span>, <span class="dt">lower.tail =</span> F)</a>
-<a class="sourceLine" id="cb4-2" title="2">[<span class="dv">1</span>] <span class="fl">0.7576314</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">pchisq</span>(chi_sq, <span class="dv">8</span>, <span class="dt">lower.tail =</span> F)</a>
-<a class="sourceLine" id="cb4-4" title="4">[<span class="dv">1</span>] <span class="fl">0.9968287</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw">pchisq</span>(chi_sq, <span class="dv">147</span>, <span class="dt">lower.tail =</span> F)</a>
-<a class="sourceLine" id="cb4-6" title="6">[<span class="dv">1</span>] <span class="dv">1</span></a></code></pre></div>
-<p>Let’s calculate the degrees of freedom. If you know what the marginal value is, <em>i.e.,</em> how many people are there altogether, how many entries in <code>lab_table</code> are free to vary?</p>
-<p> </p>
-<p><strong>Task 21: </strong>OK, now that we have the number of <em>df</em>s figured out, let’s get the <em>p</em>-value associated with our observed <code>chi_sq</code>!</p>
-<p> </p>
-<p>As a sanity check, we can run the test using <code>R</code>’s <code>chisq.test()</code> function. If you pull up its documentation, you’ll see that for a goodness-of-fit test such as this one, it requires a table as the only argument.</p>
-<p> </p>
-<p><strong>Task 22: </strong>Run the test using the <code>R</code> function.</p>
-<p> </p>
-<p>Hopefully, you will have got the same results from the by-hand calculation.</p>
-<div class="writeUp">
-<p>A Pearson’s goodness-of-fit test showed that the distribution of lab group attendance did not significantly depart from uniform, <span class="math inline">\(\chi^2(1) = 1.18,\ p=.277\)</span>.</p>
-</div>
-<p> </p>
-<p><strong>Task 23: </strong>Perform a goodness-of-fit test on the distribution of <code>programme</code> separately for the Thursday and Friday labs. The null hypothesis assumes that both are uniform. Write up the results.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-A Pearson's goodness-of-fit test showed that the distribution of lab group attendance was significantly different from uniform in the Thursday group ($\chi^2(2) = 9.03,\ p=.011$) but not the Friday group ($\chi^2(2) = 2.87,\ p=.239$).
--->
-<div class="warn">
-<h4 id="writeable-text-boxes">Writeable text boxes</h4>
-<p>Boxes such as the one above are there for you to type in the answer. If you want to keep what you’ve written, you <strong>must save the page</strong> to your computer. These sheets are online so if you just close the tab/window without saving the page, all your answers will be lost.</p>
-<p>The boxes expand as you type but try to keep your answers concise. It’s good practice!</p>
-</div>
-<p><strong>This is the kind of multiple testing that inflates Type I error, so don’t do it in practice! :)</strong></p>
-<p>Instead, let’s see if there is a relationship between the day on which the lab takes place and who attends it.</p>
-<p> </p>
-<p><strong>Task 24: </strong>First, create a contingency table <code>cont</code>, cross-tabulating <code>lab</code> and <code>programme</code>. You can do this in several ways but two of the more convenient ones are using <code>table()</code> or <code>xtabs()</code>. The latter produces a table that looks like this:</p>
-<div class="solution">
-<pre><code>          programme
-lab        Psychology Linguistics CogScience
-  Friday           23          31         36
-  Thursday         37          23         16</code></pre>
-</div>
-<p> </p>
-<p>As you know from the lecture, to perform a <span class="math inline">\(\chi^2\)</span> test of independence, we need the observed counts, the expected counts and the degrees of freedom. We just got the first one in our contingency table. The latter two can be derived using observed and marginal counts. <strong>Marginal</strong> counts are called marginal because they are the row and column sums of the contingency table and are, thus, in its margins.</p>
-<p> </p>
-<p><strong>Task 25: </strong>Add margins to <code>cont</code>. There is a function that does that. <strong>Hint. </strong>If you don’t know its name, maybe try asking the internet how to add margins to a table in <code>R</code>.</p>
-<p> </p>
-<p>If you want, you can calculate the expected counts by hand (see lecture 5). However, what I’d like you to do is figure out how many degrees of freedom there are in this table. To do that, realise that the marginal counts are fixed. If this is the case, how many independent values do you need to know before you know what the others are? Start by fixing the number of the cell <code>[1, 1]</code> to some number. Does that tell you anything about some other values in other cells, given that the marginal counts are fixed (and known)? Fix another one, say <code>[1, 2]</code>, what about now? Cary on in the same vein till you can solve the table. In a way, it’s a bit like sudoku. In fact, a sudoku with only one solution is basically a table with 0 degrees of freedom!</p>
-<p> </p>
-<p><strong>Task 26: </strong>How many <em>df</em>s do we have?</p>
-<p> </p>
-<p>Great! Now, that you understand why the formula for <em>df</em> is what it is, let’s run the test itself! There are, yet again, several ways of telling the <code>chisq.test()</code> function that you want to perform the test of independence. You can give it a contingency table (without marginal counts!) or two variables. Consult the function documentations (<code>?chisq.test</code>) for examples and details.</p>
-<p> </p>
-<p><strong>Task 27: </strong>Run the <span class="math inline">\(\chi^2\)</span> test of independence to see if the day of the lab is related to the distribution of programme. Write up the results.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-According to the $\chi^2$ test of independence, there was a relationship between the day of the lab and the distribution of attending students with respect to study programme, $\chi^2(2) = 11.04,\ p=.004$. -->
-<p><strong>Have a think: </strong>Was the test we used appropriate for the kind of data we had? In other words, were the assumptions of the test met?</p>
-<!-- solution
-Yes, the variables are both categorical, with expected cell counts of $> 5$, and the observations are random and independent. -->
-</div>
-<div id="analysing-continuous-data" class="section level2">
-<h2>Analysing continuous data</h2>
-<div id="known-sigma" class="section level3">
-<h3>Known <span class="math inline">\(\sigma\)</span></h3>
-<p>Let’s look at the average time spent on a lab sheet. What if I told you, that – as far as undergraduate psychology students are concerned – the mean time spent on these kinds of labs sheets is 103.7 minutes with the population std. deviation <span class="math inline">\(\sigma = 14.6\)</span>? Could you use this knowledge to test whether USMR students are a random sample from the psych undergrad population or not?</p>
-<p> </p>
-<p><strong>Task 28: </strong>Try testing the null hypothesis using a 2-tailed <em>z</em>-test. Do it “by hand” (there’s no built-in <code>R</code> function for the <em>z</em>-test anyway). Remember, all you’re doing is calculating the <em>z</em>-statistic and getting the <em>p</em>-value of this <strong>or more extreme</strong> statistic under the standard normal distribution.</p>
-<p><strong>Hint: </strong>The formula for the <em>z</em>-test is <span class="math inline">\(z = \frac{\bar{x} - \mu}{SE}\)</span>, with <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>. The function you need to get the <em>p</em>-value is <code>pnorm()</code>. Think about which tail of the normal distribution you’re interested in and how to get the 2-tailed <em>p</em>-value.</p>
-<div class="warn">
-<h4 id="warning">Warning</h4>
-<p>Watch out for missing values!</p>
-</div>
-<p>These are the results you should have got:</p>
-<div class="solution">
-<pre><code>[1] &quot;z = -4.43&quot;
-[1] &quot;p = 9.4e-06&quot;</code></pre>
-</div>
-<p> </p>
-<p><strong>Task 29: </strong>Write up the results of the <em>z</em>-test.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-The mean time spent on lab sheets in the sample of USMR students was significantly less than in the population of Psychology undergraduates, $z=-4.43,\ p=9.4\times 10^{-6}$. -->
-</div>
-<div id="unknown-sigma" class="section level3">
-<h3>Unknown <span class="math inline">\(\sigma\)</span></h3>
-<p>As you know, the <em>z</em>-test required the population variance to be known and so I told you what it is so that you could run the test. Let’s try a more realistic scenario, where we don’t know <span class="math inline">\(\sigma^2\)</span>. Let’s keep the hull hypothesis the same tough, <span class="math inline">\(H_0: \mu = 103.7\)</span>.</p>
-<p> </p>
-<p><strong>Task 30: </strong>Run the one-sample <em>t</em>-test on the same variable and write up the results. Take note of the similarities and differences between the results of the <em>z</em>- and the <em>t</em>-test. <strong>Hint. </strong>By default, the test assumes that <span class="math inline">\(\mu = 0\)</span>. The documentation to the <code>t.test()</code> function will help you find out how to change this value.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-A one-sample *t*-test revealed a significant difference in time spent on lab sheets between USMR students (*Mean* = 98.45, 95% CI [96.46, 100.45]) and the population of Psychology undergraduates, $t(151)=-5.2,\ p<10^{-6}$. -->
-<p>The result of the <em>t</em>-test should be very close to that of the <em>z</em>-test. However, the smaller the sample size, the larger the effect of random statistical fluctuations.</p>
-<p> </p>
-<p><strong>Task 31: </strong>Re-run the <em>t</em>-test on a random sample of 20 elements of <code>lab_time</code> to see that sometimes size really does matter!</p>
-<p> </p>
-<p>I think it’s really important to understand where the <em>p</em>-values come from. Simulating the sampling distribution of the test statistic is the best way of getting your head around the concept. So let’s do that!</p>
-<hr />
-</div>
-<div id="get-loopy" class="section level3">
-<h3>Get loopy</h3>
-<p>Given what the sampling distribution is (if you don’t know, make sure to check out lectures 3-5), simulating it involves taking many samples from the population. Every time you encounter a repetitive task you should start thinking about how to delegate as much of the legwork as possible on the computer.</p>
-<p>This is where loops come in very handy<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. They are used to repeat a block of code an arbitrary number of times. Let’s look at the anatomy of a loop in <code>R</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> n) {</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># code</span></a>
+<div id="starter-a-useful-function" class="section level2">
+<h2>Starter: A useful function</h2>
+<p>In the extra file from Week 6, you learnt to write functions; in Lab 3, you learnt about logical subsetting (where items in a vector or matrix are selected according to the logical values <code>T</code> or <code>F</code>). Can we put these together here?</p>
+<p>Write a function called <code>outliers()</code> to test whether any of the elements passed to it are greater than, or less than, <code>x</code> standard deviations from the mean (where <code>x</code> is a value passed to the function). You should use a template something like the following:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">outliers &lt;-<span class="st"> </span><span class="cf">function</span>(obs, <span class="dt">x =</span> <span class="fl">2.5</span>) {</a>
+<a class="sourceLine" id="cb7-2" title="2"> <span class="co"># code goes here</span></a>
 <a class="sourceLine" id="cb7-3" title="3">}</a></code></pre></div>
-<p>the <code>for () {}</code> bit is just syntax and it’s sole function is to tell <code>R</code> that this is a loop. The bit in <code>()</code> defines the iterator variable <code>i</code> and the vector <code>n</code> over which the loop iterates. So <code>for (i in 1:10)</code> will be a loop that runs through 10 times. First, it will assign <code>i</code> the value of 1 and run the rest of the code. Then, it will assign it the next value in the <code>n</code> vector, <em>e.g.,</em> 2 and run the code again. It will repeat until it runs out of elements of <code>n</code>.</p>
-<p>To demonstrate:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb8-3" title="3">}</a>
-<a class="sourceLine" id="cb8-4" title="4">[<span class="dv">1</span>] <span class="dv">1</span></a>
-<a class="sourceLine" id="cb8-5" title="5">[<span class="dv">1</span>] <span class="dv">2</span></a>
-<a class="sourceLine" id="cb8-6" title="6">[<span class="dv">1</span>] <span class="dv">3</span></a>
-<a class="sourceLine" id="cb8-7" title="7">[<span class="dv">1</span>] <span class="dv">4</span></a>
-<a class="sourceLine" id="cb8-8" title="8">[<span class="dv">1</span>] <span class="dv">5</span></a></code></pre></div>
-<p>As you can see, the loop printed the value of <code>i</code> for each of the 5 iterations.</p>
-<p>The code in the body of the loop <code>{}</code> can do whatever you want. you can use the current value of <code>i</code> to create, modify, or subset data structures, to do calculations with it, or simply not use it at all. The world’s your oyster!</p>
-<p>Finally, loops can be nested, if needed:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> n) {</a>
-<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">for</span> (j <span class="cf">in</span> m) {</a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co"># code</span></a>
-<a class="sourceLine" id="cb9-4" title="4">  }</a>
-<a class="sourceLine" id="cb9-5" title="5">}</a></code></pre></div>
-<p>This will run all the iterations of the inner loop for each iteration of the outer one.</p>
+<p><strong>Tip: </strong>Your function takes two values: <code>obs</code> (a vector or matrix of observations), and <code>x</code>, as above. <code>x = 2.5</code> passes a <em>default value</em> to <code>x</code>: If you don’t specify an explicit value, the default will be used. This means that you can use <code>outliers(vec)</code> to find elements in a vector more than 2.5 sds from the mean; or <code>outliers(vec, 2)</code> if you prefer 2 sds from the mean.</p>
 <p> </p>
-<p><strong>Task 32: </strong>Have a go at writing a loop that will print <code>data[1, 1]</code>, then <code>data[2, 2]</code>, then <code>data[3, 3]</code>, <em>etc.,</em> for as many times as there are columns of <code>data</code>. <strong>Hint. </strong><code>ncol()</code> is a good function to use to specify the vector over which to loop. The output should look like this:</p>
-<div class="solution">
-<pre><code>[1] 1
-167 Levels: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 ... 167
-[1] Friday
-Levels: Friday Thursday
-[1] Psychology
-Levels: Psychology Linguistics CogScience
-[1] 115
-[1] 6
-[1] 2</code></pre>
+<p><strong>Task 7: </strong>Now write the code to complete the function:</p>
+<p><strong>Hint: </strong>Suppose you have a matrix <code>mat</code>. The code the replaces those of its elements whose value is an outlier with <code>NA</code>s could look something like this: <code>mat[mat &gt; mean(mat) + 2 * sd(mat)] &lt;- NA</code></p>
+<p>Here, you’re being asked to produce a function that does something similar to the code inside the <code>[]</code> above. You want to use <code>x</code> rather than <code>2</code> so that the number of standard deviations can be arbitrary and you need to take into account that your input could include <code>NA</code>s.</p>
+<p>You also need to think about detecting values that are ‘x’ standard deviations <em>below</em> the mean in addition to those above it.</p>
+<p><strong>Pro tip: </strong>A neat solution to this problem might involve using the <code>abs()</code> function which converts values to their absolute value. See <code>?abs</code>, also for more on what an absolute value is, look <a href="https://www.mathsisfun.com/numbers/absolute-value.html">here</a>.</p>
+<p> </p>
+<p><strong>Task 8: </strong>Test your <code>outliers</code> function with the following code: Does it correctly identify the 2 outliers?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">vec &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2">vec[<span class="kw">sample</span>(<span class="kw">length</span>(vec), <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="dv">250</span> <span class="co"># create two outliers at random</span></a>
+<a class="sourceLine" id="cb8-3" title="3">vec <span class="co"># inspect vector to find outliers</span></a>
+<a class="sourceLine" id="cb8-4" title="4"> [<span class="dv">1</span>]  <span class="fl">90.21218</span> <span class="fl">132.05268</span> <span class="fl">103.39998</span> <span class="fl">250.00000</span> <span class="fl">106.09940</span>  <span class="fl">71.68061</span> <span class="fl">103.54545</span></a>
+<a class="sourceLine" id="cb8-5" title="5"> [<span class="dv">8</span>]  <span class="fl">91.46694</span>  <span class="fl">96.33894</span>  <span class="fl">82.81656</span>  <span class="fl">87.66680</span> <span class="fl">106.84111</span>  <span class="fl">80.96235</span>  <span class="fl">89.40778</span></a>
+<a class="sourceLine" id="cb8-6" title="6">[<span class="dv">15</span>]  <span class="fl">91.11157</span>  <span class="fl">87.11206</span>  <span class="fl">93.28785</span> <span class="fl">108.71977</span>  <span class="fl">88.37341</span> <span class="fl">250.00000</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="kw">which</span>(<span class="kw">outliers</span>(vec)) <span class="co"># check outliers function</span></a>
+<a class="sourceLine" id="cb8-8" title="8">[<span class="dv">1</span>]  <span class="dv">4</span> <span class="dv">20</span></a></code></pre></div>
 </div>
-<p>Now, often you will want to save the output of each iteration of the loop. There are again many ways to do this but a straight-forward one is to first create an empty object and then start combining it with the output of the loop:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">out &lt;-<span class="st"> </span><span class="kw">c</span>() <span class="co"># empty vector</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co"># append the result of some operation to to the vector</span></a>
-<a class="sourceLine" id="cb11-4" title="4">  out &lt;-<span class="st"> </span><span class="kw">c</span>(out, data<span class="op">$</span>lab_time[i <span class="op">*</span><span class="st"> </span><span class="dv">10</span>])</a>
-<a class="sourceLine" id="cb11-5" title="5">}</a>
-<a class="sourceLine" id="cb11-6" title="6">out</a>
-<a class="sourceLine" id="cb11-7" title="7"> [<span class="dv">1</span>]  <span class="ot">NA</span>  <span class="dv">93</span> <span class="dv">114</span> <span class="dv">102</span> <span class="dv">107</span>  <span class="dv">81</span>  <span class="dv">94</span>  <span class="dv">88</span>  <span class="ot">NA</span>  <span class="dv">87</span></a></code></pre></div>
+<div id="main-course-some-data-manipulation" class="section level2">
+<h2>Main Course: Some data manipulation</h2>
+<p>The aim of this exercise is for you to load some data, get it into a suitable format for analysis, and perform (for now) a simple correlation, and a linear regression.</p>
+<p><em>Note: </em>Most of this exercise is about getting data into shape: Doing the stats is easy!</p>
 <p> </p>
-<p><strong>Task 33: </strong>Combine the two tasks above and create a vector <code>out</code> that includes <code>data[1, 1]</code>, <code>data[2, 2]</code>, <code>data[3, 3]</code>, <em>etc</em>.</p>
-<hr />
+<p><strong>Task 9: </strong>Download the data from the LEARN (lab7.Rdata), and load it into <code>R</code>.</p>
+<p><strong>Tip: </strong>This data is in <code>R</code> format, not <code>.csv</code> (because it contains several data frames). If you know how, save it into your project folder. Use one of the commands below to load it into <code>R</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">load</span>(<span class="st">&#39;lab7.Rdata&#39;</span>) <span class="co"># if your data is in your project folder</span></a></code></pre></div>
+<p><strong>Tip: </strong>The first thing you should do when you’ve loaded your data is look at the <code>Environment</code> tab in Rstudio (top right), or type <code>ls()</code>, to find out what new objects you’ve loaded.</p>
+<p><strong>Pro tip: </strong><code>ls()</code> returns a list of all the objects (variables and functions) in your workspace. That means it’s very useful if you want to delete everything and start again: You can use <code>rm(list = ls())</code> (or if you like pointing and clicking, just click on the broom in RStudio’s Environment tab). <code>rm()</code> is the function to <span style="color:rgb(var(--theme-col));"><strong>r</strong></span>e<span style="color:rgb(var(--theme-col));"><strong>m</strong></span>ove things.</p>
+<p>You have data from three different Universities on some students in their statistics classes. Each University (or School) has provided you with the same information; unfortunately, they have provided it in slightly different formats. Your task is to assemble all of the information into <em>one</em> data frame called <code>schools</code>, suitable for further analysis.</p>
+<p>The data set should consist of a unique student identifier and, for each student, the school they’re in, their IQ, an exam score, and their gender. Unfortunately, the records are not all complete (in particular, some exam scores are missing), and there may be other errors.</p>
+<p><strong>Tip: </strong>You will definitely want to use <code>merge()</code> to tackle this (be careful with the <code>all</code> arguments!). You may also be able to use <code>rbind()</code> to bind things row-wise as an alternative for some (but not all) merges. You should also be thinking about your indexing skills from previous weeks’ labs. Below are some things you might want to think about:</p>
+<ul>
+<li>are the observations complete?</li>
+<li>are there any typos?</li>
+<li>do the column names match?</li>
+<li>are there any unlikely values, or outliers?</li>
+</ul>
+<p>The general approach is probably to fix up (or merge) the data from each individual school, before merging the complete dataset together (<em>NB.,</em> you can only merge two things at a time…)</p>
 <p> </p>
-<p><strong>Task 34: </strong>Now that you have an inkling about how to use loops, let’s see if we can make use of them to simulate our sampling distribution</p>
-<p> </p>
-<p><strong>Task 34.1: </strong>First, let’s create an empty vector that will store each estimate of out <em>t</em>-statistic. Call it <code>t_est</code>, why not!</p>
-<div class="solution">
-
 </div>
+<div id="side-dish-a-note-on-correlation" class="section level2">
+<h2>Side Dish: A note on correlation</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">x =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">150</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2">y =<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">length</span>(x), <span class="dt">m =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>) <span class="co"># add some random noise to x and store it in y</span></a>
+<a class="sourceLine" id="cb10-3" title="3">y2 =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">length</span>(x), <span class="dt">m =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4">y3 =<span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">length</span>(x), <span class="dt">m =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p>Take a look at the plot generated below where the black, blue, and red values (and their ‘line of best fit’) represent different variables and their relationship with the variable <code>x</code>. Take a second to think about what you expect the correlations between <code>x</code> and the three different variables representing <code>Y</code> (black, blue, and red) will be.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">plot</span>(x, y, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">650</span>))</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">points</span>(x, y2, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">points</span>(x, y3, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="kw">abline</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x))</a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw">abline</span>(<span class="kw">lm</span>(y2 <span class="op">~</span><span class="st"> </span>x), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="kw">abline</span>(<span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" width="480" /></p>
+<p>Some of you may have been tempted to suggest that the blue line indicates a higher correlation than the black line, and similarly that the red line indicates a higher correlation than both alternatives. This is a common mistake when thinking about correlations. All these correlations are actually identical (almost 1):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">cor</span>(x, y) <span class="co"># Black</span></a>
+<a class="sourceLine" id="cb12-2" title="2">[<span class="dv">1</span>] <span class="fl">0.9841423</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw">cor</span>(x, y2) <span class="co"># Blue</span></a>
+<a class="sourceLine" id="cb12-4" title="4">[<span class="dv">1</span>] <span class="fl">0.9887159</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">cor</span>(x, y3) <span class="co"># Red</span></a>
+<a class="sourceLine" id="cb12-6" title="6">[<span class="dv">1</span>] <span class="fl">0.9887703</span></a></code></pre></div>
+<p>Remember that correlation tells you how well the line fits the data (how close the points are to it) and not how steep it is. Looking at all the lines again - you can see that in each case knowing the value of <code>X</code> for any one participant allows you to say with almost certainty what their <code>Y</code> value would be. The steepness of the gradient is determined by the increase in <code>Y</code> units for each one unit increase in <code>X</code> - this is the coefficient from the linear model.</p>
 <p> </p>
-<p><strong>Task 34.2: </strong>Next, let’s write the core structure of a loop. Say we want the loop to run 10<sup>4</sup> times. Don’t worry about the code inside <code>{}</code> just yet.</p>
-<div class="solution">
-
 </div>
+<div id="dessert-some-statistics" class="section level2">
+<h2>Dessert: Some statistics!</h2>
 <p> </p>
-<p><strong>Task 34.3: </strong>Now, inside of the loop, you want to sample the same number of observation as we have in our data from a normally distributed population with <span class="math inline">\(\mu=103.7\)</span> and <em>SD</em> of <code>sd(data$lab_time, na.rm = T)</code>. Save this sample into an object called <code>samp</code>.</p>
-<div class="solution">
-
-</div>
-<p><strong>Tip: </strong> You want to make sure each of the constituent commands within the loop run on it own, otherwise the entire loop won’t run either. You can trial-run things in the console.</p>
-<p> </p>
-<p><strong>Task 34.4: </strong>Now, we want to get the <em>t</em>-statistic for this sample and add it to our for now empty <code>t_est</code> vector. You can calculate it by hand if you wish but maybe you can somehow extract it from <code>t.test()</code>? <strong>Hint: </strong><code>t.test()</code> returns a list of values. This list, just like any list, can be queried using <code>$</code>. The <em>Value</em> section of the function documentations will tell you the rest.</p>
-<div class="warn">
-<h4 id="t.test"><code>t.test()</code></h4>
-<p>Don’t forget to specify the <code>mu =</code> parameter if you are using <code>t.test()</code>!</p>
-</div>
-<div class="solution">
-
-</div>
-<p> </p>
-<p><strong>Task 34.5: </strong>That’s it! You can run the loop now and sit back</p>
-<p> </p>
-<p><strong>Task 34.6: </strong>Let’s look at the histogram of <code>t_est</code>. To see it in a higher resolution, let’s ask for 50 breaks.</p>
-<p> </p>
-<p>Beautiful, isn’t it?</p>
-<p>OK, final stretch! We have successfully simulated the sampling distribution of the <em>t</em>-statistic <strong>under the null hypothesis</strong>. Let’s use it to get a <em>p</em>-value for our observed <em>t</em> (-5.2003)</p>
-<p> </p>
-<p><strong>Task 35: </strong>Calculate the 2-tailed <em>p</em>-value using our sampling distribution. Basically, you want to know what proportion of the individual <em>t</em> estimates in the distribution have values that are more extreme than the observed one.</p>
-<p> </p>
-<p>Since none of our simulated estimates met the condition – at least when I did it! –, the simulated <em>p</em>-value is 0. However, this is just an approximation. To say, that there’s zero chance that you would find this or a more extreme result if the null is true, is incorrect! We can safely say, that the <em>p</em>-value is very small, though.</p>
-<p><strong>Nicely done!</strong> This should bring the principle of NHST home.</p>
-<p> </p>
-<p> </p>
-<p>Thinking about it, it doesn’t seem to me like we’ve quite explored <code>lab_time</code> to death yet. Let’s see what else hides within! To encourage some healthy rivalry (for when has that gone wrong?!), let’s compare the Thursday and the Friday folks to see who’s fastest with the lab sheets.</p>
-<p>We can assume, that people attend either one or the other group.</p>
-<p> </p>
-<p><strong>Task 36: </strong>Write down the formulation of the null hypothesis. <strong>Hint. </strong>We are looking at differences in means of average time spent on lab sheets in the two groups.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-$H_0: \mu_{Thursday} = \mu_{Frisday}$ -->
-<p> </p>
-<p><strong>Task 37: </strong>OK, let’s test the null with a Welch’s <em>t</em>-test. That’s the one <code>R</code> does by default when you ask it to perform a <em>t</em>-test on independent data (recall lecture 5). Write up the results. <strong>Hint. </strong>The function documentation should help you find out how to specify the test formula. If it doesn’t, ask the Internet.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-A Welch's *t*-test showed that the time spent on lab sheets in the Thursday group was significantly longer than that in the Friday group, *Mean diff* = $-8.51$, 95% CI [$-12.25,\ -4.78$], $t(143.12)=-4.51,\ p<10^{-4}$. -->
-<p>Great! Finally, let’s see if there’s been a change in the number of tasks students are able to complete in the labs between week 3 and 4.</p>
-<p> </p>
-<p><strong>Task 38: </strong>What is the null hypothesis and which test is appropriate to test it?</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-$H_0: \mu_{wk3} = \mu_{wk4}$ -->
+<p><strong>Task 10: </strong>Using <code>cor.test()</code> and <code>lm()</code>, run a correlation, and then a linear model, to examine the relationship between IQ and exam performance in the <code>schools</code> dataset you’ve just created. What can you conclude from your analyses?</p>
+<p><strong>Tip: </strong><code>cor.test()</code>, and other <code>R</code> functions ending in <code>.test</code>, are simple functions, designed to do a test and print out information immediately. <code>lm()</code> is a bit more complex: The simplest way to start with it is to assign its output to a variable (<code>var &lt;- lm(...)</code>) and then use <code>summary()</code> to tell you the most useful information about it (<code>summary(var)</code>).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># load(url(&quot;http://is.gd/tsktsk&quot;))</span></a></code></pre></div>
 <!-- solution
-The paired sample *t*-test is the one to pick as the observations are paired (and therefore not independent) -- one observation per week from each student. -->
-<p> </p>
-<p><strong>Task 39: </strong>Run the test and write up the results.</p>
-<div class="noteBox writeUp" contenteditable="true">
-
-</div>
-<!--
-The students spent on average less time on the lab sheet in week 4 compared to week 3, *Mean diff* = $-2.05$, 95% CI [$-2.58,\ -1.51$], $t(152)=-7.53,\ p=4.1\times 10^{-12}$. -->
-<p>I guess we should conclude with a picture, shouldn’t we?</p>
-<p> </p>
-<p><strong>Task 40: </strong>Visualise the results of your Welch’s <em>t</em>-test with an error bar plot with confidence intervals, such as the one in the lecture 5. I’ll help you a wee bit: The 95%CI for Thursday is [100.21, 105.68] and for Friday, it is [91.82, 97.04]. The plot should look something like this, perhaps:</p>
-<div class="solution">
-<img src="data:image/png;base64,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" width="480" />
-</div>
-<p><strong>You can now do statistical analysis of several types of data. Very well done indeed!</strong></p>
-<p> </p>
-<p> </p>
-</div>
-</div>
-<div id="extra-task-for-the-brave" class="section level2">
-<h2>Extra task for the brave</h2>
-<p>If you’re hungry for more, try getting a bootstrap 95% confidence interval from our first <span class="math inline">\(\chi^2\)</span> goodness-of-fit test. That’s right, with no hints whatsoever other than the lecture slides. Not sure this will be encouraging but you <em>can</em> do it in a single line of code that’s about 100 characters long…</p>
-<p>Good luck!</p>
-<p> </p>
-<p> </p>
-<p> </p>
-</div>
+*Note: * Results may differ slightly depending on merging decisions. -->
+<!-- solution
+There's a significant positive correlation between `iq` and `exam`
+  - Higher IQ is associated with better exam score -->
+<!-- solution
+The model is better than the null model (*F*-test; $p < .05$)
+For each point increase in `iq`, `exam` score goes up by 0.34 (as per *b* coefficient) -->
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>This is obviously not true but let’s pretend…<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>For the <code>R</code> snobs among you: yeah, yeah, I know… <code>apply(r_snobs, funcfion(x) get.a.life(x))</code><a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>This would be a bit silly with 5 observations (and a bit silly anyway!) but it’s just an example.<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
@@ -2251,34 +1954,11 @@ hr {
     margin-bottom: 3em;
 }
 
-.solText > title {
-    font-size: 20px;
-    color: rgb(var(--theme-col));
-	display: block;
-	margin-top: 10px;
-	margin-bottom: 5px;
-}
-
-warn {
-    font-weight: bold;
-    color: rgb(var(--warn-col));
-}
-
 .warn {
     border: solid 1px rgb(var(--warn-col));
     padding: 1em 1em 0.5em 1em;
     background-color: rgba(var(--warn-col), .3);
     margin-bottom: 3em;
-}
-
-.warn > h3, .warn > h4, .warn > h5 {
-    font-size: 20px;
-    color: rgb(var(--warn-col));
-	margin-top: 10px;
-}
-
-.warn strong {
-    color: rgb(var(--warn-col));
 }
 
 .warn::before {
@@ -2292,34 +1972,27 @@ warn {
     float: left;
 }
 
-.writeUp::before {
+.writeUp:not(.empty)::before {
     content: "Write-up";
     font-size: 25px;
     color: rgb(var(--theme-col));
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-bottom: 10px;
     display: block;
 }
 
-.writeUp:not(.noteBox)::before {
-    margin-bottom: 10px;
+.empty::before {
+    content: 'Write-up';
+    font-size: 25px;
+    color: rgb(var(--theme-col));
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: -55px 0 10px -15px;
+	display: block;
 }
 
-.noteBox.writeUp::before {
-    margin: -50px 0 10px 0;
-}
-
-.noteBox {
-    border: solid 1px rgb(var(--theme-col));
-    background-color: #fff;
-    padding: 6px 12px;
-    overflow-y: auto;
-	min-height: 35px;
-	margin-bottom: 40px;
-	overflow-wrap: break-word;
-}
-
-.noteBox.writeUp {
-	padding: 65px 12px 12px 12px;
+.writeUp.empty {
+	background-color: white;
+    margin-top: 4em;
 }
 
 @media print {	
@@ -2339,7 +2012,7 @@ warn {
     border: none;
   }
   
-  .writeUp, .solText, .noteBox, .solution, .why, .warn {
+  .writeUp, .solText, .empty, .solution, .why {
     page-break-inside:avoid
   }
   
@@ -2380,7 +2053,7 @@ warn {
     font-size: 10pt;
   }
   
-  .noteBox.writeUp::before, .solution pre.sourceCode::before, .writeUp:not(.noteBox)::before, why::before {
+  .empty::before, .solution pre.sourceCode::before, .writeUp:not(.empty)::before, why::before {
     font-size: 11pt;      
   }
   
@@ -2388,23 +2061,9 @@ warn {
     border: 1pt solid rgb(var(--theme-col)) !important;
     background-color: rgba(var(--theme-col), .2) !important;
   }
-  
   body {
     margin: 0;
   }
-  
-  .warn > h3, .warn > h4, .warn > h5, .solText > title {
-    font-size: 13pt;
-  }
-    
-  .math.inline {
-    font-size: 8pt !important;
-  }
-}
-
-
-.math.inline {
-    font-size: 10pt !important;
 }
 
 </style>
