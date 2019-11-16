@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Probability (2)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Probability (2)</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec9_prob2.html">Click for handout</a></h3>
+</section>
+
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Brief recap of probability rules</li>
+<li>Contingency tables and conditional probability
+<ul>
+<li>Our first test (without the actual test!)</li>
+</ul></li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Understand the use of probability rules to test dependence</li>
+<li>Understand use of probability to test independence</li>
+</ul>
+</section>
+<section id="rules-of-probability" class="slide level2">
+<h2>Rules of probability</h2>
+<ol type="1">
+<li>For any event</li>
+</ol>
+<p><span class="math display">\[0 \leq p(A) \leq 1\]</span></p>
+<ol start="2" type="1">
+<li>The sum of the probabilities of all possible outcomes = 1</li>
+</ol>
+<p><span class="math display">\[p(A_1) + p(A_2) + ... p(A_i) = 1\]</span></p>
+<ol start="3" type="1">
+<li>Probability of the complement of A (Not A):</li>
+</ol>
+<p><span class="math display">\[p(\sim A) = 1 - p(A)\]</span></p>
+</section>
+<section id="rules-of-probability-1" class="slide level2">
+<h2>Rules of probability</h2>
+<ol start="4" type="1">
+<li>For mutually exclusive events, probability of A or B:</li>
+</ol>
+<p><span class="math display">\[p(A \bigcup B) = p(A) + p(B)\]</span></p>
+<ul>
+<li>The probability of A or B, will always be equal or greater than the probability of single event.
+<ul>
+<li>Why?</li>
+</ul></li>
+</ul>
+<ol start="5" type="1">
+<li>General addition rule:</li>
+</ol>
+<p><span class="math display">\[p(A \bigcup B) = p(A) + p(B) - p(A \bigcap B)\]</span></p>
+</section>
+<section id="rules-of-probability-2" class="slide level2">
+<h2>Rules of probability</h2>
+<ol start="6" type="1">
+<li>If A and B are independent, probability of A and B</li>
+</ol>
+<p><span class="math display">\[p(A \bigcap B = p(A)p(B)\]</span></p>
+<ul>
+<li>The probability of A and B will always we less than or equal to the probability of single event.
+<ul>
+<li>Why?</li>
+</ul></li>
+</ul>
+</section>
+<section id="conditional-probability" class="slide level2">
+<h2>Conditional probability</h2>
+<ul>
+<li>Sometimes we have events where the probability of one event may be dependent on whether another event has occured.</li>
+<li>This is referred to as <strong>conditional probability</strong>.</li>
+<li>Probability of B <strong>given</strong> A, which is written, <span class="math inline">\(p(B|A)\)</span></li>
+</ul>
+</section>
+<section id="conditional-probability-1" class="slide level2">
+<h2>Conditional probability</h2>
+<ul>
+<li>We can calculate conditional probability as;</li>
+</ul>
+<p><span class="math display">\[p(B|A) = \frac{p(A \bigcap B)}{p(A)}\]</span></p>
+<ul>
+<li>Or:</li>
+</ul>
+<p><span class="math display">\[p(A|B) = \frac{p(A \bigcap B)}{p(B)}\]</span></p>
+</section>
+<section id="conditional-probability-an-example" class="slide level2">
+<h2>Conditional probability: an example</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boys</td>
+<td>25</td>
+<td>24</td>
+<td>49</td>
+</tr>
+<tr class="even">
+<td>Girls</td>
+<td>10</td>
+<td>41</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>35</td>
+<td>49</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>We have data on the handedness of boys and girls in a class</li>
+<li>Let’s say we select one student at random, and they are a girl.<br />
+</li>
+<li>What is the probability they are left handed?
+<ul>
+<li><span class="math inline">\(p(left | girl)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="conditional-probability-an-example-1" class="slide level2">
+<h2>Conditional probability: an example</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boys</td>
+<td>25</td>
+<td>24</td>
+<td>49</td>
+</tr>
+<tr class="even">
+<td>Girls</td>
+<td>10</td>
+<td>41</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>35</td>
+<td>49</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(p(left \bigcap girl)\)</span> = <span class="math inline">\(\frac{10}{100}\)</span> = 0.10</li>
+<li><span class="math inline">\(p(girl) = \frac{51}{100}\)</span> = 0.51</li>
+</ul>
+</section>
+<section id="conditional-probability-an-example-2" class="slide level2">
+<h2>Conditional probability: an example</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boys</td>
+<td>25</td>
+<td>24</td>
+<td>49</td>
+</tr>
+<tr class="even">
+<td>Girls</td>
+<td>10</td>
+<td>41</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>35</td>
+<td>49</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[p(Left|Girl) = \frac{p(Left \bigcap Girl)}{p(Girl)}\]</span></p>
+<p><span class="math display">\[p(Left|Girl) = \frac{0.10}{0.51} = 0.196\]</span></p>
+</section>
+<section id="conditional-probability-an-example-3" class="slide level2">
+<h2>Conditional probability: an example</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boys</td>
+<td>25</td>
+<td>24</td>
+<td>49</td>
+</tr>
+<tr class="even">
+<td>Girls</td>
+<td>10</td>
+<td>41</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>35</td>
+<td>49</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[p(Girl|Left) = \frac{p(Left \bigcap Girl)}{p(Left)}\]</span></p>
+<p><span class="math display">\[p(Left|Girl) = \frac{0.10}{0.35} = 0.286\]</span></p>
+</section>
+<section id="are-events-independent" class="slide level2">
+<h2>Are events independent?</h2>
+<ul>
+<li>The multiplication rule, and the use of contingency tables, provides a way to assess if events are independent.</li>
+<li><strong>Example</strong>: Consider a different school with 100 pupils.
+<ul>
+<li>55 male and 45 female.</li>
+<li>Suppose we ask those students if they like stats. 40 say yes, 60 say no.</li>
+</ul></li>
+<li>We can tabulate the proportions and think about the probabilities.</li>
+</ul>
+</section>
+<section id="are-events-independent-1" class="slide level2">
+<h2>Are events independent?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>p(Male, Yes)</td>
+<td>p(Male, No)</td>
+<td>0.55</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>p(Female &amp; Yes)</td>
+<td>p(Female, No)</td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>0.40</td>
+<td>0.60</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="are-events-independent-2" class="slide level2">
+<h2>Are events independent?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td><span class="math inline">\(0.55*0.40 = 0.22\)</span></td>
+<td><span class="math inline">\(0.55*0.60 = 0.33\)</span></td>
+<td>0.55</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td><span class="math inline">\(0.45*0.40 = 0.18\)</span></td>
+<td><span class="math inline">\(0.45*0.60 = 0.27\)</span></td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>0.40</td>
+<td>0.60</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If we assume all events to be independent, we can calculate expected frequencies.
+<ul>
+<li>These are the products of the two probabilities.</li>
+</ul></li>
+<li>Notice that here we do not have actual frequencies like in example 1. We have cell probabilities.</li>
+</ul>
+</section>
+<section id="are-events-independent-3" class="slide level2">
+<h2>Are events independent?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>0.22</td>
+<td>0.33</td>
+<td>0.55</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>0.18</td>
+<td>0.27</td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>0.40</td>
+<td>0.60</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>From this, <strong>if</strong> preference and gender are independent, the probabilities of liking stats if male or female should be the same:
+<ul>
+<li><span class="math inline">\(p(yes|male)\)</span> = <span class="math inline">\(\frac{.22}{.55}\)</span> = 0.40</li>
+<li><span class="math inline">\(p(yes|female)\)</span> = <span class="math inline">\(\frac{.18}{.45}\)</span> = 0.40</li>
+</ul></li>
+</ul>
+</section>
+<section id="are-events-independent-4" class="slide level2">
+<h2>Are events independent?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>0.10</td>
+<td>0.45</td>
+<td>0.55</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>0.30</td>
+<td>0.15</td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>0.40</td>
+<td>0.60</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>But what if we observed the above…</li>
+</ul>
+</section>
+<section id="are-events-independent-5" class="slide level2">
+<h2>Are events independent?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>Marginal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>0.10</td>
+<td>0.45</td>
+<td>0.55</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>0.30</td>
+<td>0.15</td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td>Marginal</td>
+<td>0.40</td>
+<td>0.60</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Given this, our conditional probabilities look like this;
+<ul>
+<li><span class="math inline">\(p(yes|male) = \frac{.10}{.55}\)</span> = 0.18</li>
+<li><span class="math inline">\(p(yes|female) = \frac{.30}{.45}\)</span> = 0.67</li>
+</ul></li>
+<li>In other words, gender and whether you like stats are related.</li>
+</ul>
+</section>
+<section id="our-first-statistical-test" class="slide level2">
+<h2>Our first statistical test</h2>
+<ul>
+<li>What we have just done (more or less) is do all the backgroun work to understand a <span class="math inline">\(\chi^2\)</span> test of independence.</li>
+<li>This is test of the independence of two nominal category variables.</li>
+<li>To use this in practice, we have a couple of extra steps, but the above is the fundamental principle.</li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Finish any existing tasks from labs.</li>
+<li>Reading: See LEARN</li>
+<li>Quiz 9 on probability
+<ul>
+<li><strong>This quiz counts</strong></li>
+<li>Live now (as of Monday at 09:00).</li>
+<li>Closes Sunday at 17:00</li>
+</ul></li>
+</ol>
+</section>
+<section id="recommendations-of-the-week-lab-team" class="slide level2">
+<h2>Recommendations of the week (Lab Team)</h2>
+<ul>
+<li>Podcast: <a href="http://www.theblackgoatpodcast.com/">The Black Goat</a></li>
+<li>Recipe: <a href="https://www.jamieoliver.com/features/creamy-sea-salted-fudge-recipe/">Homemade Fudge</a></li>
+<li>Book: <a href="https://www.theguardian.com/books/2007/jul/21/fiction.featuresreviews3">The End of Mr Y, Scarlett Thomas</a></li>
+<li>Thing to do: <a href="https://www.nationalgalleries.org/visit/scottish-national-gallery-modern-art">Gallery of Modern Art</a></li>
+<li>Coffee/food Place: <a href="https://www.kilteddonut.com/">The Kilted Donut</a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>
