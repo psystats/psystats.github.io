@@ -41,11 +41,15 @@ $$p(A \bigcup B) = p(A) + p(B)$$
 - The probability of A or B, will always be equal or greater than the probability of single event.
   - Why?
 
+<<<<<<< HEAD
 ## Rules of probability
+=======
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 5. General addition rule: 
 
 $$p(A \bigcup B) = p(A) + p(B) - p(A \bigcap B)$$
 
+<<<<<<< HEAD
 - The general addition rule can be used when events are not mutually exclusive.
   - That is when an event can fall into both A and B.
   - E.g. Think a playing card being red or a 7.
@@ -55,10 +59,17 @@ $$p(A \bigcup B) = p(A) + p(B) - p(A \bigcap B)$$
 6. If A and B are independent, probability of A and B
 
 $$p(A \bigcap B) = p(A)p(B)$$
+=======
+## Rules of probability
+6. If A and B are independent, probability of A and B
+
+$$p(A \bigcap B = p(A)p(B)$$
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 - The probability of A and B will always we less than or equal to the probability of single event.
     - Why? 
 
+<<<<<<< HEAD
 ## Question from class
 - Why is the probability of event A and event B occurring arrived at using multiplication?
   - As per they "Why?" above, the probability that two things occur, conceptually, has to be equally likely or less likely than a single event.
@@ -129,16 +140,28 @@ $$p(A \bigcap B) = p(A)p(B|A)$$
 - Probability of B **given** A, which is written, $p(B|A)$
 - Note though that when $p(A)$ and $p(B)$ are independent, then the $p(B|A) = p(B)$
   - Hence the simple multiplication rule for independent events.
+=======
+
+## Conditional probability
+- Sometimes we have events where the probability of one event may be dependent on whether another event has occured. 
+- This is referred to as **conditional probability**.
+- Probability of B **given** A, which is written, $p(B|A)$
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 ## Conditional probability
 - We can calculate conditional probability as;
 
+<<<<<<< HEAD
 $$p(B|A) = \frac{p(A \bigcap B)}{p(A)}$$
+=======
+$$p(B|A) = \frac{p(A \bigcap B)}{p(A)}$$ 
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 - Or: 
 
 $$p(A|B) = \frac{p(A \bigcap B)}{p(B)}$$
 
+<<<<<<< HEAD
 ## Where does this come from?
 - It comes from re-arranging our general multiplication rule.
 
@@ -156,6 +179,8 @@ $$\frac{p(A \bigcap B)}{p(A)} = p(B|A)$$
 
 $$p(B|A) = \frac{p(A \bigcap B)}{p(A)}$$
 
+=======
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 ## Conditional probability: an example
 
@@ -163,7 +188,11 @@ $$p(B|A) = \frac{p(A \bigcap B)}{p(A)}$$
 |----------|--------|---------|----------|
 | Boys     | 25     | 24      | 49       |
 | Girls    | 10     | 41      | 51       |
+<<<<<<< HEAD
 | Marginal | 35     | 65      | 100      |
+=======
+| Marginal | 35     | 49      | 100      |
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 - We have data on the handedness of boys and girls in a class
 - Let's say we select one student at random, and they are a girl.  
@@ -175,6 +204,7 @@ $$p(B|A) = \frac{p(A \bigcap B)}{p(A)}$$
 |          | Left   | Right   | Marginal |
 |----------|--------|---------|----------|
 | Boys     | 25     | 24      | 49       |
+<<<<<<< HEAD
 | **Girls**| **10** | **41**  | **51**   |
 | Marginal | 35     | 65      | 100      |
 
@@ -199,13 +229,45 @@ $$p(Left|Girl) = \frac{0.10}{0.51} = 0.196$$
 | Boys     | **25** | 24      | 49       |
 | Girls    | **10** | 41      | 51       |
 | Marginal | **35** | 65      | 100      |
+=======
+| Girls    | 10     | 41      | 51       |
+| Marginal | 35     | 49      | 100      |
+
+- $p(left \bigcap girl)$ = $\frac{10}{100}$ = 0.10
+- $p(girl) = \frac{51}{100}$ = 0.51
+
+## Conditional probability: an example
+
+|          | Left   | Right   | Marginal |
+|----------|--------|---------|----------|
+| Boys     | 25     | 24      | 49       |
+| Girls    | 10     | 41      | 51       |
+| Marginal | 35     | 49      | 100      |
+
+
+$$p(Left|Girl) = \frac{p(Left \bigcap Girl)}{p(Girl)}$$
+
+$$p(Left|Girl) = \frac{0.10}{0.51} = 0.196$$
+
+## Conditional probability: an example
+
+|          | Left   | Right   | Marginal |
+|----------|--------|---------|----------|
+| Boys     | 25     | 24      | 49       |
+| Girls    | 10     | 41      | 51       |
+| Marginal | 35     | 49      | 100      |
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 
 $$p(Girl|Left) = \frac{p(Left \bigcap Girl)}{p(Left)}$$
 
+<<<<<<< HEAD
 - Therefore: 
 
 $$p(Girl|Left) = \frac{0.10}{0.35} = 0.286$$
+=======
+$$p(Left|Girl) = \frac{0.10}{0.35} = 0.286$$
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 
 ## Are events independent?
 - The multiplication rule, and the use of contingency tables, provides a way to assess if events are independent.
@@ -277,7 +339,11 @@ $$p(Girl|Left) = \frac{0.10}{0.35} = 0.286$$
 - In other words, gender and whether you like stats are related.
 
 ## Our first statistical test
+<<<<<<< HEAD
 - What we have just done (more or less) is do all the background work to understand a $\chi^2$ test of independence.
+=======
+- What we have just done (more or less) is do all the backgroun work to understand a $\chi^2$ test of independence.
+>>>>>>> 1470af8c1f4ca8c3782bfc4fcf1db48635a18f62
 - This is test of the independence of two nominal category variables.
 - To use this in practice, we have a couple of extra steps, but the above is the fundamental principle.
 
