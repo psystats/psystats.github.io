@@ -64,7 +64,7 @@ library(kableExtra)
 
 ## Sets: Empty, complement, difference
 
-![](empty.png)
+![](empty.PNG)
 
 - Key point on empty sets: P and R here are **mutually exclusive**
 - If P occurs, R **cannot** occur.
