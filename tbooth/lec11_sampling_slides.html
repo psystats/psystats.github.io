@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Lecture 11: Sampling</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <script src="https://psystats.github.io/slides_files/kePrint-0.0.1/kePrint.js"></script>
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Lecture 11: Sampling</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec11_sampling.html">Click for handout</a></h3>
+</section>
+
+<section id="course-feedback" class="slide level2">
+<h2>Course feedback</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Thank-you for all the course feedback.
+<ul>
+<li>Lots of positives and lots of things to think about developing.</li>
+</ul></li>
+<li>Some quick changes for the rest of this year:
+<ul>
+<li>Slight changes to labs</li>
+<li>Improve the consistency of lecture and lab code</li>
+<li>Fuller code explanations</li>
+<li>Add links to more detailed statistical material</li>
+</ul></li>
+</ul>
+</section>
+<section id="administrative-matters" class="slide level2">
+<h2>Administrative matters</h2>
+<ul>
+<li>Times and locations for both lectures and labs have changed.</li>
+<li>Please check carefully.</li>
+<li>If you can not make your new lab, let us know.</li>
+</ul>
+</section>
+<section id="concepts-to-carry-forward" class="slide level2">
+<h2>Concepts to carry forward</h2>
+<ul>
+<li>Data can be of different types.</li>
+<li>Dependent on type (continuous vs. categorical), we can visualise and describe the distribution of data differently.</li>
+<li>When thinking about events (“things happening”) we can assign probabilities to the event.</li>
+<li>We can then define a probability distribution that describes the probability of all possible events.</li>
+</ul>
+</section>
+<section id="in-psych-stats" class="slide level2">
+<h2>In Psych Stats</h2>
+<ul>
+<li>In psychology, we design a study, to calculate a value that carries some meaning.
+<ul>
+<li>Reaction time of one group vs another.</li>
+</ul></li>
+<li>Given it has meaning based on the study design, we want to know something about the number:
+<ul>
+<li>Is it unusual or not?</li>
+</ul></li>
+<li>This is the task for the next 4-5 weeks.</li>
+</ul>
+</section>
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<ul>
+<li>We will talk about populations, samples and sampling.</li>
+<li>Basic concepts of sampling may seem simple and intuitive</li>
+<li>But these concepts are very useful when we start talking about statistical inference
+<ul>
+<li>Statistical inference = how we make decisions about statistics we calculate.</li>
+</ul></li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Understand the concept principles sampling from populations.</li>
+<li>Be familiar with the specific statistical terminology for sampling.</li>
+<li>Understand the concept of a sampling distribution.</li>
+</ul>
+</section>
+<section id="a-question" class="slide level2">
+<h2>A question</h2>
+<ul>
+<li>Suppose I wanted to know the proportion of UG students at the University of Edinburgh were born in Scotland?
+<ul>
+<li>In stats talk, all UG at the UoE are our <strong>population</strong>.</li>
+<li>The proportion of Scottish students is the <strong>population parameter</strong> (the thing we are interested in).</li>
+</ul></li>
+<li>What is the best way to find this out exactly?</li>
+<li>What else might we do?</li>
+</ul>
+</section>
+<section id="lets-try" class="slide level2">
+<h2>Let’s try</h2>
+<ul>
+<li>Sample the class</li>
+</ul>
+</section>
+<section id="sampling-distribution-1" class="slide level2">
+<h2>Sampling distribution (1)</h2>
+<ul>
+<li>What we have just drawn is a <strong>sampling distribution</strong> for the proportion of Scottish students
+<ul>
+<li>This is just a histogram.</li>
+<li>Each data point is a guess based on some data of the proportion of students that are Scottish at UoE.</li>
+</ul></li>
+</ul>
+</section>
+<section id="parameter-vs-point-estimate" class="slide level2">
+<h2>Parameter vs point-estimate</h2>
+<ul>
+<li>Key idea:
+<ul>
+<li>There is population parameter (proportion of Scottish students at UoE) we are interested in.</li>
+<li>We can draw a sample, and calculate this proportion (statistic) in the sample.</li>
+<li>In a single sample, this <strong>point-estimate</strong> is our best guess at the population parameter.</li>
+</ul></li>
+</ul>
+</section>
+<section id="actual-proportion" class="slide level2">
+<h2>2017/18 actual proportion</h2>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Scottish
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+13926
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+12025
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>To save time, we are going to automate the process of looking at samples from now on.</li>
+<li>So let’s look at a few more examples.</li>
+</ul>
+</section>
+<section id="visualizing-sampling-distributions" class="slide level2">
+<h2>Visualizing sampling distributions</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" /></p>
+</section>
+<section id="visualizing-sampling-distributions-1" class="slide level2">
+<h2>Visualizing sampling distributions</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+</section>
+<section id="visualizing-sampling-distributions-2" class="slide level2">
+<h2>Visualizing sampling distributions</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" /></p>
+</section>
+<section id="sampling-distributions-2" class="slide level2">
+<h2>Sampling distributions (2)</h2>
+<ul>
+<li>We have just calculated three sampling distributions</li>
+<li>Each of these look different.</li>
+<li>Each sampling distribution is characterising the <strong>sampling variability</strong> in our <strong>estimate</strong> of the <strong>parameter</strong> of interest (proportion of Scottish students at UoE).</li>
+</ul>
+</section>
+<section id="more-samples" class="slide level2">
+<h2>More samples</h2>
+<ul>
+<li>So far we have just taken 10 samples.</li>
+<li>What if we took more?</li>
+</ul>
+</section>
+<section id="more-samples-1" class="slide level2">
+<h2>More samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" /></p>
+</section>
+<section id="more-samples-2" class="slide level2">
+<h2>More samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" /></p>
+</section>
+<section id="more-samples-3" class="slide level2">
+<h2>More samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" /></p>
+<ul>
+<li>What do you notice about the plots on the last three slides?</li>
+</ul>
+</section>
+<section id="frequency-probability" class="slide level2">
+<h2>Frequency = probability</h2>
+<ul>
+<li>At this point lets pause and remember some things from probability.</li>
+<li>When we spoke about probability, we spoke about the relation to frequency.</li>
+<li>If something did not happen very often, it has a lower probability.
+<ul>
+<li>Now think about our sampling distributions of the proportion of Scottish students</li>
+</ul></li>
+</ul>
+</section>
+<section id="frequency-probability-1" class="slide level2">
+<h2>Frequency = probability</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" /></p>
+</section>
+<section id="bigger-samples" class="slide level2">
+<h2>Bigger samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" /></p>
+<ul>
+<li>So above is a frequency distribution for <span class="math inline">\(n\)</span>=10.</li>
+<li>Let’s see what happens when we make <span class="math inline">\(n\)</span> bigger.</li>
+</ul>
+</section>
+<section id="bigger-samples-1" class="slide level2">
+<h2>Bigger samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="480" /></p>
+</section>
+<section id="bigger-samples-2" class="slide level2">
+<h2>Bigger samples</h2>
+<p><img src="lec11_sampling_slides_files/figure-revealjs/unnamed-chunk-12-1.png" width="480" /></p>
+<ul>
+<li>What do you notice about the last three slides?</li>
+</ul>
+</section>
+<section id="what-does-it-mean-to-be-narrow" class="slide level2">
+<h2>What does it mean to be narrow?</h2>
+<ul>
+<li>Remember: frequency distributions are characterising the variability in sample estimates.</li>
+<li>Variability can be thought of as the spread in data/plots.</li>
+<li>So as we increase <span class="math inline">\(n\)</span> we are getting….</li>
+</ul>
+</section>
+<section id="what-does-it-mean-to-be-narrow-1" class="slide level2">
+<h2>What does it mean to be narrow?</h2>
+<ul>
+<li>To think about this in probability language, as <span class="math inline">\(n\)</span> increases, the probability of observing an estimate in a sample that is a long way from the population parameter (here 0.46) decreases (becomes less probable).</li>
+<li>So when we have large samples, our estimates from those samples are likely to be closer to the population value.
+<ul>
+<li>This is a good thing.</li>
+</ul></li>
+</ul>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard error</h2>
+<ul>
+<li>We can formally calculate the “narrowness” of a sampling distribution.
+<ul>
+<li>This is essentially calculating the standard deviation (as we have done before) of the sampling distribution.</li>
+<li>Or at least approximating it!</li>
+</ul></li>
+<li>In the context of sampling distributions, this is called the <strong>standard error</strong></li>
+</ul>
+</section>
+<section id="mean-se-of-sampling-distribution" class="slide level2">
+<h2>Mean &amp; SE of sampling distribution</h2>
+<ul>
+<li>Mean of the sampling distribution is close to the population parameter.
+<ul>
+<li>Even with a small number of samples.</li>
+</ul></li>
+<li>As the number of samples increases, the sampling distribution approaches a normal distribution.
+<ul>
+<li>Point-estimates pile up around the population value.</li>
+</ul></li>
+<li>As the n per sample increases, the SE of the sampling distribution decreases (becomes narrower).
+<ul>
+<li>With large n, all our point-estimates are closer to the population parameter.</li>
+</ul></li>
+</ul>
+</section>
+<section id="central-limit-theorem" class="slide level2">
+<h2>Central Limit Theorem</h2>
+<ul>
+<li>What we have seen throughout this lecture is a demonstration of an important concept in statistics - namely, <strong>central limit theorem</strong>.<br />
+</li>
+<li>The central limit theorem (roughly) states that when estimates of sample means are based on increasingly large samples (<span class="math inline">\(n\)</span>), the sampling distribution of means becomes more normal (symmetric), and narrower (quantified by the standard error).</li>
+</ul>
+</section>
+<section id="key-terminology" class="slide level2">
+<h2>Key terminology</h2>
+<ul>
+<li><strong>Census</strong>: process of asking every member of a population.</li>
+<li><strong>Sampling</strong>: process of selecting subsets of populations.</li>
+<li><strong>Population</strong>: the complete set of units of interest.</li>
+<li><strong>Sample</strong>: A subset of the population</li>
+</ul>
+</section>
+<section id="key-terminology-1" class="slide level2">
+<h2>Key terminology</h2>
+<ul>
+<li><strong>Parameter</strong>: value of of interest in the population.</li>
+<li><strong>Point estimate</strong>: our “best guess” at the parameter of interest from a sample.</li>
+<li><strong>Sampling distribution</strong>: the distribution of estimates of the population parameter.</li>
+<li><strong>Standard error</strong>: quantification of the variation in estimates.</li>
+</ul>
+</section>
+<section id="features-of-samples" class="slide level2">
+<h2>Features of samples</h2>
+<ul>
+<li>Is our sample…
+<ul>
+<li>Biased?</li>
+<li>Representative?</li>
+<li>Random?</li>
+</ul></li>
+</ul>
+</section>
+<section id="good-samples" class="slide level2">
+<h2>Good samples</h2>
+<ul>
+<li>If a sample of <span class="math inline">\(n\)</span> is drawn at random, it will be unbiased and representative of <span class="math inline">\(N\)</span></li>
+<li>Our point estimates from such samples will be good guesses at the population parameter.
+<ul>
+<li>Without the need for census.</li>
+</ul></li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Look back over any material from last term.</li>
+<li>Reading: Can be found <a href="https://moderndive.com/7-sampling.html">here</a></li>
+<li>Quiz 11: Semester 1 R
+<ul>
+<li>Live now.</li>
+<li>Close Sunday at 17:00</li>
+</ul></li>
+</ol>
+</section>
+<section id="recommendations-of-the-week" class="slide level2">
+<h2>Recommendations of the week</h2>
+<ul>
+<li>These will start again next week.</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>
