@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Lecture 13: Hypothesis testing</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Lecture 13: Hypothesis testing</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec13_hypoth.html">Click for handout</a></h3>
+</section>
+
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Introduce hypothesis testing</li>
+<li>Discuss the different elements of a hypothesis test</li>
+<li>Particular focus on the idea of a null distribution.</li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Understand the structure of a hypothesis test.</li>
+<li>Develop familiarity with key terminology of hypothesis testing.</li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>Suppose Umberto and I taught dapR to two separate cohorts of students.
+<ul>
+<li>Umberto taught one class</li>
+<li>I taught the other</li>
+</ul></li>
+<li>We measure how well each student does with the course grade.</li>
+<li>We want to know if Umberto or I are the better teacher.
+<ul>
+<li>So, is there a difference in the average grade of Umberto’s class vs my class.</li>
+</ul></li>
+</ul>
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">class &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">ID =</span> <span class="kw">paste</span>(<span class="kw">rep</span>(<span class="st">&quot;ID&quot;</span>, <span class="dv">300</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">300</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">grade =</span> <span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">300</span>, <span class="dv">55</span>, <span class="dv">15</span>),<span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">teacher =</span> <span class="kw">as_factor</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;Umberto&quot;</span>, <span class="st">&quot;Tom&quot;</span>), <span class="dv">300</span>, <span class="dt">replace =</span> T, <span class="dt">prob =</span> (<span class="kw">c</span>(.<span class="dv">5</span>,.<span class="dv">5</span>))))</a>
+<a class="sourceLine" id="cb1-5" title="5">)</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">head</span>(class)</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"># A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  ID    grade teacher</a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>fct<span class="op">&gt;</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="dv">1</span> ID1      <span class="dv">43</span> Tom    </a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="dv">2</span> ID2      <span class="dv">64</span> Umberto</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="dv">3</span> ID3      <span class="dv">37</span> Umberto</a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="dv">4</span> ID4      <span class="dv">47</span> Umberto</a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="dv">5</span> ID5      <span class="dv">65</span> Umberto</a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="dv">6</span> ID6      <span class="dv">52</span> Tom    </a></code></pre></div>
+</section>
+<section id="the-ideal" class="slide level2">
+<h2>The ideal</h2>
+<ul>
+<li>We have some exact predictions to compare
+<ul>
+<li>Person 1: There will be a 5 point difference in grades.</li>
+<li>Person 2: There will be a 15 point difference in grades.</li>
+</ul></li>
+<li>But what happens if the difference is 8 points?
+<ul>
+<li>Neither is right</li>
+<li>But the grades still differ</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-reality" class="slide level2">
+<h2>The reality</h2>
+<ul>
+<li>We have a sample of data</li>
+<li>From which we calculate a statistic</li>
+<li>And we need some way to make a decision about the value of that statistic.
+<ul>
+<li>Enter hypothesis testing.</li>
+</ul></li>
+</ul>
+</section>
+<section id="questions-vs-hypotheses" class="slide level2">
+<h2>Questions vs hypotheses</h2>
+<ul>
+<li>Research question.
+<ul>
+<li>Statement on the expected relations between variables of interest.</li>
+<li>Can be “messy” (not precisely stated)</li>
+</ul></li>
+<li>Statistical hypothesis
+<ul>
+<li>Precise mathematical statement</li>
+<li>Testable!</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypotheses" class="slide level2">
+<h2>Hypotheses</h2>
+<ul>
+<li>The typically applied hypothesis testing framework in psychology has two hypotheses.
+<ul>
+<li><span class="math inline">\(H_0\)</span> : the null hypothesis</li>
+<li><span class="math inline">\(H_1\)</span> : the alternative hypothesis</li>
+</ul></li>
+<li>Note the similarity to our ideal:
+<ul>
+<li><span class="math inline">\(H_0\)</span> : Person 1</li>
+<li><span class="math inline">\(H_1\)</span> : Person 2</li>
+</ul></li>
+<li>But we said this was not the reality…so what is different?</li>
+</ul>
+</section>
+<section id="defining-h0" class="slide level2">
+<h2>Defining H0</h2>
+<ul>
+<li>Assume that Umberto and I were equally good teachers.</li>
+<li>And that there was nothing systematic about how students were assigned to classes.
+<ul>
+<li>So the students were essentially random samples of the population of students.</li>
+</ul></li>
+<li>What would we expect the difference in average score of classes to be?</li>
+</ul>
+</section>
+<section id="defining-h0-1" class="slide level2">
+<h2>Defining H0</h2>
+<ul>
+<li>By chance, <span class="math inline">\(\Delta\bar{x} = 0\)</span>.</li>
+<li>This is perhaps the simplest way to think of defining H0.
+<ul>
+<li>What would the result be if only chance were at play?</li>
+</ul></li>
+<li>So if I were trying to guess the card you drew from a deck, by chance I would get this right <span class="math inline">\(\frac{1}{52}\)</span> times.
+<ul>
+<li>If this was my study, my null would be the proportion <span class="math inline">\(\frac{1}{52} = 0.019\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-h0-2" class="slide level2">
+<h2>Defining H0</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span> is a very specific hypothesis.</li>
+<li>It states that the population value of a statistic is <strong>equal</strong> to specific value.</li>
+</ul>
+</section>
+<section id="defining-h1" class="slide level2">
+<h2>Defining H1</h2>
+<ul>
+<li><span class="math inline">\(H_1\)</span> is the opposing position to <span class="math inline">\(H_0\)</span>.
+<ul>
+<li>Specifying <span class="math inline">\(H_1\)</span> is where we see the difference to the ideal case.</li>
+</ul></li>
+<li><span class="math inline">\(H_1\)</span> claims “some other state of the world” is true.
+<ul>
+<li>But is broader with respect to what this might be.</li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-h1-1" class="slide level2">
+<h2>Defining H1</h2>
+<ul>
+<li><span class="math inline">\(H_1\)</span> can be <strong>one-sided</strong> or <strong>two-sided</strong></li>
+<li>Two-sided:
+<ul>
+<li>The difference in grades <span class="math inline">\(\neq 0\)</span></li>
+</ul></li>
+<li>One-sided
+<ul>
+<li>The difference in grades is <span class="math inline">\(&lt; 0\)</span></li>
+<li>The difference in grades is <span class="math inline">\(&gt; 0\)</span></li>
+<li>These correspond a belief in who would be a better teacher.</li>
+</ul></li>
+</ul>
+</section>
+<section id="test-statistic" class="slide level2">
+<h2>Test Statistic</h2>
+<ul>
+<li>A test statistic is a calculation that provides a value in keeping with our research question.
+<ul>
+<li>It is calculated on a sample of data.</li>
+</ul></li>
+<li>We have been implicitly talking about the test statistic for our example.
+<ul>
+<li>The difference in means.</li>
+<li>Aside: We are currently talking about a raw difference in means.</li>
+<li>Formally the test statistic here is a <span class="math inline">\(t\)</span>-statistic (we will talk about this in full in a couple of weeks)</li>
+</ul></li>
+</ul>
+</section>
+<section id="point-estimates" class="slide level2">
+<h2>Point-estimates</h2>
+<ul>
+<li>A point estimate, as we have discussed, is simply a value of a statistic calculated in a sample.</li>
+</ul>
+</section>
+<section id="point-estimates-1" class="slide level2">
+<h2>Point-estimates</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">class <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(teacher) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">    </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb2-4" title="4">        <span class="dt">mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(grade),<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-5" title="5">        )</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co"># A tibble: 2 x 2</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  teacher  mean</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="dv">1</span> Tom      <span class="fl">54.4</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="dv">2</span> Umberto  <span class="fl">55.2</span></a></code></pre></div>
+<ul>
+<li><span class="math inline">\(\Delta\bar{x}\)</span> = 0.8</li>
+</ul>
+</section>
+<section id="null-distribution" class="slide level2">
+<h2>Null Distribution</h2>
+<ul>
+<li>A key point about a test statistic is that it must have a calculable sampling distribution under the null.
+<ul>
+<li>Ooft, sounds heavy!</li>
+<li>It is, but we have covered all we need to know.</li>
+</ul></li>
+<li>In week 11 we saw exactly how we can construct sampling distributions.</li>
+<li>This is no different.
+<ul>
+<li><strong>IF</strong> the null is true, what would the variation around the null hypothesis look like.</li>
+</ul></li>
+</ul>
+</section>
+<section id="null-distribution-1" class="slide level2">
+<h2>Null Distribution</h2>
+<p><img src="lec13_hypoth_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+</section>
+<section id="probability-and-the-null" class="slide level2">
+<h2>Probability and the null</h2>
+<ul>
+<li>To recap again, the area under the curve provides us with probability.</li>
+<li>We can calculate the probability at the point where the blue line (our sample estimate), is on our x-axis.</li>
+<li>This probability is what is referred to as the <span class="math inline">\(p\)</span>-value.</li>
+</ul>
+</section>
+<section id="p-value" class="slide level2">
+<h2>p-value</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">dif <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">    </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb3-3" title="3">        <span class="dt">pvalue =</span> <span class="kw">sum</span>(delta <span class="op">&gt;=</span><span class="st"> </span>obs_delta)<span class="op">/</span><span class="kw">n</span>()</a>
+<a class="sourceLine" id="cb3-4" title="4">    )</a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co"># A tibble: 1 x 1</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  pvalue</a>
+<a class="sourceLine" id="cb3-7" title="7">   <span class="op">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="dv">1</span>  <span class="fl">0.326</span></a></code></pre></div>
+<ul>
+<li>The <span class="math inline">\(p\)</span>-value represents the chance of obtaining a statistic as extreme or more extreme than the observed statistic, if the null hypothesis were true.</li>
+<li>This represents the area under the curve to the right of the blue line.
+<ul>
+<li>The area furthest from the null (red line)</li>
+</ul></li>
+</ul>
+</section>
+<section id="significance-level" class="slide level2">
+<h2>Significance Level</h2>
+<ul>
+<li>So we know the exact probability of our point estimate, given the sampling distribution for the null.</li>
+<li>How can we evaluate it?</li>
+<li>We do this by assigning a significance level, or <span class="math inline">\(\alpha\)</span> level.
+<ul>
+<li><span class="math inline">\(\alpha\)</span> is cut-off point.</li>
+<li>If our <span class="math inline">\(p\)</span>-value is <span class="math inline">\(&lt; \alpha\)</span> we make one decision.</li>
+<li>If our <span class="math inline">\(p\)</span>-value is <span class="math inline">\(\geq \alpha\)</span> we make another decision</li>
+</ul></li>
+<li>We typically use <span class="math inline">\(\alpha\)</span> = 0.05</li>
+</ul>
+</section>
+<section id="interpreting-test-result" class="slide level2">
+<h2>Interpreting test result</h2>
+<ul>
+<li><span class="math inline">\(p\)</span>-value is <span class="math inline">\(&lt; \alpha\)</span>: We reject the null hypothesis</li>
+<li><span class="math inline">\(p\)</span>-value is <span class="math inline">\(\geq \alpha\)</span>: We fail to reject the null hypothesis</li>
+<li>Odd language:
+<ul>
+<li>Why don’t we accept the null?</li>
+<li>Or accept the alternative?</li>
+</ul></li>
+</ul>
+</section>
+<section id="interpreting-test-result-1" class="slide level2">
+<h2>Interpreting test result</h2>
+<ul>
+<li>Accepting the null:
+<ul>
+<li>To accept the null would be like saying we believe the null is true.</li>
+<li>We believe the difference is 0.</li>
+<li>We don’t actually know this.</li>
+<li>All we know is that given our data, we do not have enough evidence to suggest it is not true.</li>
+</ul></li>
+</ul>
+</section>
+<section id="interpreting-test-result-2" class="slide level2">
+<h2>Interpreting test result</h2>
+<ul>
+<li>Accepting the alternative:
+<ul>
+<li>This is trickier, and we will come back to it next week.</li>
+<li>Short answer: we have not tested the alternative.</li>
+<li>Our sampling distribution was built around the null.</li>
+<li>And the alternative was not precisely stated.</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Structure of a Hypothesis Test
+<ol type="1">
+<li>A hypothesis</li>
+<li>A hypothesis test</li>
+<li>Test statistic</li>
+<li>Observed test statistic (point estimate from sample)</li>
+<li>Null distribution</li>
+<li><span class="math inline">\(p\)</span>-value</li>
+<li>Significance level</li>
+</ol></li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Finish tasks from last week.</li>
+<li>Quiz 13: Bootstrapping and R
+<ul>
+<li>Today at 17:00.</li>
+<li>Close Monday 3rd at 17:00</li>
+</ul></li>
+</ol>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>
