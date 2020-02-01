@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Lecture 14: NHST</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Lecture 14: NHST</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec14_NHST.html">Click for handout</a></h3>
+</section>
+
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Discuss further details of NHST</li>
+<li>Introduce Type I error, Type II error, power and effect size</li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Understand the structure of a hypothesis test.</li>
+<li>Understand the definition of Type I error, Type II error, power and effect size.</li>
+</ul>
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<ul>
+<li>Structure of a Hypothesis Test
+<ol type="1">
+<li>A hypothesis</li>
+<li>A hypothesis test</li>
+<li>Test statistic</li>
+<li>Observed test statistic (point estimate from sample)</li>
+<li>Null distribution</li>
+<li><span class="math inline">\(p\)</span>-value</li>
+<li>Significance level</li>
+</ol></li>
+</ul>
+</section>
+<section id="nhst" class="slide level2">
+<h2>NHST</h2>
+<ul>
+<li>What we are setting out is the modern application of <strong>N</strong>ull <strong>H</strong>ypothesis <strong>S</strong>ignificance <strong>T</strong>esting (NHST).</li>
+<li>Before we continue to develop some of the key ideas, let’s briefly discuss where the framework came from.</li>
+</ul>
+</section>
+<section id="nhst-brief-history" class="slide level2">
+<h2>NHST: Brief history</h2>
+<ul>
+<li>Jerzy Neyman (1894-1981) and Egon S. Pearson (1895-1980).</li>
+<li><strong>Key features:</strong>
+<ul>
+<li>Argued that you need two hypotheses to compare, the null (<span class="math inline">\(H_{0}\)</span>) and the alternative (<span class="math inline">\(H_{1}\)</span>).</li>
+<li>Rejected inductive reasoning for inductive behaviour
+<ul>
+<li>They wanted a decision rule.</li>
+</ul></li>
+<li>Introduced concepts of Type I and Type II error
+<ul>
+<li>The different ways we can be wrong.</li>
+</ul></li>
+<li>Focus was on decision making to maintain a long-run error rate.</li>
+</ul></li>
+</ul>
+</section>
+<section id="decisions-and-errors" class="slide level2">
+<h2>Decisions and errors</h2>
+<ul>
+<li>Type I and Type II error:
+<ul>
+<li>N-P set up a 2x2 system.</li>
+<li>We make a binary decision (right/wrong) about the <span class="math inline">\(H_{0}\)</span></li>
+<li>Therefore, there are 2 ways to make the right decision, and two ways to make the wrong decision.</li>
+</ul></li>
+</ul>
+</section>
+<section id="decisions-and-errors-1" class="slide level2">
+<h2>Decisions and errors</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct</td>
+<td style="text-align: center;">Incorrect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Incorrect</td>
+<td style="text-align: center;">Correct</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-rates-type-i" class="slide level2">
+<h2>Error rates: Type I</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct</td>
+<td style="text-align: center;">Incorrect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Type I Error (<span class="math inline">\(\alpha\)</span>)</td>
+<td style="text-align: center;">Correct</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-rates-type-i-1" class="slide level2">
+<h2>Error rates: Type I</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct<br>True Negative</td>
+<td style="text-align: center;">Incorrect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Type I Error (<span class="math inline">\(\alpha\)</span>)<br> False Positive</td>
+<td style="text-align: center;">Correct</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-is-alpha" class="slide level2">
+<h2>What is alpha?</h2>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> is commonly referred to as the significance level of the test.
+<ul>
+<li>It represents our level of tolerance for Type I error.</li>
+<li>Or in the long-run, the number of times we are willing to be wrong.</li>
+<li>Or probability of incorrectly rejecting the null.</li>
+</ul></li>
+<li>It is set a priori for any given hypothesis test.
+<ul>
+<li>The level at which <span class="math inline">\(\alpha\)</span> is set should be determined by study.
+<ul>
+<li>Conventionally this is set at .05 (5%); .01 (1%); or .001 (0.1%).</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="alpha-and-critical-regions" class="slide level2">
+<h2>Alpha and critical regions</h2>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> defines a <strong>critical region</strong> under the sampling distribution.
+<ul>
+<li>The <strong>critical value</strong> is the value of the test statistic which defines the start of this region.</li>
+</ul></li>
+</ul>
+</section>
+<section id="critical-regions" class="slide level2">
+<h2>Critical regions</h2>
+<p><img src="lec14_NHST_slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" /></p>
+<ul>
+<li>A two tailed <span class="math inline">\(\alpha = 0.05\)</span> means we have 0.025% of the distribution within the critical region in each tail.</li>
+</ul>
+</section>
+<section id="critical-regions-1" class="slide level2">
+<h2>Critical regions</h2>
+<p><img src="lec14_NHST_slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" /></p>
+<ul>
+<li>A one tailed <span class="math inline">\(\alpha = 0.05\)</span> means we have 0.05% of the distribution within the critical region either the left or right tail.</li>
+</ul>
+</section>
+<section id="critical-regions-2" class="slide level2">
+<h2>Critical regions</h2>
+<p><img src="lec14_NHST_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+<ul>
+<li>In either case, 95% of the area is not within a critical region (red area in both plots).</li>
+</ul>
+</section>
+<section id="error-and-probability" class="slide level2">
+<h2>Error and probability</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(p(True Negative)=(1-\alpha)=0.95\)</span></td>
+<td style="text-align: center;">Incorrect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(p(False Positive) = \alpha=0.05\)</span></td>
+<td style="text-align: center;">Correct</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><span class="math inline">\(p =0.95+0.05=1\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-rates-type-ii" class="slide level2">
+<h2>Error rates: Type II</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct <br> True Negative</td>
+<td style="text-align: center;">Type II Error (<span class="math inline">\(\beta\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Type I Error (<span class="math inline">\(\alpha\)</span>) <br> False Positive</td>
+<td style="text-align: center;">Correct</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-rates-type-ii-1" class="slide level2">
+<h2>Error rates: Type II</h2>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct <br> True Negative</td>
+<td style="text-align: center;">Type II Error (<span class="math inline">\(\beta\)</span>) <br> False Negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Type I Error (<span class="math inline">\(\alpha\)</span>) <br> False Positive</td>
+<td style="text-align: center;">Correct <br> True Positive</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-are-beta-and-power" class="slide level2">
+<h2>What are beta and power?</h2>
+<ul>
+<li><span class="math inline">\(\beta\)</span> is the level of tolerance for Type II error
+<ul>
+<li>Again, the number of times we are willing to be wrong.</li>
+<li>The probability of incorrectly failing to reject the null.</li>
+</ul></li>
+<li>Power:
+<ul>
+<li>The probability of correctly rejecting the null when the null hypothesis is false.</li>
+<li>Typically discuss a minimum power level of 80%.</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-are-beta-and-power-1" class="slide level2">
+<h2>What are beta and power?</h2>
+<p><img src="lec14_NHST_slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" /></p>
+</section>
+<section id="error-and-probability-1" class="slide level2">
+<h2>Error and probability</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Correct</td>
+<td style="text-align: center;"><span class="math inline">\(p(FalseNegative)=\beta=0.20\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Incorrect</td>
+<td style="text-align: center;"><span class="math inline">\(p(TrueNegative)=(1-\beta)=0.80=Power\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(p =0.20+0.80=1\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="effect-size" class="slide level2">
+<h2>Effect size</h2>
+<ul>
+<li>Imagine we have a null distribution for a statistic.
+<ul>
+<li>Let’s say the difference in means.</li>
+<li>The null assumes no difference.</li>
+</ul></li>
+<li>How can I work out what would constitute a correct rejection of the null?
+<ul>
+<li>Or how big of a difference in means would there need to be for me to confidently reject the null?</li>
+</ul></li>
+</ul>
+</section>
+<section id="effect-size-1" class="slide level2">
+<h2>Effect size</h2>
+<p><img src="lec14_NHST_slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" /></p>
+<ul>
+<li>This assumed (or hypothesized) difference from the null is known as an <strong>effect size</strong>.</li>
+</ul>
+</section>
+<section id="full-picture" class="slide level2">
+<h2>Full picture</h2>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is True</th>
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Confidence Level <br> True Negative <br> 1 - <span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: center;">Type II Error (<span class="math inline">\(\beta\)</span>) <br> False Negative <br> <span class="math inline">\(1 - Power\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test rejects <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: center;">Type I Error (<span class="math inline">\(\alpha\)</span>) <br> False Positive <br> <span class="math inline">\(1 - Conf.level\)</span></td>
+<td style="text-align: center;">Power <br> True Positive <br> <span class="math inline">\(1-\beta\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interplay-of-components" class="slide level2">
+<h2>Interplay of components</h2>
+<ul>
+<li>Interplay of the 2x2 (from Szucs et al):
+<ul>
+<li>Set alpha level a priori
+<ul>
+<li>How many times in the long run I am willing to be wrong.</li>
+</ul></li>
+<li>Decide on the effect size.</li>
+<li>Decide on power based on acceptable Type II error rate.</li>
+<li>From which we can select a sample size to keep power at this level given the set effect size.</li>
+</ul></li>
+<li>This you will look a lot more at in labs this week.</li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>NHST provides decisions rules for our hypothesis tests.</li>
+<li>The null is either “right” or “wrong”
+<ul>
+<li>And given that, our decisions to reject or fail to reject, are “right” or “wrong”</li>
+</ul></li>
+<li>This gives a 2x2 system.</li>
+<li>Our probabilities of being wrong are Type I and Type II error.</li>
+<li>To fully define the system, we need to specify <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> thus power, and an effect size.</li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Finish tasks from last week.</li>
+<li>Quiz 14: Hypothesis Testing and R
+<ul>
+<li>Today at 17:00.</li>
+<li>Close Monday 3rd at 17:00</li>
+</ul></li>
+</ol>
+</section>
+<section id="recommendations-of-the-week" class="slide level2">
+<h2>Recommendations of the week</h2>
+<ul>
+<li>Podcast: <a href="https://quantitudethepodcast.org/">Quantitude</a></li>
+<li>Recipe: <a href="https://www.deliciousmagazine.co.uk/recipes/spicy-baked-eggs-with-tomatoes-and-chickpeas/">Spicy Baked eggs with tomato and chickpeas</a></li>
+<li>Book: <a href="https://www.penguin.co.uk/books/1032177/surely-you-re-joking-mr-feynman/9780099173311.html">Surely You’re Joking Mr Feynman</a>, Richard Feynman.</li>
+<li>Thing to do: <a href="https://www.parliament.scot/visitandlearn/visiting-the-parliament.aspx">Scottish Parliament</a></li>
+</ul>
+</section>
+<section id="additional-notes" class="slide level2">
+<h2>Additional Notes</h2>
+<ul>
+<li>In the slides that follow, there is a brief outline of hypothesis testing as set out by Fisher.</li>
+<li><strong>This material is not tested in dapR1.</strong></li>
+<li>It is here purely for context.</li>
+</ul>
+</section>
+<section id="nhst-critiques" class="slide level2">
+<h2>NHST: Critiques</h2>
+<ol type="1">
+<li>We do not provide evidence for the null.</li>
+<li>Testing leaves an theoretical black hole.</li>
+<li><span class="math inline">\(p\)</span>-values do not provide probabilities of H0 or H1 being true.</li>
+<li>NHST does not consider the pre-study probabilities of each hypothesis.</li>
+<li>NHST hugely under-estimates false positives.</li>
+<li>NHST is not structured to factor in accumulating evidence from science.</li>
+</ol>
+</section>
+<section id="alternatives" class="slide level2">
+<h2>Alternatives</h2>
+<ul>
+<li>Likelihood (Fisher; see additional slides)</li>
+<li>Bayesian hypothesis testing</li>
+<li>We are not going to talk much about these approaches (not until 3rd year)
+<ul>
+<li>If you are interested, see additional readings.</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-fisher" class="slide level2">
+<h2>Hypothesis Testing: Fisher</h2>
+<ul>
+<li>Key features:
+<ul>
+<li>One hypothesis, null hypothesis, that we are interested in.
+<ul>
+<li>It is specifically stated and testable.</li>
+</ul></li>
+<li>We can calculate a probability of this hypothesis.
+<ul>
+<li>Referred to as a p-value.</li>
+</ul></li>
+<li>Small p-values indicate the data are not in line with our hypothesis.</li>
+<li>If after repeated testing, data rarely failed to provide a small p-value, this may suggest our hypothesis is not good.</li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-concepts-fisher" class="slide level2">
+<h2>Defining concepts: Fisher</h2>
+<ul>
+<li>Null hypothesis (<span class="math inline">\(H_{0}\)</span>):
+<ul>
+<li>The null hypothesis is the only hypothesis in Fishers system.</li>
+<li>It is stated precisely, such that a sampling distribution can be built.</li>
+<li>Conventionally will specific a point, around which we would only expect to see random variation.</li>
+<li>The term ?null? comes from the verb to nullify (invalidate).</li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-concepts-fisher-1" class="slide level2">
+<h2>Defining concepts: Fisher</h2>
+<ul>
+<li><span class="math inline">\(p\)</span>-value:
+<ul>
+<li>Fisher rejected the idea that the information of interest was <span class="math inline">\(P(H|data)\)</span>.</li>
+<li>Instead his testing considered <span class="math inline">\(P(data|H)\)</span>
+<ul>
+<li>That is, given a hypothesis which says something about the world, what is the probability of the data I see .</li>
+</ul></li>
+<li>This probability was Fisher?s <span class="math inline">\(p\)</span>-value.</li>
+<li>Fisher saw the “<strong>exact p-value as providing a heuristic piece of inductive evidence which gives an indication of the plausibility of H0 together with other available evidence</strong>” ( Szucs et al. 2017)
+<ul>
+<li>The smaller the value, the more unusual or rare the sample statistic is.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-concepts-fisher-2" class="slide level2">
+<h2>Defining concepts: Fisher</h2>
+<ul>
+<li><span class="math inline">\(p\)</span>-value:
+<ul>
+<li>Formal definition: <strong><em>The probability of observing data as or more extreme if the null hypothesis is true.</em></strong>
+<ul>
+<li>This definition stems from the fact that what we expect to see in data is defined by the specification of the null hypothesis and the associated sampling distribution.</li>
+</ul></li>
+<li>Importantly, Fisher saw evidence of a small <span class="math inline">\(p\)</span>-value from a single study as only weak evidence a phenomena may warrant further study.</li>
+<li>A phenomena was only of interest if in well designed repeated studies small <span class="math inline">\(p\)</span>-values were seen.</li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-concepts-fisher-3" class="slide level2">
+<h2>Defining concepts: Fisher</h2>
+<ul>
+<li>Inductive reasoning:
+<ul>
+<li>System is based on an inductive reasoning.</li>
+<li>There is not proof of the truth or a decision/outcome, it is just probable given information at hand.</li>
+<li>If the null is true, we have a point estimate of the effect, and random variation around this.
+<ul>
+<li>We collect some data and calculate a statistic.</li>
+</ul></li>
+<li>If it does not fall close to the value specified by the null, and is distant enough given random variation, then we have either witnessed a very rare event, or the null is incorrect.</li>
+</ul></li>
+</ul>
+</section>
+<section id="steps-fisher" class="slide level2">
+<h2>Steps: Fisher</h2>
+<ul>
+<li>Pick the appropriate statistical test (rest of the course)</li>
+<li>Define the null hypothesis</li>
+<li>Calculate the probability of the data given the null (<span class="math inline">\(p\)</span>-value).</li>
+<li>Assess the <span class="math inline">\(p\)</span>-value. -Note Fisher arbitrarily spoke of values less than 0.05 as being potential markers for small <span class="math inline">\(p\)</span>-values, but he was in no way fixed to them and they carried no particular statistical meaning.</li>
+<li>Come a conclusion.
+<ul>
+<li>Being careful your conclusions are in line with the underlying inductive reasoning and definition of the <span class="math inline">\(p\)</span>-value.</li>
+</ul></li>
+</ul>
+</section>
+<section id="additional-reading" class="slide level2">
+<h2>Additional Reading</h2>
+<ul>
+<li>Berger, J.O. (2003). Could Fisher, Jeffreys and Neyman have Agreed on Testing? <em>Statistical Science, 18</em>, 1-32.</li>
+<li>Gigerenzer, G. (2004). Mindless statistics. <em>J. Socio Econ. 33</em>, 587–606.</li>
+<li>Hubbard, R. &amp; Bayarri, M.J. (2003) Confusion Over Measures of Evidence (p’s) Versus Errors (<span class="math inline">\(\alpha\)</span>s) in Classical Statistical Testing, <em>The American Statistician, 57</em>, 171-178.</li>
+</ul>
+</section>
+<section id="additional-reading-1" class="slide level2">
+<h2>Additional Reading</h2>
+<ul>
+<li>Lehmann, E.L. (1993). The Fisher, Neyman-Pearson Theories of Testing Hypotheses: One theory or two? <em>Journal of the American Statistical Association, 88</em>, 1242-1249</li>
+<li>Rouder, J.N., Morey, R.D., Verhagen, J., Province, J.M., &amp; Wagenmakers E-J. (2016). Is there free lunch in inference? <em>Trends in Cognitive Science, 8</em>, 520-547.</li>
+<li>Szucs, D., &amp; Ioannidis, J.P.A. (2017). When null hypothesis significance testing is unsuitable for research: A reassessment. <em>Frontiers in Human Neuroscience</em>, 11:390.</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>
