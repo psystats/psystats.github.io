@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Lecture 15: Statistical Distributions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Lecture 15: Statistical Distributions</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec15_statdis.html">Click for handout</a></h3>
+</section>
+
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Discuss why we do not always need to bootstrap</li>
+<li>Role of statistical distributions in inference</li>
+<li>Major focus on normal distribution</li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Develop understanding of probability distributions.</li>
+<li>Increase awareness of the role of central limit theorem for hypothesis testing.</li>
+</ul>
+</section>
+<section id="inference" class="slide level2">
+<h2>Inference</h2>
+<ul>
+<li>We have used bootstraps to get across the idea of a sampling distribution.</li>
+<li>In inference, we want to know what the variance in the sampling distribution is, given some specified value of the unknown population parameter of interest (<span class="math inline">\(H_{0}\)</span>).</li>
+<li>From this, we can say something about how probable our sample estimate is given <span class="math inline">\(H_{0}\)</span>.</li>
+<li>How….</li>
+</ul>
+</section>
+<section id="probability-distributions" class="slide level2">
+<h2>Probability distributions</h2>
+<ul>
+<li>Sampling distributions are probability distributions.</li>
+<li>We have seen lots of probability distributions so far in dapR.</li>
+<li>A probability distribution maps the values of a random variable to the probability of it occurring.</li>
+<li>We have noted that for:
+<ul>
+<li>For discrete distributions we maps to a specific value of outcome.</li>
+<li>For continuous distributions we map to areas under the curve.</li>
+</ul></li>
+<li>The mapping occurs via a <strong>probability mass (or density) function</strong></li>
+</ul>
+</section>
+<section id="binomial" class="slide level2">
+<h2>Binomial</h2>
+<ul>
+<li>We have talked a lot about examples that are formally called <strong>Bernoulli experiments/process</strong></li>
+<li>Properties:
+<ul>
+<li>There are two outcomes (success and failure)</li>
+<li>We have a probability of success (<span class="math inline">\(p\)</span>)</li>
+<li>We are interested in the number of successes (<span class="math inline">\(k\)</span>) given a fixed number of trials (<span class="math inline">\(n\)</span>)
+<ul>
+<li>Think how heads in a sequence of coin tosses.</li>
+<li>Or ESP from lab.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="binomial-pmf" class="slide level2">
+<h2>Binomial PMF</h2>
+<p><span class="math display">\[
+f(k,n,p) = Pr(X = k) = \binom{n}{k}p^{k}q^{n-k}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(k\)</span> = number of success</li>
+<li><span class="math inline">\(n\)</span> = total trials,</li>
+<li><span class="math inline">\(p\)</span> = probability success</li>
+<li><span class="math inline">\(q\)</span> = <span class="math inline">\(1-p\)</span> or probability of failure</li>
+</ul>
+</section>
+<section id="an-example" class="slide level2">
+<h2>An example</h2>
+<ul>
+<li>Experiment:
+<ul>
+<li>Guess the hand a coin is in.</li>
+<li>5 trials (n=5)</li>
+<li><span class="math inline">\(p(correct) = 0.5\)</span></li>
+<li>Thus <span class="math inline">\(q = 1 - 0.5 = 0.5\)</span></li>
+</ul></li>
+<li>We could get 0-5 of these trials correct.
+<ul>
+<li>So we have 6 possible values of our outcome to calculate the probability for.</li>
+<li>(see additional slides for working)</li>
+</ul></li>
+</ul>
+</section>
+<section id="binomial-probability-distribution" class="slide level2">
+<h2>Binomial probability distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" /></p>
+</section>
+<section id="cumulative-probability" class="slide level2">
+<h2>Cumulative probability</h2>
+<ul>
+<li>Another way we can think about representing probability of outcomes is cumulatively.</li>
+<li>Cumulative probability distributions provide a way to easily see the total probability of all values before r after a given point.</li>
+</ul>
+</section>
+<section id="cumulative-probability-1" class="slide level2">
+<h2>Cumulative probability</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" /></p>
+<ul>
+<li>The cumulative probability function in the case of binomial simply sums the probabilities of the individual outcomes.</li>
+</ul>
+</section>
+<section id="comparing-pmf-cdf" class="slide level2">
+<h2>Comparing PMF &amp; CDF</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+</section>
+<section id="normal-distribution" class="slide level2">
+<h2>Normal distribution</h2>
+<ul>
+<li>This term normal distribution has come up a lot.</li>
+<li>A normal distribution is a continuous distribution</li>
+<li>It is uni-modal (one peak) and symmetrical</li>
+<li>Also referred to as the Gaussian distribution</li>
+</ul>
+</section>
+<section id="normal-pdf" class="slide level2">
+<h2>Normal: PDF</h2>
+<p><span class="math display">\[
+f(x|\mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{x-\mu^2}{2\sigma^2}}
+\]</span></p>
+<ul>
+<li>A little bit scary!</li>
+<li>But the basic points are:
+<ul>
+<li>It is a function of data (<span class="math inline">\(x\)</span>)</li>
+<li>And two parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> (mean and SD)</li>
+</ul></li>
+</ul>
+</section>
+<section id="normal-family" class="slide level2">
+<h2>Normal family</h2>
+<ul>
+<li>There is not one single normal distribution.</li>
+<li>We have a family of different distributions defined by the mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>)</li>
+</ul>
+</section>
+<section id="different-normals" class="slide level2">
+<h2>Different normals</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" /></p>
+</section>
+<section id="different-normals-1" class="slide level2">
+<h2>Different normals</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" /></p>
+</section>
+<section id="properties-of-normal" class="slide level2">
+<h2>Properties of normal</h2>
+<ul>
+<li>Nice properties of any normal distribution:
+<ul>
+<li><span class="math inline">\(\approx\frac{1}{2}\)</span> of area falls under <span class="math inline">\(\frac{2}{3}\)</span> of a SD on either side of mean</li>
+<li><span class="math inline">\(\approx\frac{2}{3}\)</span> of area falls under 1 SD on either side of mean</li>
+<li><span class="math inline">\(\approx\)</span> 95% of area falls under 2 SD on either side of mean</li>
+</ul></li>
+<li><strong>Exactly</strong> 95% falls under +/- 1.96 SD
+<ul>
+<li><span class="math inline">\(\approx 99.75%\)</span> of area falls under 3 SD on either side of mean.</li>
+</ul></li>
+</ul>
+</section>
+<section id="z-scores" class="slide level2">
+<h2>Z-scores</h2>
+<p><span class="math display">\[
+Z = \frac{x - \mu}{\sigma}
+\]</span></p>
+<ul>
+<li>It is quite typical to present a normal distribution in terms of z-scores.</li>
+<li>z-scores standardize values of x.
+<ul>
+<li>The numerator: converts x to deviations from the mean.</li>
+<li>The denominator: scales these values based on the observed spread in the data (SD)</li>
+</ul></li>
+</ul>
+</section>
+<section id="standard-normal" class="slide level2">
+<h2>Standard normal</h2>
+<ul>
+<li>The distribution of z-scores is call the standard normal distribution.</li>
+<li>It has:
+<ul>
+<li>Mean = 0</li>
+<li>SD = 1</li>
+</ul></li>
+</ul>
+</section>
+<section id="central-limit-theorem" class="slide level2">
+<h2>Central limit theorem</h2>
+<ul>
+<li>We have briefly noted CLT before. To refresh;</li>
+<li>The Central Limit Theorem states that the sampling distribution of the sample means from any underlying distribution with a defined mean and variance, approaches a normal distribution as the sample size gets larger.</li>
+<li>The resultant sampling distribution has:
+<ul>
+<li><span class="math inline">\(\bar{x} = \mu\)</span></li>
+<li><span class="math inline">\(\sigma_{\bar{x}}^{2} = \frac{\sigma^2}{N}\)</span></li>
+<li><span class="math inline">\(\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{N}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="uniform-distribution" class="slide level2">
+<h2>Uniform distribution</h2>
+<ul>
+<li>Continuous probability distribution.</li>
+<li>There is an equal probability for all values within a given range.</li>
+<li>Parameters:
+<ul>
+<li><span class="math inline">\(a(min)\)</span> and <span class="math inline">\(b(max)\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+Mean = \frac{1}{2}(a+b)
+\]</span></p>
+<ul>
+<li>And</li>
+</ul>
+<p><span class="math display">\[
+Variance = \frac{1}{12}(b-a)^2
+\]</span></p>
+</section>
+<section id="uniform-distribution-1" class="slide level2">
+<h2>Uniform distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" /></p>
+</section>
+<section id="uniform-distribution-2" class="slide level2">
+<h2>Uniform distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" /></p>
+</section>
+<section id="chi-square-distribution" class="slide level2">
+<h2>Chi-square distribution</h2>
+<ul>
+<li>Continuous probability distribution</li>
+<li>Non-symmetric</li>
+<li>Parameters = degrees of freedom</li>
+</ul>
+<p><span class="math display">\[
+Mean = df
+\]</span></p>
+<ul>
+<li>and</li>
+</ul>
+<p><span class="math display">\[
+Variance = 2*df
+\]</span></p>
+</section>
+<section id="chi-square-distribution-1" class="slide level2">
+<h2>Chi-square distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" /></p>
+</section>
+<section id="chi-square-distribution-2" class="slide level2">
+<h2>Chi-square distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" /></p>
+</section>
+<section id="t-distribution" class="slide level2">
+<h2>t-distribution</h2>
+<ul>
+<li>Continuous probability distribution.</li>
+<li>Symmetric and uni-modal (similar to the normal distribution).
+<ul>
+<li>“Heavier tails” = greater chance of observing a value further from the mean</li>
+</ul></li>
+<li>Parameters:
+<ul>
+<li><span class="math inline">\(\nu = n-1\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+Mean = 0, \nu&gt;1
+\]</span></p>
+<ul>
+<li>and</li>
+</ul>
+<p><span class="math display">\[
+Variance = \frac{\nu}{\nu - 2}, \nu &gt; 2
+\]</span></p>
+</section>
+<section id="t-distribution-1" class="slide level2">
+<h2>t-distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="480" /></p>
+</section>
+<section id="t-distribution-2" class="slide level2">
+<h2>t-distribution</h2>
+<p><img src="lec15_statdis_slides_files/figure-revealjs/unnamed-chunk-12-1.png" width="480" /></p>
+</section>
+<section id="sampling-distributions" class="slide level2">
+<h2>Sampling distributions</h2>
+<ul>
+<li><span class="math inline">\(\chi^2\)</span> distribution, <em>t</em>-distribution and binomial distribution are all commonly used for statistical inference.</li>
+<li>What the CLT demonstrations above show, is that we can often use the normal distribution as an approximation</li>
+</ul>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard error</h2>
+<ul>
+<li>One of the big points we have emphasized is sampling variability is characterized by the SD of the sampling distribution.</li>
+<li>But how do we obtain this from a single sample?</li>
+<li>We have already seen the answer thanks to CLT.</li>
+<li>The resultant sampling distribution has:
+<ul>
+<li><span class="math inline">\(\bar{x} = \mu\)</span></li>
+<li><span class="math inline">\(\sigma_{\bar{x}}^{2} = \frac{\sigma^2}{N}\)</span></li>
+<li><span class="math inline">\(\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{N}}\)</span> = standard error</li>
+</ul></li>
+</ul>
+</section>
+<section id="so-why-tell-us-about-bootstraps" class="slide level2">
+<h2>So why tell us about bootstraps?</h2>
+<ul>
+<li>Intuitive understanding.</li>
+<li>Sometimes statistical tools “break”
+<ul>
+<li>We do not know the sampling distribution for all statistics</li>
+<li>Sometimes statistical model assumptions are not met.</li>
+</ul></li>
+<li>If either happen, bootstraps can be a solution.</li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>We can make inferences (NHST system) using statistical distributions.</li>
+<li>Different statistics have different sampling distributions.</li>
+<li>In many cases, the normal is a good approximation due to CLT.</li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Finish tasks from last week.</li>
+<li>Quiz 15: Hypothesis Testing
+<ul>
+<li>Today at 17:00.</li>
+<li>Close Monday 3rd at 17:00</li>
+</ul></li>
+<li><strong>Lab Test 2</strong></li>
+</ol>
+</section>
+<section id="binomial-worked-example" class="slide level2">
+<h2>Binomial Worked Example</h2>
+<ul>
+<li>Experiment:
+<ul>
+<li>Guess the hand a coin is in.</li>
+<li>5 trials (n=5)</li>
+<li><span class="math inline">\(p(correct) = 0.5\)</span></li>
+<li>Thus <span class="math inline">\(q = 1 - 0.5 = 0.5\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="possible-outcomes" class="slide level2">
+<h2>Possible outcomes</h2>
+<ul>
+<li>We have 5 trials.</li>
+<li>So our possible outcomes are:</li>
+</ul>
+<p><span class="math display">\[
+X = [0,1,2,3,4,5]
+\]</span></p>
+</section>
+<section id="calculation-for-x-3" class="slide level2">
+<h2>Calculation for X = 3</h2>
+<p><span class="math display">\[
+Pr(X = 3) = \binom{n}{k}p^{k}q^{n-k}
+\]</span></p>
+</section>
+<section id="step-1" class="slide level2">
+<h2>Step 1</h2>
+<p><span class="math display">\[
+\binom{5}{3}
+\]</span></p>
+<ul>
+<li>Is read as 5 choose 3.</li>
+<li>It is the number of possible ways we could get 3 successes
+<ul>
+<li>That is, we might get trials 1, 2, and 3 correct.</li>
+<li>Or trials 2, 3, and 5 etc.</li>
+</ul></li>
+<li>We work out this total number using factorials</li>
+</ul>
+</section>
+<section id="step-1-factorials" class="slide level2">
+<h2>Step 1: Factorials</h2>
+<p><span class="math display">\[
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]</span></p>
+<ul>
+<li>Where <span class="math inline">\(n!\)</span> for <span class="math inline">\(n=5\)</span> is</li>
+</ul>
+<p><span class="math display">\[
+n! = 5*4*3*2*1 = 120
+\]</span></p>
+</section>
+<section id="step-1-our-calculation" class="slide level2">
+<h2>Step 1: Our calculation</h2>
+<p><span class="math display">\[
+\binom{5}{3} = \frac{5!}{3!(5-3)!} = \frac{5!}{3!2!} = \frac{120}{6*2} = 10
+\]</span></p>
+<ul>
+<li>There are 10 ways to get three trials correct.</li>
+</ul>
+</section>
+<section id="step-1-brute-force" class="slide level2">
+<h2>Step 1: Brute Force</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>T1</th>
+<th>T2</th>
+<th>T3</th>
+<th>T4</th>
+<th>T5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-1-1" class="slide level2">
+<h2>step 1</h2>
+<p><span class="math display">\[
+Pr(X = 3) = 10*p^{k}q^{n-k}
+\]</span></p>
+<ul>
+<li>Insert the 10.</li>
+</ul>
+</section>
+<section id="step-2" class="slide level2">
+<h2>Step 2</h2>
+<p><span class="math display">\[
+p^{k}q^{n-k}
+\]</span></p>
+<ul>
+<li>We need to add in our probabilities of success, trial number and number of successes.</li>
+</ul>
+<p><span class="math display">\[
+p^{k}q^{n-k} = 0.5^3(1-0.5)^{5-3} = 0.5^30.5^2
+\]</span></p>
+<ul>
+<li>Calculate the powers….</li>
+</ul>
+</section>
+<section id="step-2-1" class="slide level2">
+<h2>Step 2</h2>
+<p><span class="math display">\[
+0.5^3 = 0.5*0.5*0.5 = 0.125
+\]</span></p>
+<p>And the second…</p>
+<p><span class="math display">\[
+0.5^2 = 0.5*0.5 = 0.25
+\]</span></p>
+</section>
+<section id="step-2-2" class="slide level2">
+<h2>Step 2</h2>
+<p><span class="math display">\[
+p^{k}q^{n-k} = 0.5^30.5^2 = 0.125*0.25 = 0.03125 
+\]</span></p>
+<ul>
+<li>Insert the values and complete.</li>
+</ul>
+</section>
+<section id="finish-it-off" class="slide level2">
+<h2>Finish it off</h2>
+<p><span class="math display">\[
+Pr(X = 3) = 10*0.03125 = 0.3125
+\]</span></p>
+<ul>
+<li>So the probability of three successes in this experiment is 0.3125.</li>
+<li>You can follow these steps for all the other possible outcome values, and confirm the values in the plot from lecture.</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>
