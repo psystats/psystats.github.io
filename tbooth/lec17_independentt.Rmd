@@ -21,8 +21,8 @@ library(moments)
 - $t$-test assumptions
 	
 ## Learning objectives
-- Understand when to use a one sample $t$-test
-- Understand the null hypothesis for a one sample $t$-test
+- Understand when to use an independent sample $t$-test
+- Understand the null hypothesis for an independent sample $t$-test
 - Understand how to calculate the test statistic
 - Know how to conduct the test in R
 - Understand the assumptions for $t$-tests
@@ -213,7 +213,7 @@ tibble(
 
 ## Is my test significant?
 - So our critical value is -1.72
-	- Our t-statistic is larger than this, -5.51.
+	- Our t-statistic is larger than this, -7.38.
 	- So we reject the null hypothesis.
 - $t$(21)= -7.38, $p$ <.05, one-tailed.
 
@@ -333,8 +333,11 @@ shapiro.test(thr$Score)
 
 ##  Assumption checks: Homogeneity of variance 
 - Levene's test:
-	- Statistical test for the equality (or homogeneity) of variances across groups.
-	- Test statistic is essentially a ratio of variance estimates calculated based on group means versus grand mean.
+	- Statistical test for the equality (or homogeneity) of variances across groups (2+).
+	- Test statistic is essentially a ratio of variance estimates calculated based on group means versus 
+	grand mean.
+- The $F$-test is a related test that compares the variances of two groups.
+  - This test is preferable for $t$-test.
 	- $H_0$: Population variances are equal.
 	- $p$-value $< \alpha$ = reject the null, the variances differ across groups.
 

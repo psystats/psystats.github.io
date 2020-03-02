@@ -545,8 +545,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="learning-objectives" class="slide level2">
 <h2>Learning objectives</h2>
 <ul>
-<li>Understand when to use a one sample <span class="math inline">\(t\)</span>-test</li>
-<li>Understand the null hypothesis for a one sample <span class="math inline">\(t\)</span>-test</li>
+<li>Understand when to use an independent sample <span class="math inline">\(t\)</span>-test</li>
+<li>Understand the null hypothesis for an independent sample <span class="math inline">\(t\)</span>-test</li>
 <li>Understand how to calculate the test statistic</li>
 <li>Know how to conduct the test in R</li>
 <li>Understand the assumptions for <span class="math inline">\(t\)</span>-tests</li>
@@ -841,7 +841,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{SE(\bar{x}_1 - \bar{x}_2)} = \frac{5.27-9.58}{0
 <ul>
 <li>So our critical value is -1.72
 <ul>
-<li>Our t-statistic is larger than this, -5.51.</li>
+<li>Our t-statistic is larger than this, -7.38.</li>
 <li>So we reject the null hypothesis.</li>
 </ul></li>
 <li><span class="math inline">\(t\)</span>(21)= -7.38, <span class="math inline">\(p\)</span> &lt;.05, one-tailed.</li>
@@ -1135,10 +1135,16 @@ None. Data structure issue.
 <ul>
 <li>Levene’s test:
 <ul>
-<li>Statistical test for the equality (or homogeneity) of variances across groups.</li>
+<li>Statistical test for the equality (or homogeneity) of variances across groups (2+).</li>
 <li>Test statistic is essentially a ratio of variance estimates calculated based on group means versus grand mean.</li>
+</ul></li>
+<li>The <span class="math inline">\(F\)</span>-test is a related test that compares the variances of two groups.
+<ul>
+<li>This test is preferable for <span class="math inline">\(t\)</span>-test.
+<ul>
 <li><span class="math inline">\(H_0\)</span>: Population variances are equal.</li>
 <li><span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \alpha\)</span> = reject the null, the variances differ across groups.</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
