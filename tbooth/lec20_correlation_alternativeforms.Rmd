@@ -1,0 +1,33 @@
+---
+title: "Lecture 20: Alternative forms"
+subtitle: Data Analysis for Psychology in R 1
+author: Tom Booth
+---
+```{r premable, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(patchwork)
+library(moderndive)
+```
+
+## Today
+
+## Learning objectives
+
+## Types of correlation
+
+## Ranks
+
+## Spearman correlation
+
+## Calculation
+
+## In R
+
+## Other forms
+
+## in R
+
+## Tasks for this week...
+- Keep safe and healthy.
+
