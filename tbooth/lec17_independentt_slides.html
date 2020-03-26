@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Tom Booth" />
+  <title>Lecture 17: Independent t-test</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https:\\psystats.github.io\slides_files\css\slides.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="https://psystats.github.io/slides_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <script src="https://psystats.github.io/slides_files/kePrint-0.0.1/kePrint.js"></script>
+</head>
+<body>
+<div class="banner"><div class = "header"><a href="/">dapR<strong>1</strong></a></div></div>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Lecture 17: Independent t-test</h1>
+  <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
+    <h2 class="author">Tom Booth</h2>
+    <h3 class="date"><a href="./lec17_independentt.html">Click for handout</a></h3>
+</section>
+
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<style>
+:root {
+--theme-col: var(--dapR_1-col1);
+--hover-col: var(--dapR_1-col2);
+}
+</style>
+<ul>
+<li>Discuss in detail independent sample <span class="math inline">\(t\)</span>-tests
+<ul>
+<li>When to use</li>
+<li>Tested hypotheses</li>
+<li>Calculation</li>
+<li>Doing in R</li>
+<li>Write up</li>
+</ul></li>
+<li><span class="math inline">\(t\)</span>-test assumptions</li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Understand when to use an independent sample <span class="math inline">\(t\)</span>-test</li>
+<li>Understand the null hypothesis for an independent sample <span class="math inline">\(t\)</span>-test</li>
+<li>Understand how to calculate the test statistic</li>
+<li>Know how to conduct the test in R</li>
+<li>Understand the assumptions for <span class="math inline">\(t\)</span>-tests</li>
+</ul>
+</section>
+<section id="purpose-data" class="slide level2">
+<h2>Purpose &amp; Data</h2>
+<ul>
+<li>The independent or Student’s <span class="math inline">\(t\)</span>-test is used when we want to test the difference in mean between two measured groups.</li>
+<li>The groups must be independent:
+<ul>
+<li>No person can be in both groups.</li>
+</ul></li>
+<li>Examples:
+<ul>
+<li>Treatment versus control group in an experimental study.</li>
+<li>Married versus not married</li>
+</ul></li>
+<li>Data Requirements
+<ul>
+<li>A continuously measured variable.</li>
+<li>A binary variable denoting groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypotheses" class="slide level2">
+<h2>Hypotheses</h2>
+<ul>
+<li>Identical to one-sample, only now we are comparing two measured groups.</li>
+<li>Two-tailed:</li>
+</ul>
+<p><span class="math display">\[
+\begin{matrix}
+H_0: \mu_1 = \mu_2 \\
+H_1: \mu_1 \neq \mu_2
+\end{matrix}
+\]</span></p>
+<ul>
+<li>One-tailed:</li>
+</ul>
+<p><span class="math display">\[
+\begin{matrix}
+H_0: \mu_1 = \mu_2 \\
+H_1: \mu_1 &lt; \mu_2 \\
+H_1: \mu_1 &gt; \mu_2
+\end{matrix}
+\]</span></p>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>Example taken from Howell, D.C. (2010). <em>Statistical Methods for Psychology, 7th Edition</em>. Belmont, CA: Wadsworth Cengage Learning.</li>
+<li>Data from Aronson, Lustina , Good, Keough , Steele and Brown (1998). Experiment on stereotype threat.
+<ul>
+<li>Two independent groups college students (n=12 control; n=11 threat condition).</li>
+<li>Both samples excel in maths.</li>
+<li>Threat group told certain students usually do better in the test</li>
+</ul></li>
+</ul>
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<table class="table table-striped" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:right;">
+Score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Threat
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Threat
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Threat
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Threat
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualizing-data" class="slide level2">
+<h2>Visualizing data</h2>
+<ul>
+<li>We spoke earlier in the course about the importance of visualizing our data.</li>
+<li>Here, we want to show the mean and distribution of scores by group.</li>
+<li>So we want a…..</li>
+</ul>
+</section>
+<section id="visualizing-data-1" class="slide level2">
+<h2>Visualizing data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> threat, <span class="kw">aes</span>(<span class="dt">x =</span> Group, <span class="dt">y =</span> Score, <span class="dt">fill =</span> Group)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="st">  </span><span class="kw">theme_minimal</span>()  </a></code></pre></div>
+<p><img src="lec17_independentt_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+</section>
+<section id="hypotheses-1" class="slide level2">
+<h2>Hypotheses</h2>
+<ul>
+<li>My hypothesis is that the threat group will perform worse than the control group.
+<ul>
+<li>This is a one-tailed, or directional hypothesis.</li>
+</ul></li>
+<li>And I will use an alpha = .05</li>
+</ul>
+</section>
+<section id="t-statistic" class="slide level2">
+<h2>t-statistic</h2>
+<p><span class="math display">\[
+t = \frac{\bar{x}_1 - \bar{x}_2}{SE(\bar{x}_1 - \bar{x}_2)}
+\]</span></p>
+<ul>
+<li>Where
+<ul>
+<li><span class="math inline">\(\bar{x}_1\)</span> and <span class="math inline">\(\bar{x}_2\)</span> are the sample means in each group</li>
+<li><span class="math inline">\(SE(\bar{x}_1 - \bar{x}_2)\)</span> is standard error of the difference</li>
+</ul></li>
+<li>Sampling distribution is a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-2\)</span> degrees of freedom.</li>
+</ul>
+</section>
+<section id="standard-error-difference" class="slide level2">
+<h2>Standard Error Difference</h2>
+<ul>
+<li>First calculate the pooled standard deviation.</li>
+</ul>
+<p><span class="math display">\[
+S_p = \sqrt\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}
+\]</span></p>
+<ul>
+<li>Then use this to calculate the SE of the difference.</li>
+</ul>
+<p><span class="math display">\[
+SE(\bar{x}_1 - \bar{x}_2) = S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}
+\]</span></p>
+</section>
+<section id="calculation" class="slide level2">
+<h2>Calculation</h2>
+<ul>
+<li>Steps in my calculations:
+<ul>
+<li>Calculate the sample mean in both groups.</li>
+<li>Calculate the pooled SD.</li>
+<li>Check I know my n.</li>
+<li>Calculate the standard error.</li>
+<li>Use all this to calculate <span class="math inline">\(t\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="calculation-1" class="slide level2">
+<h2>Calculation</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">calc &lt;-<span class="st"> </span>threat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Group) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">Mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(Score),<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">SD =</span> <span class="kw">round</span>(<span class="kw">sd</span>(Score),<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">N =</span> <span class="kw">n</span>()</a>
+<a class="sourceLine" id="cb2-7" title="7">  ) </a></code></pre></div>
+<pre><code># A tibble: 2 x 4
+  Group    Mean    SD     N
+  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 Threat   5.27  1.27    11
+2 Control  9.58  1.51    12</code></pre>
+</section>
+<section id="calculation-2" class="slide level2">
+<h2>Calculation</h2>
+<pre><code># A tibble: 2 x 4
+  Group    Mean    SD     N
+  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 Threat   5.27  1.27    11
+2 Control  9.58  1.51    12</code></pre>
+<ul>
+<li>Calculate pooled standard deviation</li>
+</ul>
+<p><span class="math display">\[
+S_p = \sqrt\frac{(n_1 - 1)s_1^2 + n_2 - 1)s_2^2}{n_1 + n_2 - 2} = \sqrt{\frac{10*1.27 + 11*1.51}{11+12-2}} = \sqrt{\frac{29.31}{21}} = 1.396 
+\]</span></p>
+</section>
+<section id="calculation-3" class="slide level2">
+<h2>Calculation</h2>
+<ul>
+<li>Calculate pooled standard deviation</li>
+</ul>
+<p><span class="math display">\[
+S_p = \sqrt\frac{(n_1 - 1)s_1^2 + n_2 - 1)s_2^2}{n_1 + n_2 - 2} = \sqrt{\frac{10*1.27 + 11*1.51}{11+12-2}} = \sqrt{\frac{29.31}{21}} = 1.396 
+\]</span></p>
+<ul>
+<li>Calculate the standard error.</li>
+</ul>
+<p><span class="math display">\[
+SE(\bar{x}_1 - \bar{x}_2) = S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} = 1.396\sqrt{\frac{1}{11}+\frac{1}{12}} = 1.396*0.417 = 0.583
+\]</span></p>
+</section>
+<section id="calculation-4" class="slide level2">
+<h2>Calculation</h2>
+<ul>
+<li>Use all this to calculate <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+t = \frac{\bar{x}_1 - \bar{x}_2}{SE(\bar{x}_1 - \bar{x}_2)} = \frac{5.27-9.58}{0.583} = -7.39 
+\]</span></p>
+<ul>
+<li>Note: There is a small amount of rounding error when we compare to <span class="math inline">\(t\)</span> calculated in R.
+<ul>
+<li>Actual value = -7.38</li>
+</ul></li>
+</ul>
+</section>
+<section id="is-my-test-significant" class="slide level2">
+<h2>Is my test significant?</h2>
+<ul>
+<li>Steps:
+<ul>
+<li>Calculate my degrees of freedom <span class="math inline">\(n-2 = 23-2 = 21\)</span></li>
+<li>Check my value of <span class="math inline">\(t\)</span> against the <span class="math inline">\(t\)</span>-distribution with the appropriate df and make my decision</li>
+</ul></li>
+</ul>
+</section>
+<section id="is-our-test-significant" class="slide level2">
+<h2>Is our test significant?</h2>
+<p><img src="lec17_independentt_slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">LowerCrit =</span> <span class="kw">round</span>(<span class="kw">qt</span>(<span class="fl">0.05</span>, <span class="dv">21</span>),<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">)</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co"># A tibble: 1 x 1</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  LowerCrit</a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="op">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="dv">1</span>     <span class="fl">-1.72</span></a></code></pre></div>
+</section>
+<section id="is-my-test-significant-1" class="slide level2">
+<h2>Is my test significant?</h2>
+<ul>
+<li>So our critical value is -1.72
+<ul>
+<li>Our t-statistic is larger than this, -7.38.</li>
+<li>So we reject the null hypothesis.</li>
+</ul></li>
+<li><span class="math inline">\(t\)</span>(21)= -7.38, <span class="math inline">\(p\)</span> &lt;.05, one-tailed.</li>
+</ul>
+</section>
+<section id="in-r" class="slide level2">
+<h2>In R</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">res &lt;-<span class="st"> </span><span class="kw">t.test</span>(Score <span class="op">~</span><span class="st"> </span>Group, </a>
+<a class="sourceLine" id="cb6-2" title="2">       <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-3" title="3">       <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>,</a>
+<a class="sourceLine" id="cb6-4" title="4">       <span class="dt">data =</span> threat)</a></code></pre></div>
+<pre><code>
+    Two Sample t-test
+
+data:  Score by Group
+t = -7.3817, df = 21, p-value = 1.458e-07
+alternative hypothesis: true difference in means is less than 0
+95 percent confidence interval:
+      -Inf -3.305768
+sample estimates:
+ mean in group Threat mean in group Control 
+             5.272727              9.583333 </code></pre>
+</section>
+<section id="exact-p-values" class="slide level2">
+<h2>Exact p-values</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">Exactp =</span> <span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(<span class="fl">7.3817</span>, <span class="dv">21</span>)</a>
+<a class="sourceLine" id="cb8-3" title="3">)</a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># A tibble: 1 x 1</span></a>
+<a class="sourceLine" id="cb8-5" title="5">       Exactp</a>
+<a class="sourceLine" id="cb8-6" title="6">        <span class="op">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="dv">1</span> <span class="fl">0.000000146</span></a></code></pre></div>
+</section>
+<section id="write-up" class="slide level2">
+<h2>Write up</h2>
+<p>An independent sample <span class="math inline">\(t\)</span>-test was used to assess whether the maths score mean of the control group (12) was higher than that of the stereotype threat group (11). There was a significant difference in test score between the control (Mean=9.58; SD=1.51) and threat (Mean=5.27; SD=1.27) groups (<span class="math inline">\(t\)</span>(21)=-7.38, <span class="math inline">\(p\)</span>&lt; .05, one-tailed). Therefore, we reject the null hypothesis. The direction of effect supports our directional hypothesis and indicates that the threat group performed more poorly than the control group.</p>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>The independent sample <span class="math inline">\(t\)</span>-test has the following assumptions:
+<ul>
+<li>Independence of observations within and across groups.</li>
+<li>Continuous variable is approximately normally distribution <strong>within both groups</strong>.
+<ul>
+<li>Equivalently, that the difference in means is normally distributed.</li>
+</ul></li>
+<li>Homogeneity of variance across groups.</li>
+</ul></li>
+</ul>
+</section>
+<section id="assumption-checks-summary" class="slide level2">
+<h2>Assumption checks summary</h2>
+<table class="table table-striped" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+One-Sample t-test
+</th>
+<th style="text-align:left;">
+Independent Sample t-test
+</th>
+<th style="text-align:left;">
+Paired Sample t-test
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Normality
+</td>
+<td style="text-align:left;">
+Continuous variable (and difference) is normally distributed.
+</td>
+<td style="text-align:left;">
+Yes (Population)
+</td>
+<td style="text-align:left;">
+Yes (Both groups/ Difference)
+</td>
+<td style="text-align:left;">
+Yes (Both groups/ Difference)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tests:
+</td>
+<td style="text-align:left;">
+Descriptive Statistics; Shapiro-Wilks Test; QQ-plot
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Independence
+</td>
+<td style="text-align:left;">
+Observations are sampled independently.
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes (within and across groups)
+</td>
+<td style="text-align:left;">
+Yes (within groups)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tests:
+</td>
+<td style="text-align:left;">
+None. Design issue.
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Homogeneity of variance
+</td>
+<td style="text-align:left;">
+Population level standard deviation is the same in both groups.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tests:
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matched Pairs in data
+</td>
+<td style="text-align:left;">
+For paired sample, each observation must have matched pair.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tests:
+</td>
+<td style="text-align:left;">
+None. Data structure issue.
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="assumption-checks-normality" class="slide level2">
+<h2>Assumption checks: Normality</h2>
+<ul>
+<li>Descriptive statistics:
+<ul>
+<li>Skew: No strict cuts for skew.
+<ul>
+<li>Skew &lt; |1| generally not problematic</li>
+<li>|1| &lt; skew &gt; |2| slight concern</li>
+<li>Skew &gt; |2| investigate impact</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="histograms" class="slide level2">
+<h2>Histograms</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">threat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>Score)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">20</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Group)</a></code></pre></div>
+<p><img src="lec17_independentt_slides_files/figure-revealjs/unnamed-chunk-13-1.png" width="480" /></p>
+</section>
+<section id="skew" class="slide level2">
+<h2>Skew</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">library</span>(moments)</a>
+<a class="sourceLine" id="cb10-2" title="2">threat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Group) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="dt">skew =</span> <span class="kw">round</span>(<span class="kw">skewness</span>(Score),<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6">  )</a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co"># A tibble: 2 x 2</span></a>
+<a class="sourceLine" id="cb10-8" title="8">  Group    skew</a>
+<a class="sourceLine" id="cb10-9" title="9">  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="dv">1</span> Threat  <span class="fl">-0.23</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="dv">2</span> Control <span class="fl">-0.08</span></a></code></pre></div>
+</section>
+<section id="assumption-checks-normality-1" class="slide level2">
+<h2>Assumption checks: Normality</h2>
+<ul>
+<li>QQ-plots:
+<ul>
+<li>Plots the sorted quantiles of one data set (distribution) against sorted quantiles of data set (distribution).</li>
+<li>Quantile = the percent of points falling below a given value.</li>
+<li>For a normality check, we can compare our own data to data drawn from a normal distribution</li>
+</ul></li>
+</ul>
+</section>
+<section id="qq-plots" class="slide level2">
+<h2>QQ-plots</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">threat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">sample =</span> Score, <span class="dt">colour =</span> Group)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw">stat_qq_line</span>()</a></code></pre></div>
+<p><img src="lec17_independentt_slides_files/figure-revealjs/unnamed-chunk-15-1.png" width="480" /></p>
+</section>
+<section id="assumption-checks-normality-2" class="slide level2">
+<h2>Assumption checks: Normality</h2>
+<ul>
+<li>Shapiro-Wilks test:
+<ul>
+<li>Checks properties of the observed data against properties we would expected from normally distributed data.</li>
+<li>Statistical test of normality.</li>
+<li><span class="math inline">\(H_0\)</span>: data = a normal distribution.</li>
+<li><span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \alpha\)</span> = reject the null, data are not normal.
+<ul>
+<li>Sensitive to N as all p-values will be.</li>
+<li>In very large N, normality should also be checked with QQ-plots alongside statistical test.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="shapiro-wilks-r" class="slide level2">
+<h2>Shapiro-Wilks R</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">con &lt;-<span class="st"> </span>threat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Group <span class="op">==</span><span class="st"> &quot;Control&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Score)</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">shapiro.test</span>(con<span class="op">$</span>Score)</a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4">    Shapiro<span class="op">-</span>Wilk normality test</a>
+<a class="sourceLine" id="cb12-5" title="5"></a>
+<a class="sourceLine" id="cb12-6" title="6">data<span class="op">:</span><span class="st">  </span>con<span class="op">$</span>Score</a>
+<a class="sourceLine" id="cb12-7" title="7">W =<span class="st"> </span><span class="fl">0.95538</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.7164</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">thr &lt;-<span class="st"> </span>threat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Group <span class="op">==</span><span class="st"> &quot;Threat&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Score)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">shapiro.test</span>(thr<span class="op">$</span>Score)</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4">    Shapiro<span class="op">-</span>Wilk normality test</a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6">data<span class="op">:</span><span class="st">  </span>thr<span class="op">$</span>Score</a>
+<a class="sourceLine" id="cb13-7" title="7">W =<span class="st"> </span><span class="fl">0.93979</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.518</span></a></code></pre></div>
+</section>
+<section id="assumption-checks-homogeneity-of-variance" class="slide level2">
+<h2>Assumption checks: Homogeneity of variance</h2>
+<ul>
+<li>Levene’s test:
+<ul>
+<li>Statistical test for the equality (or homogeneity) of variances across groups (2+).</li>
+<li>Test statistic is essentially a ratio of variance estimates calculated based on group means versus grand mean.</li>
+</ul></li>
+<li>The <span class="math inline">\(F\)</span>-test is a related test that compares the variances of two groups.
+<ul>
+<li>This test is preferable for <span class="math inline">\(t\)</span>-test.
+<ul>
+<li><span class="math inline">\(H_0\)</span>: Population variances are equal.</li>
+<li><span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \alpha\)</span> = reject the null, the variances differ across groups.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="f-test-r" class="slide level2">
+<h2>F-test R</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">var.test</span>(threat<span class="op">$</span>Score <span class="op">~</span><span class="st"> </span>threat<span class="op">$</span>Group, <span class="dt">ratio =</span> <span class="dv">1</span>, <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3">    F test to compare two variances</a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5">data<span class="op">:</span><span class="st">  </span>threat<span class="op">$</span>Score by threat<span class="op">$</span>Group</a>
+<a class="sourceLine" id="cb14-6" title="6">F =<span class="st"> </span><span class="fl">0.71438</span>, num df =<span class="st"> </span><span class="dv">10</span>, denom df =<span class="st"> </span><span class="dv">11</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.6038</span></a>
+<a class="sourceLine" id="cb14-7" title="7">alternative hypothesis<span class="op">:</span><span class="st"> </span>true ratio of variances is not equal to <span class="dv">1</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="dv">95</span> percent confidence interval<span class="op">:</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="st"> </span><span class="fl">0.2026227</span> <span class="fl">2.6181459</span></a>
+<a class="sourceLine" id="cb14-10" title="10">sample estimates<span class="op">:</span></a>
+<a class="sourceLine" id="cb14-11" title="11">ratio of variances </a>
+<a class="sourceLine" id="cb14-12" title="12">         <span class="fl">0.7143813</span> </a></code></pre></div>
+</section>
+<section id="violation-of-homogeneity-of-variance" class="slide level2">
+<h2>Violation of homogeneity of variance</h2>
+<ul>
+<li>If the variances differ, we can use a Welch test.</li>
+<li>Conceptually very similar, but we do not use a pooled standard deviation.
+<ul>
+<li>As such our estimate of the SE of the difference changes</li>
+<li>As do our degrees of freedom</li>
+</ul></li>
+</ul>
+</section>
+<section id="welch-test" class="slide level2">
+<h2>Welch test</h2>
+<ul>
+<li>If the variances differ, we can use a Welch test.</li>
+<li>Test statistic = same</li>
+<li>SE calculation:</li>
+</ul>
+<p><span class="math display">\[
+SE(\bar{x}_1 - \bar{x}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
+\]</span></p>
+<ul>
+<li>And degrees of freedom (don’t worry, not tested)</li>
+</ul>
+<p><span class="math display">\[
+df = \frac{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2}{\frac{(\frac{s_1^2}{n_1})^2}{n_1 -1} + \frac{(\frac{s_2^2}{n_2})^2}{n_2 -1}} 
+\]</span></p>
+</section>
+<section id="welch-in-r" class="slide level2">
+<h2>Welch in R</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">welch &lt;-<span class="st"> </span><span class="kw">t.test</span>(Score <span class="op">~</span><span class="st"> </span>Group, </a>
+<a class="sourceLine" id="cb15-2" title="2">       <span class="dt">var.equal =</span> <span class="ot">FALSE</span>, <span class="co">#default, only here to highlight difference</span></a>
+<a class="sourceLine" id="cb15-3" title="3">       <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>,</a>
+<a class="sourceLine" id="cb15-4" title="4">       <span class="dt">data =</span> threat)</a></code></pre></div>
+</section>
+<section id="welch-in-r-1" class="slide level2">
+<h2>Welch in R</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">welch</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3">    Welch Two Sample t<span class="op">-</span>test</a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5">data<span class="op">:</span><span class="st">  </span>Score by Group</a>
+<a class="sourceLine" id="cb16-6" title="6">t =<span class="st"> </span><span class="fl">-7.4379</span>, df =<span class="st"> </span><span class="fl">20.878</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">1.346e-07</span></a>
+<a class="sourceLine" id="cb16-7" title="7">alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is less than <span class="dv">0</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="dv">95</span> percent confidence interval<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="st">      </span><span class="op">-</span><span class="ot">Inf</span> <span class="fl">-3.313093</span></a>
+<a class="sourceLine" id="cb16-10" title="10">sample estimates<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="st"> </span>mean <span class="cf">in</span> group Threat mean <span class="cf">in</span> group Control </a>
+<a class="sourceLine" id="cb16-12" title="12">             <span class="fl">5.272727</span>              <span class="fl">9.583333</span> </a></code></pre></div>
+</section>
+<section id="a-comment-on-sample-size" class="slide level2">
+<h2>A comment on sample size</h2>
+<ul>
+<li>In class we have been using examples with very small N.
+<ul>
+<li>This is purely so we can show working on slides etc.</li>
+</ul></li>
+<li>Typically, even with simple tests like we have discussed so far, with n ~20, you should think carefully about whether statistical analyses are appropriate.</li>
+</ul>
+</section>
+<section id="tasks-for-this-week" class="slide level2">
+<h2>Tasks for this week…</h2>
+<ol type="1">
+<li>Finish tasks from last week.</li>
+<li>Quiz 17: One-sample <span class="math inline">\(t\)</span>-tests
+<ul>
+<li>Today at 17:00.</li>
+<li>Close Monday 3rd at 17:00</li>
+</ul></li>
+</ol>
+</section>
+    </div>
+  </div>
+
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="https://psystats.github.io/slides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1000,
+        height: 750,
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/search/search.js', async: true },
+          { src: 'https://psystats.github.io/slides_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('h2:not(.author)').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+	$('h1.title').each(function () {
+        $(this).wrapAll('<div class="slide-title" />');
+    });	
+});
+
+var f = (function() {
+	// get scale
+	var element = document.querySelector('.slides');
+	var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+	var bottom = $(".present > .slide-title").offset().top + ($(".present > .slide-title").outerHeight() * scaleX);
+	
+	$(":root")[0].style.setProperty('--header-height', Math.floor(bottom) + 'px');
+});
+
+window.addEventListener( 'load', f);
+$(window).resize(f);
+Reveal.addEventListener( 'slidechanged', f);
+Reveal.addEventListener( 'overviewshown', function() {
+	$('.banner').addClass( "overview" );
+} );
+Reveal.addEventListener( 'overviewhidden', function() {	
+	$('.banner').removeClass( "overview" );
+});
+Reveal.addEventListener( 'overviewhidden', f);
+
+
+</script>
+
+  </body>
+</html>

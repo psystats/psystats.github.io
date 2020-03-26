@@ -77,9 +77,15 @@ tab1
 
 ## Relative frequencies
 - In 2014-15, the department had the following proportions:
+<<<<<<< HEAD
   - Social = 0.50, or 50%
   - Differential = 0.30, or 30%
   - Developmental = 0.20, or 20%
+=======
+  - Social = 0.20, or 20%
+  - Differential = 0.50, or 50%
+  - Developmental = 0.30, or 30%
+>>>>>>> 17a6717de0f0af09eb6d1cf480d687988703815a
 
 ## Relative frequencies
 
