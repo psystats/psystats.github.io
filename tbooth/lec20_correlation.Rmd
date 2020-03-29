@@ -118,7 +118,7 @@ for(i in 1:7) {
 ##  Variance 
 
 $$
-Var_x = \frac{\sum_{i=1}^{N}{(x_i - \bar{x})}^2}{N-1}
+Var_x = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}
 $$
 
 - Variance is the mean squared deviation from the mean.
@@ -164,19 +164,19 @@ height_var
 - To think about the equation for covariance, suppose we re-write variance as follows. Instead of:
 
 $$
-Var_x = \frac{\sum_{i=1}^{N}{(x_i - \bar{x})}^2}{N-1}
+Var_x = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}
 $$
 
 - we use
 
 $$
-Cov_{xx} = \frac{\sum_{i=1}^{N}{(x_i - \bar{x})(x_i - \bar{x})}}{N-1}
+Cov_{xx} = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})(x_i - \bar{x})}}{n-1}
 $$
 
 ## Covariance
 
 $$
-Cov_{xy} = \frac{\sum_{i=1}^{N}{(x_i - \bar{x})(y_i - \bar{y})}}{N-1}
+Cov_{xy} = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})(y_i - \bar{y})}}{n-1}
 $$
 
 - So our covariance is identical to our variance, with the exception that our summed termed is the combined deviance from the respective means of both $x$ and $y$.
@@ -215,7 +215,7 @@ $$
 - Or in full
 
 $$
-r = \frac{\frac{\sum_{i=1}^{N}{(x_i - \bar{x})(y_i - \bar{y})}}{N-1}}{\sqrt{\frac{\sum_{i=1}^{N}{(x_i - \bar{x})}^2}{N-1}} \sqrt{\frac{\sum_{i=1}^{N}{(x_i - \bar{x})}^2}{N-1}}}
+r = \frac{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})(y_i - \bar{y})}}{n-1}}{\sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}} \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}}}
 $$
 
 ## Correlation
@@ -244,6 +244,7 @@ cor(data$height, data$weight)
 - As such, they do not require significance tests.
 - But in other circumstances a correlation may be a test of interest, and we can formulate associated hypothesis tests.
 
+
 ## Hypotheses
 - The association between two random variables = 0.
 - As such, the null for a correlation is:
@@ -264,13 +265,13 @@ $$
 - The $t$-statistic for a given correlation is calculated as:
 
 $$
-t = r \sqrt \frac{N-2}{1 - r^2}
+t = r \sqrt \frac{n-2}{1 - r^2}
 $$
 
 - So for our data:
 
 $$
-t = r \sqrt \frac{N-2}{1 - r^2} = 0.87 \sqrt \frac{5}{1 - 0.87^2} = 0.87\sqrt \frac{5}{0.2431} = 0.87*4.535 = 3.95
+t = r \sqrt \frac{n-2}{1 - r^2} = 0.87 \sqrt \frac{5}{1 - 0.87^2} = 0.87\sqrt \frac{5}{0.2431} = 0.87*4.535 = 3.95
 $$
 
 ## Is our test significant?
@@ -316,7 +317,7 @@ cor.test(data$height, data$weight)
 
 ##  Write up 
 - Write up is very simple for small number of variables.
-- There was a strong positive correlation between height and weight ($r$(5) = .87, $p$<.05) in the current sample. As height increased, so did weight.
+- There was a strong positive correlation between height and weight ($r$ = .87, $t$(5) = 3.92, $p$<.05) in the current sample. As height increased, so did weight.
 - Often we report lots of correlations and do so in a correlation matrix.
 
 ## Correlation matrices
@@ -382,7 +383,6 @@ d <- ggplot(anscombe, aes(x=x4, y=y4)) +
 
 (a +b) / (c + d)
 ```
-
 
 ## Correlation and causation
 - You will talk more about this point in lab

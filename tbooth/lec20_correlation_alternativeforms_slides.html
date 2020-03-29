@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Tom Booth" />
-  <title>Lecture 20: Correlation</title>
+  <title>Lecture 20: Alternative forms</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -515,10 +515,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 <section>
-    <h1 class="title">Lecture 20: Correlation</h1>
+    <h1 class="title">Lecture 20: Alternative forms</h1>
   <h1 class="subtitle">Data Analysis for Psychology in R 1</h1>
     <h2 class="author">Tom Booth</h2>
-    <h3 class="date"><a href="./lec20_correlation.html">Click for handout</a></h3>
+    <h3 class="date"><a href="./lec20_correlation_alternativeforms.html">Click for handout</a></h3>
 </section>
 
 <section id="today" class="slide level2">
@@ -530,46 +530,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 }
 </style>
 <ul>
-<li>Introduce Pearson correlation
-<ul>
-<li>Build from variance…</li>
-<li>…to covariance…</li>
-<li>…to correlation.</li>
-</ul></li>
+<li>Briefly consider different forms of correlation and calculation in R</li>
 </ul>
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning objectives</h2>
 <ul>
-<li>Understand the basic features of correlation coefficients.</li>
-<li>Understand the relation between covariance and correlation.</li>
-<li>Understand how to calculate Pearson correlation.</li>
-<li>Know how to use R to calculate correlations.</li>
+<li>Understand when to use different forms of correlation.</li>
+<li>Be able to run correct forms of correlation in R.</li>
 </ul>
 </section>
-<section id="purpose" class="slide level2">
-<h2>Purpose</h2>
-<ul>
-<li>Correlations measure the degree of association between two variables.
-<ul>
-<li>If one goes up does the other go up (positive association)?</li>
-<li>If one variable changes (varies) does the other change (vary) too.</li>
-<li>If one goes up does the other go down (negative association)?</li>
-</ul></li>
-<li>The value ranges from -1 to 1.
-<ul>
-<li>Values close to |1| indicate stronger associations.
-<ul>
-<li>Values close to 0 indicate no association.</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="data-requirements" class="slide level2">
-<h2>Data Requirements</h2>
-<ul>
-<li>There is a tight of correlation for almost all data types.</li>
-</ul>
+<section id="types-of-correlation" class="slide level2">
+<h2>Types of correlation</h2>
 <table>
 <thead>
 <tr class="header">
@@ -617,327 +589,151 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 </section>
-<section id="scatterplots" class="slide level2">
-<h2>Scatterplots</h2>
+<section id="spearman-correlation" class="slide level2">
+<h2>Spearman correlation</h2>
 <ul>
-<li>Typical visualization of correlations is through scatterplots.</li>
-<li>Scatterplots plot points at the (x,y) co-ordinates for two measured variables.</li>
-<li>We plot these points for each individual in our data set.
+<li>Spearman’s <span class="math inline">\(\rho\)</span> (or rank-order correlation) is a <em>non-parametric</em> estimate of the association between two variables.
 <ul>
-<li>This produces the clouds of points.</li>
+<li>As name suggests, it uses data on the rank-ordering of X,Y responses for each individual.</li>
+</ul></li>
+<li>When would we choose to use the Spearman correlation?
+<ul>
+<li>If our data are naturally ranked data (e.g. imaging an experiment where the task is to rank foods and drinks in terms of preference).</li>
+<li>If the data are non-normal or skewed.</li>
+<li>If the data shows evidence of non-linearity.</li>
 </ul></li>
 </ul>
 </section>
-<section id="simple-data" class="slide level2">
-<h2>Simple Data</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">name =</span> <span class="kw">as_factor</span>(<span class="kw">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Peter&quot;</span>,<span class="st">&quot;Robert&quot;</span>,<span class="st">&quot;David&quot;</span>,<span class="st">&quot;George&quot;</span>,<span class="st">&quot;Matthew&quot;</span>, <span class="st">&quot;Bradley&quot;</span>)),</a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">height =</span> <span class="kw">c</span>(<span class="fl">1.52</span>,<span class="fl">1.60</span>,<span class="fl">1.68</span>,<span class="fl">1.78</span>,<span class="fl">1.86</span>,<span class="fl">1.94</span>,<span class="fl">2.09</span>),</a>
-<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">54</span>,<span class="dv">49</span>,<span class="dv">50</span>,<span class="dv">67</span>,<span class="dv">70</span>,<span class="dv">110</span>,<span class="dv">98</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5">)</a></code></pre></div>
-<pre><code># A tibble: 6 x 3
-  name    height weight
-  &lt;fct&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-1 John      1.52     54
-2 Peter     1.6      49
-3 Robert    1.68     50
-4 David     1.78     67
-5 George    1.86     70
-6 Matthew   1.94    110</code></pre>
+<section id="spearman-correlation-1" class="slide level2">
+<h2>Spearman correlation</h2>
+<ul>
+<li>Spearman’s is not testing for linear relations, it is testing for increasing monotonic relationship.
+<ul>
+<li>Huh?</li>
+</ul></li>
+</ul>
 </section>
-<section id="scatterplot" class="slide level2">
-<h2>Scatterplot</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" /></p>
+<section id="linear-vs.-monotonic" class="slide level2">
+<h2>Linear vs. monotonic</h2>
+<p><img src="lec20_correlation_alternativeforms_slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" /></p>
 </section>
-<section id="scatterplot-1" class="slide level2">
-<h2>Scatterplot</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" /></p>
-</section>
-<section id="strength-of-correlation" class="slide level2">
-<h2>Strength of correlation</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" /></p>
-</section>
-<section id="variance" class="slide level2">
-<h2>Variance</h2>
+<section id="steps-in-spearmans" class="slide level2">
+<h2>Steps in Spearman’s</h2>
 <p><span class="math display">\[
-Var_x = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}
+\rho = 1 - \frac{6\Sigma{d^2_i}}{n(n^2-1)}
 \]</span></p>
 <ul>
-<li>Variance is the mean squared deviation from the mean.</li>
-</ul>
-</section>
-<section id="variance-1" class="slide level2">
-<h2>Variance</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" /></p>
-</section>
-<section id="variance-2" class="slide level2">
-<h2>Variance</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" /></p>
-</section>
-<section id="covariance" class="slide level2">
-<h2>Covariance</h2>
+<li>Calculation steps:
 <ul>
-<li>So variance = deviation around the mean of a single variable.</li>
-<li><strong>Co</strong>variance concerns variation in two variables.</li>
-<li>To think about the equation for covariance, suppose we re-write variance as follows. Instead of:</li>
+<li>Rank each variable from largest to smallest.</li>
+<li>If there are ties in ranks, assign the average of the rankings to each case.</li>
+<li>Calculate the difference in rank for each person on the two variables.</li>
+<li>Tabulate data</li>
+<li>Square the difference.</li>
+<li>Sum the squared values.</li>
+</ul></li>
 </ul>
+</section>
+<section id="quick-example" class="slide level2">
+<h2>Quick example</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">rank &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">ID =</span> <span class="kw">paste</span>(<span class="st">&quot;ID&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">RT =</span><span class="kw">c</span>(.<span class="dv">264</span>, <span class="fl">.311</span>, <span class="fl">.265</span>, <span class="fl">.291</span>, <span class="fl">.350</span>, <span class="fl">.500</span>),</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">Caff =</span> <span class="kw">c</span>(<span class="dv">210</span>,<span class="dv">280</span>,<span class="dv">150</span>,<span class="dv">90</span>,<span class="dv">200</span>,<span class="dv">450</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5">)</a>
+<a class="sourceLine" id="cb1-6" title="6">rank</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"># A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  ID       RT  Caff</a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="dv">1</span> ID1   <span class="fl">0.264</span>   <span class="dv">210</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="dv">2</span> ID2   <span class="fl">0.311</span>   <span class="dv">280</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="dv">3</span> ID3   <span class="fl">0.265</span>   <span class="dv">150</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="dv">4</span> ID4   <span class="fl">0.291</span>    <span class="dv">90</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="dv">5</span> ID5   <span class="fl">0.35</span>    <span class="dv">200</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="dv">6</span> ID6   <span class="fl">0.5</span>     <span class="dv">450</span></a></code></pre></div>
+</section>
+<section id="calculation" class="slide level2">
+<h2>Calculation</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">rank_calc &lt;-<span class="st"> </span>rank <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">RT_rank =</span> <span class="kw">rank</span>(RT),</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">Caff_rank =</span> <span class="kw">rank</span>(Caff),</a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">di =</span> RT_rank <span class="op">-</span><span class="st"> </span>Caff_rank,</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">di2 =</span> di<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  )</a>
+<a class="sourceLine" id="cb2-8" title="8">rank_calc</a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co"># A tibble: 6 x 7</span></a>
+<a class="sourceLine" id="cb2-10" title="10">  ID       RT  Caff RT_rank Caff_rank    di   di2</a>
+<a class="sourceLine" id="cb2-11" title="11">  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="dv">1</span> ID1   <span class="fl">0.264</span>   <span class="dv">210</span>       <span class="dv">1</span>         <span class="dv">4</span>    <span class="dv">-3</span>     <span class="dv">9</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="dv">2</span> ID2   <span class="fl">0.311</span>   <span class="dv">280</span>       <span class="dv">4</span>         <span class="dv">5</span>    <span class="dv">-1</span>     <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="dv">3</span> ID3   <span class="fl">0.265</span>   <span class="dv">150</span>       <span class="dv">2</span>         <span class="dv">2</span>     <span class="dv">0</span>     <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="dv">4</span> ID4   <span class="fl">0.291</span>    <span class="dv">90</span>       <span class="dv">3</span>         <span class="dv">1</span>     <span class="dv">2</span>     <span class="dv">4</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="dv">5</span> ID5   <span class="fl">0.35</span>    <span class="dv">200</span>       <span class="dv">5</span>         <span class="dv">3</span>     <span class="dv">2</span>     <span class="dv">4</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="dv">6</span> ID6   <span class="fl">0.5</span>     <span class="dv">450</span>       <span class="dv">6</span>         <span class="dv">6</span>     <span class="dv">0</span>     <span class="dv">0</span></a></code></pre></div>
+</section>
+<section id="calculation-1" class="slide level2">
+<h2>Calculation</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">rank_calc</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># A tibble: 6 x 7</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  ID       RT  Caff RT_rank Caff_rank    di   di2</a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="dv">1</span> ID1   <span class="fl">0.264</span>   <span class="dv">210</span>       <span class="dv">1</span>         <span class="dv">4</span>    <span class="dv">-3</span>     <span class="dv">9</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="dv">2</span> ID2   <span class="fl">0.311</span>   <span class="dv">280</span>       <span class="dv">4</span>         <span class="dv">5</span>    <span class="dv">-1</span>     <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dv">3</span> ID3   <span class="fl">0.265</span>   <span class="dv">150</span>       <span class="dv">2</span>         <span class="dv">2</span>     <span class="dv">0</span>     <span class="dv">0</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="dv">4</span> ID4   <span class="fl">0.291</span>    <span class="dv">90</span>       <span class="dv">3</span>         <span class="dv">1</span>     <span class="dv">2</span>     <span class="dv">4</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="dv">5</span> ID5   <span class="fl">0.35</span>    <span class="dv">200</span>       <span class="dv">5</span>         <span class="dv">3</span>     <span class="dv">2</span>     <span class="dv">4</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="dv">6</span> ID6   <span class="fl">0.5</span>     <span class="dv">450</span>       <span class="dv">6</span>         <span class="dv">6</span>     <span class="dv">0</span>     <span class="dv">0</span></a></code></pre></div>
 <p><span class="math display">\[
-Var_x = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}
+\rho = 1 - \frac{6\Sigma{d^2_i}}{n(n^2-1)} = 1 - \frac{6*18}{6(6^2-1)} = 1 - \frac{108}{210} = 1 - 0.514 = 0.486
 \]</span></p>
-<ul>
-<li>we use</li>
-</ul>
-<p><span class="math display">\[
-Cov_{xx} = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})(x_i - \bar{x})}}{n-1}
-\]</span></p>
-</section>
-<section id="covariance-1" class="slide level2">
-<h2>Covariance</h2>
-<p><span class="math display">\[
-Cov_{xy} = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})(y_i - \bar{y})}}{n-1}
-\]</span></p>
-<ul>
-<li>So our covariance is identical to our variance, with the exception that our summed termed is the combined deviance from the respective means of both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
-</ul>
-</section>
-<section id="covariance-2" class="slide level2">
-<h2>Covariance</h2>
-<ul>
-<li>For our data:</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">round</span>(<span class="kw">cov</span>(data<span class="op">$</span>height, data<span class="op">$</span>weight),<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">[<span class="dv">1</span>] <span class="fl">4.1681</span></a></code></pre></div>
-</section>
-<section id="scale-covariance" class="slide level2">
-<h2>Scale &amp; Covariance</h2>
-<ul>
-<li>So what does a covariance of 4.1681 between height and weight mean?
-<ul>
-<li>I have no idea!</li>
-</ul></li>
-<li>Covariance is related to the scale of the variables we are analysing.
-<ul>
-<li>Makes sense right? variance was just the same.</li>
-</ul></li>
-<li>What about if we had measured height in centimetres not metres?</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">round</span>(<span class="kw">cov</span>(data<span class="op">$</span>height<span class="op">*</span><span class="dv">100</span>, data<span class="op">$</span>weight),<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2">[<span class="dv">1</span>] <span class="fl">416.81</span></a></code></pre></div>
-</section>
-<section id="correlation" class="slide level2">
-<h2>Correlation</h2>
-<ul>
-<li>How do we deal with problems of scale?
-<ul>
-<li>We standardize.</li>
-</ul></li>
-<li>And how do we standardize?
-<ul>
-<li>We divide by an estimate of the variability.
-<ul>
-<li>Here, the product of standard deviations of X and Y.</li>
-</ul></li>
-</ul></li>
-<li>The resulting statistic is the Pearson Product Moment Correlation (<span class="math inline">\(r\)</span>)</li>
-</ul>
-</section>
-<section id="correlation-1" class="slide level2">
-<h2>Correlation</h2>
-<p><span class="math display">\[
-r = \frac{Cov_{xy}}{SD_xSD_y}
-\]</span></p>
-<ul>
-<li>Or in full</li>
-</ul>
-<p><span class="math display">\[
-r = \frac{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})(y_i - \bar{y})}}{n-1}}{\sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}} \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})}^2}{n-1}}}
-\]</span></p>
-</section>
-<section id="correlation-2" class="slide level2">
-<h2>Correlation</h2>
-<ul>
-<li>In our data:</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">cov</span>(data<span class="op">$</span>height, data<span class="op">$</span>weight)<span class="op">/</span><span class="st"> </span>(<span class="kw">sd</span>(data<span class="op">$</span>height)<span class="op">*</span><span class="kw">sd</span>(data<span class="op">$</span>weight))</a>
-<a class="sourceLine" id="cb5-2" title="2">[<span class="dv">1</span>] <span class="fl">0.8687186</span></a></code></pre></div>
-<ul>
-<li>or we can use built in functions:</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">cor</span>(data<span class="op">$</span>height, data<span class="op">$</span>weight)</a>
-<a class="sourceLine" id="cb6-2" title="2">[<span class="dv">1</span>] <span class="fl">0.8687186</span></a></code></pre></div>
-</section>
-<section id="correlation-es" class="slide level2">
-<h2>Correlation = ES</h2>
-<ul>
-<li>For some other tests we have discussed associated measures of effect size.</li>
-<li>Remember, an effect size is a standardized measures of the type relationship of interest.
-<ul>
-<li>So Cohen’s D is a standardize raw mean difference.</li>
-</ul></li>
-<li>Well our correlation <strong>is</strong> standardized
-<ul>
-<li>It is a standardized covariance.</li>
-<li>Or a standardize measure of association</li>
-</ul></li>
-</ul>
-</section>
-<section id="hypotheses" class="slide level2">
-<h2>Hypotheses</h2>
-<ul>
-<li>For many people, correlations are descriptive statistics.</li>
-<li>As such, they do not require significance tests.</li>
-<li>But in other circumstances a correlation may be a test of interest, and we can formulate associated hypothesis tests.</li>
-</ul>
-</section>
-<section id="hypotheses-1" class="slide level2">
-<h2>Hypotheses</h2>
-<ul>
-<li>The association between two random variables = 0.</li>
-<li>As such, the null for a correlation is:</li>
-</ul>
-<p><span class="math display">\[
-H_0: r = 0
-\]</span> - And the two-tailed alternative:</p>
-<p><span class="math display">\[
-H_1: r \neq 0
-\]</span></p>
-<ul>
-<li>The sampling distribution of <span class="math inline">\(r\)</span> is approximately normal with large N, and is <span class="math inline">\(t\)</span> distributed when N is small.
-<ul>
-<li>Thus we assess the significance using the <span class="math inline">\(t\)</span>-distribution with N-2 degrees of freedom.</li>
-</ul></li>
-</ul>
-</section>
-<section id="hypothesis-testing-significance" class="slide level2">
-<h2>Hypothesis testing &amp; significance</h2>
-<ul>
-<li>The <span class="math inline">\(t\)</span>-statistic for a given correlation is calculated as:</li>
-</ul>
-<p><span class="math display">\[
-t = r \sqrt \frac{n-2}{1 - r^2}
-\]</span></p>
-<ul>
-<li>So for our data:</li>
-</ul>
-<p><span class="math display">\[
-t = r \sqrt \frac{n-2}{1 - r^2} = 0.87 \sqrt \frac{5}{1 - 0.87^2} = 0.87\sqrt \frac{5}{0.2431} = 0.87*4.535 = 3.95
-\]</span></p>
-</section>
-<section id="is-our-test-significant" class="slide level2">
-<h2>Is our test significant?</h2>
-<ul>
-<li>So the <span class="math inline">\(t\)</span> associated with our correlation is 3.95
-<ul>
-<li>Our degrees of freedom are N-2 = 7-2 = 5</li>
-<li>We will use two-tailed <span class="math inline">\(\alpha = .05\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="is-our-test-significant-1" class="slide level2">
-<h2>Is our test significant?</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-13-1.png" width="480" /></p>
-<pre><code># A tibble: 1 x 2
-  LowerCrit UpperCrit
-      &lt;dbl&gt;     &lt;dbl&gt;
-1     -2.57      2.57</code></pre>
 </section>
 <section id="in-r" class="slide level2">
 <h2>In R</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">cor.test</span>(data<span class="op">$</span>height, data<span class="op">$</span>weight)</a>
-<a class="sourceLine" id="cb8-2" title="2"></a>
-<a class="sourceLine" id="cb8-3" title="3">    Pearson<span class="st">&#39;s product-moment correlation</span></a>
-<a class="sourceLine" id="cb8-4" title="4"></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">data:  data$height and data$weight</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">t = 3.9218, df = 5, p-value = 0.01116</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="st">alternative hypothesis: true correlation is not equal to 0</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="st">95 percent confidence interval:</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="st"> 0.3344679 0.9804020</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="st">sample estimates:</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="st">      cor </span></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="st">0.8687186 </span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">cor</span>(rank<span class="op">$</span>RT, rank<span class="op">$</span>Caff, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">[<span class="dv">1</span>] <span class="fl">0.4857143</span></a></code></pre></div>
 </section>
-<section id="write-up" class="slide level2">
-<h2>Write up</h2>
+<section id="other-forms" class="slide level2">
+<h2>Other forms</h2>
 <ul>
-<li>Write up is very simple for small number of variables.</li>
-<li>There was a strong positive correlation between height and weight (<span class="math inline">\(r\)</span> = .87, <span class="math inline">\(t\)</span>(5) = 3.92, <span class="math inline">\(p\)</span>&lt;.05) in the current sample. As height increased, so did weight.</li>
-<li>Often we report lots of correlations and do so in a correlation matrix.</li>
+<li>General principle (simplified a little) of the other forms of correlation is roughly the same.</li>
+<li>We assume that the categorical variable is a crude measurement of an underlying normal variable.</li>
+<li>Aiming to provide an estimate of the association between these underlying variables.</li>
 </ul>
 </section>
-<section id="correlation-matrices" class="slide level2">
-<h2>Correlation matrices</h2>
+<section id="underlying-continuous-variable" class="slide level2">
+<h2>Underlying continuous variable</h2>
+<p><img src="lec20_correlation_alternativeforms_slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" /></p>
+</section>
+<section id="in-r-1" class="slide level2">
+<h2>In R</h2>
 <ul>
-<li>Values in diagonal are correlations with itself.
-<ul>
-<li>Always 1.00</li>
-<li>Not informative</li>
-<li>Can omit or replace with e.g. reliability</li>
-</ul></li>
-<li>Symmetric.
-<ul>
-<li>Above and below diagonal = same values.</li>
-<li>Do not need both.</li>
-<li>Could switch with p-values or leave empty</li>
-</ul></li>
+<li>Estimating correlation is straight forward.</li>
+<li>All we need to do is make sure R knows the type of data we have, then use <code>hetcor</code></li>
 </ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">pers_items &lt;-<span class="st"> </span>bfi[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]</a>
+<a class="sourceLine" id="cb5-2" title="2">pers_items &lt;-<span class="st"> </span>pers_items <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="dt">A1 =</span> <span class="kw">as_factor</span>(A1)</a>
+<a class="sourceLine" id="cb5-5" title="5">  )</a>
+<a class="sourceLine" id="cb5-6" title="6">pers_cors &lt;-<span class="st"> </span><span class="kw">hetcor</span>(pers_items)</a></code></pre></div>
 </section>
-<section id="correlation-matrices-1" class="slide level2">
-<h2>Correlation matrices</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">pers_items &lt;-<span class="st"> </span>bfi[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]</a>
-<a class="sourceLine" id="cb9-2" title="2">pers_cors &lt;-<span class="st"> </span><span class="kw">hetcor</span>(pers_items)</a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">pers_cors<span class="op">$</span>correlations</a>
-<a class="sourceLine" id="cb10-2" title="2">           A1         A2         A3         A4         A5</a>
-<a class="sourceLine" id="cb10-3" title="3">A1  <span class="fl">1.0000000</span> <span class="fl">-0.3416242</span> <span class="fl">-0.2682817</span> <span class="fl">-0.1483927</span> <span class="fl">-0.1826790</span></a>
-<a class="sourceLine" id="cb10-4" title="4">A2 <span class="fl">-0.3416242</span>  <span class="fl">1.0000000</span>  <span class="fl">0.4867503</span>  <span class="fl">0.3352432</span>  <span class="fl">0.3877875</span></a>
-<a class="sourceLine" id="cb10-5" title="5">A3 <span class="fl">-0.2682817</span>  <span class="fl">0.4867503</span>  <span class="fl">1.0000000</span>  <span class="fl">0.3621720</span>  <span class="fl">0.5051762</span></a>
-<a class="sourceLine" id="cb10-6" title="6">A4 <span class="fl">-0.1483927</span>  <span class="fl">0.3352432</span>  <span class="fl">0.3621720</span>  <span class="fl">1.0000000</span>  <span class="fl">0.3067003</span></a>
-<a class="sourceLine" id="cb10-7" title="7">A5 <span class="fl">-0.1826790</span>  <span class="fl">0.3877875</span>  <span class="fl">0.5051762</span>  <span class="fl">0.3067003</span>  <span class="fl">1.0000000</span></a></code></pre></div>
-</section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li>Variables must be interval or ratio (continuous)
-<ul>
-<li>No test: about design.</li>
-</ul></li>
-<li>Variables must be normally distributed.
-<ul>
-<li>Histograms, skew, QQ-Plots, Shapiro-Wilks.</li>
-</ul></li>
-<li>Homoscedasticity</li>
-<li>The relationship between the two variables must be linear.
-<ul>
-<li>Visualize: scatterplots.</li>
-</ul></li>
-</ul>
-</section>
-<section id="anscombe-quartet" class="slide level2">
-<h2>Anscombe Quartet</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1),<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb11-2" title="2">[<span class="dv">1</span>] <span class="fl">0.82</span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="kw">round</span>(<span class="kw">cor</span>(anscombe<span class="op">$</span>x2, anscombe<span class="op">$</span>y2),<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb11-4" title="4">[<span class="dv">1</span>] <span class="fl">0.82</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="kw">round</span>(<span class="kw">cor</span>(anscombe<span class="op">$</span>x3, anscombe<span class="op">$</span>y3),<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb11-6" title="6">[<span class="dv">1</span>] <span class="fl">0.82</span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="kw">round</span>(<span class="kw">cor</span>(anscombe<span class="op">$</span>x4, anscombe<span class="op">$</span>y4),<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb11-8" title="8">[<span class="dv">1</span>] <span class="fl">0.82</span></a></code></pre></div>
-</section>
-<section id="anscombe-quartet-1" class="slide level2">
-<h2>Anscombe Quartet</h2>
-<p><img src="lec20_correlation_slides_files/figure-revealjs/unnamed-chunk-19-1.png" width="480" /></p>
-</section>
-<section id="correlation-and-causation" class="slide level2">
-<h2>Correlation and causation</h2>
-<ul>
-<li>You will talk more about this point in lab
-<ul>
-<li>And forever more when discussing statistical results.</li>
-</ul></li>
-<li>Typically we hope to be able to explain <em>why</em> things happen.</li>
-<li>Though correlation is a fundamental metric in statistics, it actually does not help us (on its own) with this.</li>
-<li>An association between two things does not mean it <strong>causes</strong> the other.</li>
-<li>Much more on this to come in lab and next year.</li>
-</ul>
+<section id="in-r-2" class="slide level2">
+<h2>In R</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">pers_cors<span class="op">$</span>correlations</a>
+<a class="sourceLine" id="cb6-2" title="2">           A1         A2         A3         A4         A5</a>
+<a class="sourceLine" id="cb6-3" title="3">A1  <span class="fl">1.0000000</span> <span class="fl">-0.3679011</span> <span class="fl">-0.2924884</span> <span class="fl">-0.1639639</span> <span class="fl">-0.2072343</span></a>
+<a class="sourceLine" id="cb6-4" title="4">A2 <span class="fl">-0.3679011</span>  <span class="fl">1.0000000</span>  <span class="fl">0.4867503</span>  <span class="fl">0.3352432</span>  <span class="fl">0.3877875</span></a>
+<a class="sourceLine" id="cb6-5" title="5">A3 <span class="fl">-0.2924884</span>  <span class="fl">0.4867503</span>  <span class="fl">1.0000000</span>  <span class="fl">0.3621720</span>  <span class="fl">0.5051762</span></a>
+<a class="sourceLine" id="cb6-6" title="6">A4 <span class="fl">-0.1639639</span>  <span class="fl">0.3352432</span>  <span class="fl">0.3621720</span>  <span class="fl">1.0000000</span>  <span class="fl">0.3067003</span></a>
+<a class="sourceLine" id="cb6-7" title="7">A5 <span class="fl">-0.2072343</span>  <span class="fl">0.3877875</span>  <span class="fl">0.5051762</span>  <span class="fl">0.3067003</span>  <span class="fl">1.0000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">pers_cors<span class="op">$</span>type</a>
+<a class="sourceLine" id="cb7-2" title="2">     [,<span class="dv">1</span>]         [,<span class="dv">2</span>]         [,<span class="dv">3</span>]         [,<span class="dv">4</span>]         [,<span class="dv">5</span>]        </a>
+<a class="sourceLine" id="cb7-3" title="3">[<span class="dv">1</span>,] <span class="st">&quot;&quot;</span>           <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Polyserial&quot;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">[<span class="dv">2</span>,] <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;&quot;</span>           <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>   </a>
+<a class="sourceLine" id="cb7-5" title="5">[<span class="dv">3</span>,] <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;&quot;</span>           <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>   </a>
+<a class="sourceLine" id="cb7-6" title="6">[<span class="dv">4</span>,] <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;&quot;</span>           <span class="st">&quot;Pearson&quot;</span>   </a>
+<a class="sourceLine" id="cb7-7" title="7">[<span class="dv">5</span>,] <span class="st">&quot;Polyserial&quot;</span> <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;Pearson&quot;</span>    <span class="st">&quot;&quot;</span>          </a></code></pre></div>
 </section>
 <section id="tasks-for-this-week" class="slide level2">
 <h2>Tasks for this week…</h2>
